@@ -3,8 +3,10 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+if(class_exists('CMSC_Api'))
+    exit;
 
-class ACOTRS_Api
+class CMSC_Api
 {
 
 

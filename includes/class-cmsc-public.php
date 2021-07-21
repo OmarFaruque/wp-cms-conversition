@@ -4,7 +4,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class ACOTRS_Public
+if(class_exists('CMSC_Public'))
+    exit;
+
+class CMSC_Public
 {
 
     /**

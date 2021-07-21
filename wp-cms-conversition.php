@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * Plugin Name: CMS Conversition
+ * Version: 1.0.0
+ * Description: CMS Conversation allow user to communicate with each other and with course teacher. Admin / teacher can capable to active chat application for each course or can enable globally for each courch. We use modern tachnology like scss & reactjs for UI for batter user experience. 
+ * Author: Omar Faruque
+ * Author URI: https://www.linkedin.com/in/omarfaruque2020/
+ * Requires at least: 4.4.0
+ * Tested up to: 5.5.3
+ * Text Domain: cms-conversation
+ * Learndash LMS tested up to: 3.4.2.1
+ */
+
+define('CMSC_TOKEN', 'cms_conversition');
+define('CMSC_VERSION', '1.0.0');
+define('CMSC_FILE', __FILE__);
+define('CMSC_PLUGIN_NAME', 'CMS Conversition');
+
+// Init.
+add_action('plugins_loaded', 'cmsc_init');
+if (!function_exists('cmsc_init')) {
+    /**
+     * Load plugin text domain
+     *
+     * @return  void
+     */
+    function cmsc_init()
+    {
+        $plugin_rel_path = basename(dirname(__FILE__)) . '/languages'; /* Relative to WP_PLUGIN_DIR */
+        load_plugin_textdomain('cms-conversation', false, $plugin_rel_path);
+    }
+}
+
+// Loading Classes.
+if (!function_exists('CMSC_autoloader')) {
+
+    function CMSC_autoloader($class_name)
+    {
+        if (0 === strpos($class_name, 'CMSC')) {
+            $classes_dir = realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR;
+            $class_file = 'class-' . str_replace('_', '-', strtolower($class_name)) . '.php';
+            require_once $classes_dir . $class_file;
+        }
+    }
+}
+spl_autoload_register('CMSC_autoloader');
+
+// Backend UI.
+if (!function_exists('CMSC_Backend')) {
+    function CMSC_Backend()
+    {
+        return CMSC_Backend::instance(__FILE__);
+    }
+}
+if (!function_exists('CMSC_Public')) {
+    function CMSC_Public()
+    {
+        return CMSC_Public::instance(__FILE__);
+    }
+}
+
+
+if (!function_exists('CMSC_Helper')) {
+    function CMSC_Helper()
+    {
+        return CMSC_Helper::instance(__FILE__);
+    }
+}
+
+// Front end.
+// CMSC_Public();
+if (is_admin()) {
+    CMSC_Backend();
+}
+// new CMSC_Api();
