@@ -37,12 +37,67 @@
   height: 400px;
   background: url(./../images/banner-772x250.png) no-repeat; }
 
-.acotrs_active2UBE8 {
-  color: red; }
+.acotrs_wrapohVov {
+  background-color: #EEF3F7;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-bottom: 20px; }
+  .acotrs_wrapohVov ul {
+    margin: 10px 0; }
+    .acotrs_wrapohVov ul li {
+      display: inline-flex;
+      margin: 0 6px; }
+      .acotrs_wrapohVov ul li > a {
+        padding: 15px 25px;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 16px;
+        display: inline-flex;
+        align-items: center; }
+        .acotrs_wrapohVov ul li > a:focus {
+          color: white; }
+        .acotrs_wrapohVov ul li > a:hover {
+          color: white;
+          background-color: #006FFF;
+          box-shadow: 1px 1px 0.5em #999;
+          -o-box-shadow: 1px 1px 0.5em #999;
+          -webkit-box-shadow: 1px 1px 0.5em #999;
+          -moz-box-shadow: 1px 1px 0.5em #999; }
+        .acotrs_wrapohVov ul li > a.acotrs_active2UBE8 {
+          color: white;
+          background-color: #006FFF;
+          box-shadow: 1px 1px 0.5em #999;
+          -o-box-shadow: 1px 1px 0.5em #999;
+          -webkit-box-shadow: 1px 1px 0.5em #999;
+          -moz-box-shadow: 1px 1px 0.5em #999; }
+        .acotrs_wrapohVov ul li > a > span.acotrs_icon18alf {
+          font-size: 35px;
+          margin-right: 5px; }
 
-.acotrs_wrapohVov ul > li {
-  display: inline-block;
-  margin: 6px; }
+#lms_conversition_ui_root {
+  padding-right: 10px;
+  max-width: 1200px; }
+  #lms_conversition_ui_root * {
+    box-sizing: border-box; }
+  #lms_conversition_ui_root .acotrs_lmsWrap1rvy0 .acotrs_headerlc2p1 {
+    display: flex; }
+    #lms_conversition_ui_root .acotrs_lmsWrap1rvy0 .acotrs_headerlc2p1 > div {
+      flex: 1;
+      justify-content: center; }
+      #lms_conversition_ui_root .acotrs_lmsWrap1rvy0 .acotrs_headerlc2p1 > div h2 span {
+        border-bottom: 1px solid #bbb;
+        min-width: 50%;
+        display: inline-block;
+        padding-bottom: 10px;
+        color: #000;
+        font-size: 22px; }
+      #lms_conversition_ui_root .acotrs_lmsWrap1rvy0 .acotrs_headerlc2p1 > div:last-child {
+        text-align: right;
+        opacity: 0; }
+  #lms_conversition_ui_root .acotrs_lmsWrap1rvy0 .acotrs_lmsBody3UG8F {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px; }
 
 
 /*# sourceMappingURL=backend.css.map*/

@@ -1,10 +1,45 @@
-.active{
-  color: red;
-}
-.wrap{
 
-  ul>li{
-    display:inline-block;
-    margin: 6px;
+.wrap{
+  background-color: #EEF3F7;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  ul{
+    margin: 10px 0;
+    li{
+      display:inline-flex;
+      margin: 0 6px;
+      >a{
+        padding: 15px 25px;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 16px;
+        display: inline-flex;
+        align-items: center;
+        &:focus{
+          color: white;
+        }
+        &:hover{
+          color: white;
+          background-color: #006FFF;
+          box-shadow: 1px 1px 0.5em #999;
+          -o-box-shadow: 1px 1px 0.5em #999;
+          -webkit-box-shadow: 1px 1px 0.5em #999;
+          -moz-box-shadow: 1px 1px 0.5em #999;
+        }
+        &.active{
+          color: white;
+          background-color: #006FFF;
+          box-shadow: 1px 1px 0.5em #999;
+          -o-box-shadow: 1px 1px 0.5em #999;
+          -webkit-box-shadow: 1px 1px 0.5em #999;
+          -moz-box-shadow: 1px 1px 0.5em #999;
+        }
+        >span.icon{
+          font-size: 35px;
+          margin-right: 5px;
+        }
+      }
+    }
   }
 }

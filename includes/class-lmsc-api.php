@@ -3,10 +3,8 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-if(class_exists('CMSC_Api'))
-    exit;
-
-class CMSC_Api
+if(!class_exists('LMSC_Api')){
+class LMSC_Api
 {
 
 
@@ -112,4 +110,5 @@ class CMSC_Api
     {
         _doing_it_wrong(__FUNCTION__, __('Cheatin&#8217; huh?'), $this->_version);
     }
+}
 }

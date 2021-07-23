@@ -1,0 +1,60 @@
+body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq {
+  top: 32px; }
+
+.lmsc_chatWrap3tIVm .lmsc_chatIcon1oJ8F {
+  position: fixed;
+  right: 10px;
+  bottom: 15px;
+  max-width: 65px;
+  cursor: pointer; }
+  .lmsc_chatWrap3tIVm .lmsc_chatIcon1oJ8F img {
+    width: 100%; }
+
+.lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 999; }
+  .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 {
+    width: 100%;
+    display: flex;
+    height: 100%; }
+    .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:first-child {
+      flex: 1;
+      background-color: #373759; }
+      .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:first-child > ul {
+        list-style: none;
+        margin: 0; }
+        .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:first-child > ul > li {
+          justify-content: center;
+          align-items: center;
+          padding: 25px;
+          cursor: pointer; }
+          .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:first-child > ul > li > span {
+            background-image: url(./../images/inbox-gray.svg);
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+            background-position: center;
+            background-size: contain;
+            display: flex;
+            margin: 0 auto;
+            background-repeat: no-repeat; }
+          .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:first-child > ul > li:hover {
+            background-color: #6c89f4; }
+            .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:first-child > ul > li:hover > span {
+              background-image: url(./../images/inbox-white.svg); }
+    .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:nth-child(2) {
+      background-color: #fff;
+      flex: 3;
+      box-shadow: 5px 0px 0.5em rgba(0, 0, 0, 0.1);
+      position: relative; }
+    .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child {
+      flex: 10;
+      background-color: #f6f6fc; }
+
+
+/*# sourceMappingURL=frontend.css.map*/

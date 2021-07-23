@@ -1,10 +1,37 @@
-:global(#apifw_ui_root) {
+:global(#lms_conversition_ui_root) {
   //@import 'reset';
-  * {
+  *{
     box-sizing: border-box;
   }
 
   padding-right: 10px;
   max-width: 1200px;
-
+  .lmsWrap{
+    .header{
+      display: flex;
+      >div{
+        flex: 1;
+        justify-content: center;
+        h2{
+          span{
+            border-bottom: 1px solid #bbb;
+            min-width: 50%;
+            display: inline-block;
+            padding-bottom: 10px;
+            color: #000;
+            font-size: 22px;
+          }
+        }
+        &:last-child{
+          text-align: right;
+          opacity: 0;
+        }
+      }
+    }
+    .lmsBody{
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+    }
+  }
 }

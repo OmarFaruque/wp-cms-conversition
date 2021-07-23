@@ -1,15 +1,15 @@
 import React from "react";
 import {HashRouter, Route, Switch} from 'react-router-dom'
 import ReactDOM from "react-dom";
-
 import FetchWP from './utils/fetchWP';
-
 import General from "./pages/General";
-
 import Page2 from "./pages/Page2";
-
 import Tabs from "./components/Tabs";
 
+//CSS 
+import style from './backend.scss';
+
+const { __ } = window.wp.i18n;
 
 class App extends React.Component {
     constructor(props) {
@@ -24,8 +24,8 @@ class App extends React.Component {
         }
 
         this.fetchWP = new FetchWP({
-            restURL: window.acotrs_object.root,
-            restNonce: window.acotrs_object.api_nonce,
+            restURL: window.lms_conversition_object.root,
+            restNonce: window.lms_conversition_object.api_nonce,
 
         });
 
@@ -62,14 +62,14 @@ class App extends React.Component {
             loader: true,
         });
 
-        this.fetchWP.get('config/')
-            .then(
-                (json) => {
-                    this.setState({
-                        loader: false,
-                        config: json,
-                    });
-                });
+        // this.fetchWP.get('config/')
+        //     .then(
+        //         (json) => {
+        //             this.setState({
+        //                 loader: false,
+        //                 config: json,
+        //             });
+        //         });
 
 
     }
@@ -77,28 +77,40 @@ class App extends React.Component {
     render() {
         const {config} = this.state;
         return (
-            <div>
-                <HashRouter>
-                    <Tabs/>
-                    <Switch>
-                        <Route
-                            path="/"
-                            exact
-                            render={props =>
-                                <General config={config} handleUpdate={this.handleUpdate}/>
-                            }
-                        />
-                        <Route
-                            exact
-                            path="/page2"
-                            render={props =>
-                                <Page2/>
-                            }
-                        />
-                    </Switch>
-                </HashRouter>
-
-
+            <div className={style.lmsWrap}>
+                <div className={style.header}>
+                    <div>
+                        <h2>
+                            <span>
+                                {__('LMS Conversation', 'lms-conversation')}
+                            </span>
+                        </h2>
+                    </div>
+                    <div>
+                        <a href="#">{__('Check Premium Options', 'lms-conversation')}</a>
+                    </div>
+                </div>
+                <div className={style.lmsBody}>
+                    <HashRouter>
+                        <Tabs/>
+                        <Switch>
+                            <Route
+                                path="/"
+                                exact
+                                render={props =>
+                                    <General config={config} handleUpdate={this.handleUpdate}/>
+                                }
+                            />
+                            <Route
+                                exact
+                                path="/page2"
+                                render={props =>
+                                    <Page2/>
+                                }
+                            />
+                        </Switch>
+                    </HashRouter>
+                </div>
             </div>
         )
     }
@@ -106,7 +118,7 @@ class App extends React.Component {
 }
 
 
-if (document.getElementById("acotrs_ui_root")) {
-    ReactDOM.render(<App/>, document.getElementById("acotrs_ui_root"));
+if (document.getElementById("lms_conversition_ui_root")) {
+    ReactDOM.render(<App/>, document.getElementById("lms_conversition_ui_root"));
 }
 

@@ -3,18 +3,16 @@
 /**
  * Load Backend related actions
  *
- * @class   CMSC_Backend
+ * @class   LMSC_Backend
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-if(!class_exists('CMSC_Backend')){
-class CMSC_Backend
+if(!class_exists('LMSC_Backend')){
+class LMSC_Backend
 {
-
-
     /**
      * Class intance for singleton  class
      *
@@ -105,8 +103,8 @@ class CMSC_Backend
      */
     public function __construct($file = '')
     {
-        $this->version = CMSC_VERSION;
-        $this->token = CMSC_TOKEN;
+        $this->version = LMSC_VERSION;
+        $this->token = LMSC_TOKEN;
         $this->file = $file;
         $this->dir = dirname($this->file);
         $this->assets_dir = trailingslashit($this->dir) . 'assets';
@@ -114,7 +112,7 @@ class CMSC_Backend
         $this->script_suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $plugin = plugin_basename($this->file);
 
-        if($this->is_any_cms_activated()){
+        if(LMSC_Helper()->is_any_cms_activated()){
             // add action links to link to link list display on the plugins page.
             add_filter("plugin_action_links_$plugin", array($this, 'pluginActionLinks'));
 
@@ -124,7 +122,7 @@ class CMSC_Backend
             register_deactivation_hook($this->file, array($this, 'deactivation'));
 
             // reg admin menu.
-            add_action('admin_menu', array($this, 'registerRootPage'), 30);
+            add_action('admin_menu', array($this, 'lmsc_register_root_page'), 30);
 
             // Init functions, you can use it for posttype registration and all.
 
@@ -171,25 +169,6 @@ class CMSC_Backend
         return array_merge($action_links, $links);
     }
 
-    /**
-     * Check if woocommerce is activated
-     *
-     * @access  public
-     * @return  boolean woocommerce install status
-     */
-    public function is_any_cms_activated()
-    {
-        if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-            return true;
-        }
-        if (is_multisite()) {
-            $plugins = get_site_option('active_sitewide_plugins');
-            if (isset($plugins['woocommerce/woocommerce.php'])) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Installation. Runs on activation.
@@ -214,10 +193,16 @@ class CMSC_Backend
         $error = sprintf(
         /* translators: %s: Plugin Name. */
             __(
-                '%s requires <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> to be installed & activated!',
-                'acowebs-plugin-boiler-plate-text-domain'
+                '%s requires any LMS plugin like 
+                <a target="_blank" href="https://wordpress.org/plugins/learnpress/">Learnpress</a>, 
+                <a href="https://www.learndash.com/ target="_blank"">Learndash</a>, 
+                <a href="https://wordpress.org/plugins/sensei-lms/" target="_blank">Sensei</a>, 
+                <a href="https://wordpress.org/plugins/lifterlms/" target="_blank">LifterLms</a>, 
+                <a href="https://wordpress.org/plugins/masterstudy-lms-learning-management-system/" target="_blank">Masterstudy</a> & 
+                <a href="https://wordpress.org/plugins/tutor/" target="_blank">Tutor LMS</a> to be installed & activated!',
+                'cms-conversation'
             ),
-            CMSC_PLUGIN_NAME
+            LMSC_PLUGIN_NAME
         );
 
         echo ('<div class="error"><p>' . $error . '</p></div>');
@@ -226,15 +211,16 @@ class CMSC_Backend
     /**
      * Creating admin pages
      */
-    public function registerRootPage()
+    public function lmsc_register_root_page()
     {
-        $this->hook_suffix[] = add_submenu_page(
-            'woocommerce',
-            __('Acowebs', 'acowebs-plugin-boiler-plate-text-domain'),
-            __('Acowebs', 'acowebs-plugin-boiler-plate-text-domain'),
-            'manage_woocommerce',
+        $this->hook_suffix[] = add_menu_page(
+            LMSC_PLUGIN_NAME,
+            LMSC_PLUGIN_NAME,
+            'manage_options',
             $this->token . '-admin-ui',
-            array($this, 'adminUi')
+            array($this, 'adminUi'),
+            'dashicons-format-chat', 
+            50
         );
     }
 
@@ -243,11 +229,10 @@ class CMSC_Backend
      */
     public function adminUi()
     {
-
         echo (
             '<div id="' . $this->token . '_ui_root">
-  <div class="' . $this->token . '_loader"><p>' . __('Loading User Interface...', 'acowebs-plugin-boiler-plate-text-domain') . '</p></div>
-</div>'
+              <div class="' . $this->token . '_loader"><p>' . __('Loading User Interface...', 'acowebs-plugin-boiler-plate-text-domain') . '</p></div>
+            </div>'
         );
     }
 
