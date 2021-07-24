@@ -80,34 +80,120 @@ class App extends Component {
                     <div className={style.chatWindow}>
                         <div className={style.chatBody}>
                             <div>
+                                <div className={style.profileInfo}>
+                                    <div className={style.profileImg}></div>
+                                    <h4>{__('Student Name', 'lms-conversation')}</h4>
+                                    <p>{__('Student', 'lms-conversation')}</p>
+                                </div>
                                 <ul>
                                     <li className={style.inbox}>
                                         <span></span>
                                     </li>
-                                    <li className={style.inbox}>
+                                    <li className={style.friends}>
                                         <span></span>
                                     </li>
-                                    <li className={style.inbox}>
-                                        <span></span>
-                                    </li>
-                                    <li className={style.inbox}>
-                                        <span></span>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                             <div>
                                 <div>
-                                    <h2>{__('Messages', 'lms-conversation')}</h2>
+                                    <div className={style.listHeader}>
+                                        <h2>{__('Messages', 'lms-conversation')}</h2>
+                                        <div className={style.searchbar}>
+                                            <div>
+                                                <input type="search" name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className={style.userList}>
-                                        <ul>
-                                            <li className={style.groupItem}>
+                                        <div>
+                                            <div>
+                                                <div className={style.userImg}></div>
+                                            </div>
+                                            <div>
+                                                <h4>{__('Group Chat', 'lms-conversation')}</h4>
+                                                <h5>{__('Student', 'lms-conversation')}</h5>
+                                                <p>{__('Really? That\'s greet...', 'lms-conversation')}</p>
+                                            </div>
+                                            <div>
+                                                <span>2:34pm</span>
+                                            </div>
+                                        </div>
 
-                                            </li>
-                                        </ul>
+                                        <div>
+                                            <div>
+                                                <div className={style.userImg}></div>
+                                            </div>
+                                            <div>
+                                                <h4>{__('Student Name', 'lms-conversation')}</h4>
+                                                <h5>{__('Student', 'lms-conversation')}</h5>
+                                                <p>{__('Really? That\'s greet...', 'lms-conversation')}</p>
+                                            </div>
+                                            <div>
+                                                <span>2:34pm</span>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div>
+                                                <div className={style.userImg}></div>
+                                            </div>
+                                            <div>
+                                                <h4>{__('Student Name', 'lms-conversation')}</h4>
+                                                <h5>{__('Student', 'lms-conversation')}</h5>
+                                                <p>{__('Really? That\'s greet...', 'lms-conversation')}</p>
+                                            </div>
+                                            <div>
+                                                <span>2:34pm</span>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div>
+                                                <div className={style.userImg}></div>
+                                            </div>
+                                            <div>
+                                                <h4>{__('Student Name', 'lms-conversation')}</h4>
+                                                <h5>{__('Student', 'lms-conversation')}</h5>
+                                                <p>{__('Really? That\'s greet...', 'lms-conversation')}</p>
+                                            </div>
+                                            <div>
+                                                <span>2:34pm</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div></div>
+                            <div>
+                                <div className={style.topHeader}>
+                                    <div className={style.profiInfo}>
+                                        <div></div>
+                                        <div>
+                                            <h5>{__('Student Name', 'lms-conversation')}</h5>
+                                            <p>{__('Active Now', 'lms-conversation')}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span className={style.closeBtn}></span>
+                                    </div>
+                                </div>
+
+                                <div className={style.chatForm}>
+                                    <div>
+                                        <div>
+                                            <span className={style.imoji}></span>
+                                            <span className={style.imgUpload}></span>
+                                        </div>
+                                        
+                                        <div>
+                                            <input type="text" name="text_msg" id="text_msg" />
+                                        </div>
+                                        <div>
+                                            <span className={style.sendBtn}></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

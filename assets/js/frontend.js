@@ -2520,7 +2520,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8"});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","topHeader":"lmsc_topHeader2P9O3","closeBtn":"lmsc_closeBtn1EhlV","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
 
 /***/ }),
 
@@ -2989,19 +2989,52 @@ var App = /*#__PURE__*/function (_Component) {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatWindow
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatBody
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("ul", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.profileInfo
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.profileImg
+      }), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("ul", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.inbox
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.inbox
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.inbox
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.inbox
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Messages', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.friends
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.listHeader
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Messages', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.searchbar
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
+        type: "search",
+        name: "search",
+        id: "search",
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Search', 'lms-conversation')
+      })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userList
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("ul", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.groupItem
-      }))))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null))));
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Group Chat', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm")))))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.topHeader
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.profiInfo
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Active Now', 'lms-conversation')))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.closeBtn
+      }))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatForm
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.imoji
+      }), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.imgUpload
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
+        type: "text",
+        name: "text_msg",
+        id: "text_msg"
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.sendBtn
+      }))))))));
     }
   }]);
 

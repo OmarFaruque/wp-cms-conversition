@@ -29,6 +29,30 @@
             display: flex;
             height: 100%;
             >div{
+                .profileInfo{
+                    color: white;
+                    text-align: center;
+                    padding: 15px;
+                    .profileImg{
+                        width: 70px;
+                        height: 70px;
+                        background-image: url(./icons/demo-pic36.jpg);
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        background-position: center;
+                        border-radius: 100px;
+                        margin: 10px auto;
+                    }
+                    h4{
+                        color: #ccc;
+                        font-weight: 500;
+                        font-size: 18px;
+                        line-height: 18px;
+                    }
+                    p{
+                        color: #ccc;
+                    }
+                }
                 &:first-child{
                     flex: 1;
                     background-color: #373759;
@@ -41,9 +65,8 @@
                             padding: 25px;
                             cursor: pointer;
                             >span{
-                                background-image: url(icons/inbox-gray.svg);
-                                width: 50px;
-                                height: 50px;
+                                width: 40px;
+                                height: 40px;
                                 overflow: hidden;
                                 position: relative;
                                 background-position: center;
@@ -54,10 +77,29 @@
                             }
                             &:hover{
                                 background-color: #6c89f4;
+                                
+                            }
+                            &.friends{
+                                >span{
+                                    background-image: url(icons/friends.svg);
+                                }
+                            }
+                            &.friends:hover{
+                                >span{
+                                    background-image: url(icons/friends-white.svg);
+                                }
+                            }
+                            &.inbox{
+                                >span{
+                                    background-image: url(icons/inbox-gray.svg);
+                                }
+                            }
+                            &.inbox:hover{
                                 >span{
                                     background-image: url(icons/inbox-white.svg);    
                                 }
                             }
+
                         }
                     }
                 }
@@ -67,12 +109,236 @@
                     box-shadow: 5px 0px 0.5em rgba(0, 0, 0, 0.1);
                     position: relative;
                     >div{
-                      
+                        .listHeader{
+                            padding: 20px;
+                            h2{
+                                font-weight: bold;
+                            }
+                            .searchbar{
+                                >div{
+                                    position: relative;
+                                    input{
+                                        width: 100%;
+                                        background-color: transparent;
+                                        outline: none;
+                                        box-shadow: 0 0 0.5em #ddd;
+                                        border-radius: 10px;
+                                    }
+                                    input::placeholder{
+                                        color:#ccc;
+                                        padding-left: 30px;
+                                        background-image: url(./icons/search-interface-symbol.svg);
+                                        background-repeat: no-repeat;
+                                        background-size: contain;
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        .userList{
+                            padding: 20px 0;
+                            >div{
+                                display: flex;
+                                align-items: center;
+                                cursor: pointer;
+                                padding: 20px;
+                                &:hover{
+                                    background-color: #eff2fa;
+                                }
+                                &:first-child{
+                                    >div{
+                                        flex: 1;
+                                        &:first-child{
+                                            flex: 2;
+                                            >div{
+                                                background-repeat: no-repeat;
+                                                background-size: contain;
+                                                height: 70px;
+                                                border-radius: 100px;
+                                                width: 70px;
+                                                margin: 0 auto;
+                                                background-image: url(./icons/user-group-img.svg);
+                                                background-position: center;
+                                            }
+                                        }
+                                        &:nth-child(2){
+                                            flex: 5;
+                                            h4{
+                                                margin: 0;
+                                                line-height: 20px;
+                                                font-size: 18px;
+                                                font-weight: 500;
+                                            }
+                                            h5{
+                                                margin: 0;
+                                                opacity: 0.6;
+                                            }
+                                            p{
+                                                margin: 0;
+                                                opacity: 0.8;
+                                            }
+                                        }
+                                        &:last-child{
+                                            flex: 1;
+                                        }
+                                    }
+                                }
+                                &:not(:first-child)>div{
+                                    flex: 1;
+                                    &:first-child{
+                                        flex: 2;
+                                        >div{
+                                            background-image: url(./icons/demo-pic36.jpg);
+                                            background-repeat: no-repeat;
+                                            background-size: contain;
+                                            height: 70px;
+                                            border-radius: 100px;
+                                            width: 70px;
+                                            margin: 0 auto;
+                                        }
+                                    }
+                                    &:nth-child(2){
+                                        flex: 5;
+                                        h4{
+                                            margin: 0;
+                                            line-height: 20px;
+                                            font-size: 18px;
+                                            font-weight: 500;
+                                        }
+                                        h5{
+                                            margin: 0;
+                                            opacity: 0.6;
+                                        }
+                                        p{
+                                            margin: 0;
+                                            opacity: 0.8;
+                                        }
+                                    }
+                                    &:last-child{
+                                        flex: 1;
+                                    }
+                                }
+                            }
+                        }
+                        
                     }
                 }
                 &:last-child{
                     flex: 10;
                     background-color: #f6f6fc;
+                    position: relative;
+                    .topHeader{
+                        display: flex;
+                        background-color: white;
+                        padding: 10px 40px;
+                        >div{
+                            &:first-child{
+                                flex: 2;
+                                display: inline-flex;
+                                >div{
+                                    h5{
+                                        margin: 0;
+                                        font-size: 18px;
+                                        font-weight: 600;
+                                    }
+                                    p{
+                                        margin: 0;
+                                        font-size: 14px;
+                                        color: #999;
+                                    }
+                                    &:first-child{
+                                        width: 50px;
+                                        height: 50px;
+                                        border-radius: 500px;
+                                        background-image: url(./icons/demo-pic36.jpg);
+                                        background-size: contain;
+                                        background-position: center;
+                                        margin-right: 15px;
+                                    }
+                                }
+                            }
+                            &:last-child{
+                                flex: 1;
+                                height: 50px;
+                                display: flex;
+                                align-items: center;
+                                .closeBtn{
+                                    width: 30px;
+                                    height: 30px;
+                                    display: block;
+                                    margin-left: auto;
+                                    background-image: url(./icons/cancel.svg);
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                    opacity: 0.3;
+                                    cursor: pointer;
+                                    &:hover{
+                                        opacity: 0.7;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .chatForm{
+                        position: absolute;
+                        bottom: 0;
+                        padding: 30px 50px;
+                        width: 100%;
+                        >div{
+                            display: flex;
+                            background-color: white;
+                            align-items: center;
+                            >div{
+                                flex: 1;
+                                display: flex;
+                                justify-content: center;
+                                &:first-child{
+                                    display: inline-flex;
+                                    padding: 10px;
+                                    >span{
+                                        background-repeat: no-repeat;
+                                        width: 26px;
+                                        height: 26px;
+                                        display: block;
+                                        background-size: contain;
+                                        margin: 5px;
+                                        cursor: pointer;
+                                        &.imoji{
+                                            background-image: url(./icons/grinning.svg);
+                                        } 
+                                        &.imgUpload{
+                                            background-image: url(./icons/insert-picture-icon.svg);
+                                        }
+                                    }
+                                   
+                                }
+                                &:nth-child(2){
+                                    flex: 12;
+                                    input{
+                                        background-color:transparent;
+                                        box-shadow: none;
+                                        width: 100%;
+                                        &:focus{
+                                            outline: none;
+                                        }
+                                    }
+                                }
+                                &:last-child{
+                                    >span{
+                                        &.sendBtn{
+                                            background-image: url(./icons/send-button.svg);
+                                            width: 30px;
+                                            height: 30px;
+                                            display: block;
+                                            background-size: contain;
+                                            background-repeat: no-repeat;
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
