@@ -77,35 +77,7 @@ class LMSC_Public
      * @return  footer html for chat application
      */
     public function lmsc_foother_callback(){
-?>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyD3xcZDHm-TI6Qio3BZzLLlsV9q2sb-gfc",
-    authDomain: "chat-7caa4.firebaseapp.com",
-    databaseURL: "https://chat-7caa4.firebaseio.com",
-    projectId: "chat-7caa4",
-    storageBucket: "chat-7caa4.appspot.com",
-    messagingSenderId: "58421091753",
-    appId: "1:58421091753:web:502de188e4c3363c44b8b8"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  var starCountRef = firebase.database().ref('messages');
-  console.log('data: ', starCountRef);
-</script>
-
-
-<?php 
         echo (
             '<div id="' . $this->token . '_chat_ui">
               <div class="' . $this->token . '_loader"><p>' . __('Loading User Interface...', 'lms-conversation') . '</p></div>

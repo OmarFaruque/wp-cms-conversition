@@ -1,7 +1,9 @@
 :global(body.logged-in.admin-bar){
     .chatWrap{
         .chatWindow{
-            top: 32px;
+            &:global(.active){
+                top: 32px;
+            }
         }    
     }    
 }
@@ -22,8 +24,15 @@
         height: 100%;
         width: 100%;
         left: 0;
-        top: 0;
+        top: 100%;
         z-index: 999;
+        transition: top 0.3s;
+        -moz-transition: top 0.3s;
+        -o-transition: top 0.3s;
+        -webkit-transition: top 0.3s;
+        &:global(.active){
+            top: 100%;
+        }
         .chatBody{
             width: 100%;
             display: flex;
@@ -278,6 +287,10 @@
                                 }
                             }
                         }
+                    }
+                    .chatbodyLists{
+                        background-color: gray;
+                        color: white;
                     }
                     .chatForm{
                         position: absolute;

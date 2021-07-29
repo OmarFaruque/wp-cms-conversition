@@ -7,6 +7,14 @@ import style from './frontend.scss';
 import { sprintf, _n, __ } from '@wordpress/i18n';
 
 
+import { auth, googleAuthProvider, database } from "./component/config";
+
+
+
+const IDontCareAboutFirebaseAuth = () => {
+    return <div>This part won't react to firebase auth changes</div>;
+};
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +24,9 @@ class App extends Component {
             config: {
                 general: {title: ''},
                 page2: {title: ''}
-            }
+            }, 
+            chats: [], 
+            chat_window_active: false
         }
 
         this.fetchWP = new FetchWP({
@@ -30,6 +40,10 @@ class App extends Component {
 
     componentDidMount() {
         // this.fetchData();
+        const exercisesRef = database.ref('/messages/public/59');
+        exercisesRef.on('value', snapshot => {
+            this.setState({ chats: snapshot.val() });
+        });
 
     }
 
@@ -53,6 +67,18 @@ class App extends Component {
     }
 
 
+    /**
+     * @Toggle chat window
+     */
+    toggleChatWindow = (e) => {
+        e.preventDefault()
+        console.log('button Clicked');
+        const {chat_window_active} = this.state
+        this.setState({
+            chat_window_active: !chat_window_active ? true : false
+        })
+    }
+
     fetchData() {
         this.setState({
             loader: true,
@@ -71,13 +97,14 @@ class App extends Component {
     }
 
     render() {
-        const {config} = this.state;
+        const {config, chats} = this.state;
+        const activeClass = this.state.chat_window_active ? 'active' : 'close';
         return (
                 <div className={style.chatWrap}>
-                    <div className={style.chatIcon}>
+                    <div className={style.chatIcon} onClick={(e) => this.toggleChatWindow(e)}>
                         <img src={`${window.lms_conversition_object.assets_url}images/${chaticon}`} alt={__('LMS Chat', 'lms-conversation')} />
                     </div>
-                    <div className={style.chatWindow}>
+                    <div className={`${style.chatWindow} ${activeClass}`}>
                         <div className={style.chatBody}>
                             <div>
                                 <div className={style.profileInfo}>
@@ -174,9 +201,21 @@ class App extends Component {
                                         </div>
                                     </div>
                                     <div>
-                                        <span className={style.closeBtn}></span>
+                                        <span onClick={(e) => this.toggleChatWindow(e)} className={style.closeBtn}></span>
                                     </div>
                                 </div>
+
+
+                                <div className={style.chatbodyLists}>
+                                <button onClick={() => auth.signInWithRedirect(googleAuthProvider)}>
+                                  Sign In
+                                </button>
+                                </div>
+
+
+
+
+
 
                                 <div className={style.chatForm}>
                                     <div>
