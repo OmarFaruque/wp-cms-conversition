@@ -25,13 +25,13 @@
         width: 100%;
         left: 0;
         top: 100%;
-        z-index: 999;
         transition: top 0.3s;
         -moz-transition: top 0.3s;
         -o-transition: top 0.3s;
         -webkit-transition: top 0.3s;
         &:global(.active){
-            top: 100%;
+            top: 0%;
+            z-index: 999;
         }
         .chatBody{
             width: 100%;
@@ -289,8 +289,55 @@
                         }
                     }
                     .chatbodyLists{
-                        background-color: gray;
-                        color: white;
+                        .chatLists{
+                            padding: 25px 35px;
+                            max-height: 78vh;
+                            overflow-y: auto;
+                            ul{
+                                margin: 0;
+                                list-style: none;
+                                li{
+                                    display: flex;
+                                    margin: 15px 10px;
+                                    align-items: center;
+                                    img{
+                                        max-width: 200px;
+                                        min-width: 20px;
+                                    }
+                                    &.thisuser{
+                                        justify-content: flex-end;
+                                        >span{
+                                            &.msg{
+                                                background-color: #6a87f4;
+                                                padding: 7px 20px;
+                                                border-radius: 25px 25px 0px 25px;
+                                                color: white;
+                                            }
+                                        }
+                                    }
+                                    &.fromanother{
+                                        >span{
+                                            &.msg{
+                                                background-color: white;
+                                                padding: 7px 20px;
+                                                border-radius: 25px 25px 25px 0px;
+                                            }
+                                        }
+                                    }
+                                    >span{
+                                        &.userimg{
+                                            width: 25px;
+                                            height: 25px;
+                                            background-size: contain;
+                                            background-position: center;
+                                            margin-right: 8px;
+                                            background-repeat: no-repeat;
+                                            border-radius: 100px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     .chatForm{
                         position: absolute;
@@ -298,54 +345,74 @@
                         padding: 30px 50px;
                         width: 100%;
                         >div{
-                            display: flex;
-                            background-color: white;
-                            align-items: center;
-                            >div{
-                                flex: 1;
+                            >form{
                                 display: flex;
-                                justify-content: center;
-                                &:first-child{
-                                    display: inline-flex;
-                                    padding: 10px;
-                                    >span{
-                                        background-repeat: no-repeat;
-                                        width: 26px;
-                                        height: 26px;
-                                        display: block;
-                                        background-size: contain;
-                                        margin: 5px;
-                                        cursor: pointer;
-                                        &.imoji{
-                                            background-image: url(./icons/grinning.svg);
-                                        } 
-                                        &.imgUpload{
-                                            background-image: url(./icons/insert-picture-icon.svg);
-                                        }
-                                    }
-                                   
-                                }
-                                &:nth-child(2){
-                                    flex: 12;
-                                    input{
-                                        background-color:transparent;
-                                        box-shadow: none;
-                                        width: 100%;
-                                        &:focus{
-                                            outline: none;
-                                        }
-                                    }
-                                }
-                                &:last-child{
-                                    >span{
-                                        &.sendBtn{
-                                            background-image: url(./icons/send-button.svg);
-                                            width: 30px;
-                                            height: 30px;
+                                background-color: white;
+                                align-items: center;
+                                >div{
+                                    flex: 1;
+                                    display: flex;
+                                    justify-content: center;
+                                    &:first-child{
+                                        display: inline-flex;
+                                        padding: 10px;
+                                        >span{
+                                            background-repeat: no-repeat;
+                                            width: 26px;
+                                            height: 26px;
                                             display: block;
                                             background-size: contain;
-                                            background-repeat: no-repeat;
+                                            margin: 5px;
                                             cursor: pointer;
+                                            &.imoji{
+                                                background-image: url(./icons/grinning.svg);
+                                            } 
+                                        }
+                                        .fileUPloadInput{
+                                            display: none;
+                                        }
+                                        >label{
+                                            >span{
+                                                background-repeat: no-repeat;
+                                                width: 26px;
+                                                height: 26px;
+                                                display: block;
+                                                background-size: contain;
+                                                margin: 5px;
+                                                cursor: pointer;
+                                                &.imgUpload{
+                                                    background-image: url(./icons/insert-picture-icon.svg);
+                                                }
+                                            }
+                                        }
+                                    
+                                    }
+                                    &:nth-child(2){
+                                        flex: 12;
+                                        input{
+                                            background-color:transparent;
+                                            box-shadow: none;
+                                            width: 100%;
+                                            &:focus{
+                                                outline: none;
+                                            }
+                                        }
+                                    }
+                                    &:last-child{
+                                        >button{
+                                            background-color: transparent;
+                                            border-width: 0;
+                                            >span{
+                                                &.sendBtn{
+                                                    background-image: url(./icons/send-button.svg);
+                                                    width: 30px;
+                                                    height: 30px;
+                                                    display: block;
+                                                    background-size: contain;
+                                                    background-repeat: no-repeat;
+                                                    cursor: pointer;
+                                                }
+                                            }
                                         }
                                     }
                                 }

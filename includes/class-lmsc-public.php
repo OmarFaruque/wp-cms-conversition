@@ -64,10 +64,8 @@ class LMSC_Public
         $this->token = LMSC_TOKEN;
         $this->file = $file;
         $this->assets_url = esc_url(trailingslashit(plugins_url('/assets/', $this->file)));
-        // Load frontend CSS.
+
         if(LMSC_Helper()->is_any_cms_activated()){
-            add_action('wp_enqueue_scripts', array($this, 'frontend_enqueue_styles'), 10);
-            add_action(  'wp_footer', array($this, 'lmsc_foother_callback') );
             add_action('init', array($this, 'init'));
         }
     }
@@ -77,6 +75,37 @@ class LMSC_Public
      * @return  footer html for chat application
      */
     public function lmsc_foother_callback(){
+        global $post, $current_user;
+        
+        $append = false;
+        if(is_singular( 'sfwd-courses' ))
+            $append = true;    
+        
+        if($append === false)
+            return false;
+
+        // JS
+        wp_enqueue_script( $this->token . '-frontendJS' );
+
+        // CSS
+        wp_enqueue_style($this->token . '-frontend');
+
+        // Localize a script.
+        wp_localize_script(
+            $this->token . '-frontendJS',
+            $this->token . '_object',
+            array(
+                'api_nonce' => wp_create_nonce('wp_rest'),
+                'root' => rest_url($this->token . '/v1/'),
+                'assets_url' => $this->assets_url,
+                'post_id' => $post->ID, 
+                'user_id' => get_current_user_id(  ),
+                'avatar_url' => get_avatar_url( get_current_user_id(  ) ), 
+                'email' => $current_user->user_email, 
+                'pass' => $current_user->data->user_pass
+            )
+        );
+
 
         echo (
             '<div id="' . $this->token . '_chat_ui">
@@ -89,7 +118,10 @@ class LMSC_Public
      */
     public function init()
     {
-
+        if(is_user_logged_in(  ) && !is_admin()){
+            add_action('wp_enqueue_scripts', array($this, 'frontend_enqueue_styles'), 10);
+            add_action(  'wp_footer', array($this, 'lmsc_foother_callback') );
+        }
     }
 
     /**
@@ -119,22 +151,9 @@ class LMSC_Public
     {
         //JS 
         wp_register_script( $this->token . '-frontendJS', esc_url($this->assets_url) . 'js/frontend.js', array(), $this->version, true );
-        wp_enqueue_script( $this->token . '-frontendJS' );
         
         //CSS
         wp_register_style($this->token . '-frontend', esc_url($this->assets_url) . 'css/frontend.css', array(), $this->version);
-        wp_enqueue_style($this->token . '-frontend');
-
-        // Localize a script.
-        wp_localize_script(
-            $this->token . '-frontendJS',
-            $this->token . '_object',
-            array(
-                'api_nonce' => wp_create_nonce('wp_rest'),
-                'root' => rest_url($this->token . '/v1/'),
-                'assets_url' => $this->assets_url,
-            )
-        );
     }
 
 

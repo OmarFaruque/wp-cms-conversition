@@ -15,4 +15,31 @@ export default firebase;
 
 export const database = firebase.database();
 export const auth = firebase.auth();
+export const storage = firebase.storage();
+
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
+export const Schema = {
+    sender_id: window.lms_conversition_object.user_id,
+    avatar_url: window.lms_conversition_object.avatar_url,
+    text_msg: '', 
+    room: 'public', 
+    createDate: Date.now()
+}
+
+
+auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email)
+  .then((userCredential) => {
+  })
+  .catch((error) => {
+    auth.createUserWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email)
+    .then((userCredential) => {
+    })
+    .catch(error => {
+        auth.sendPasswordResetEmail(window.lms_conversition_object.email)
+        .then(() => {
+        })
+        .catch((error) => {
+        });
+    })
+  });

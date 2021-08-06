@@ -58240,7 +58240,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "database": () => (/* binding */ database),
 /* harmony export */   "auth": () => (/* binding */ auth),
-/* harmony export */   "googleAuthProvider": () => (/* binding */ googleAuthProvider)
+/* harmony export */   "storage": () => (/* binding */ storage),
+/* harmony export */   "googleAuthProvider": () => (/* binding */ googleAuthProvider),
+/* harmony export */   "Schema": () => (/* binding */ Schema)
 /* harmony export */ });
 /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.esm.js");
 
@@ -58257,7 +58259,20 @@ firebase__WEBPACK_IMPORTED_MODULE_0__.default.initializeApp(config);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (firebase__WEBPACK_IMPORTED_MODULE_0__.default);
 var database = firebase__WEBPACK_IMPORTED_MODULE_0__.default.database();
 var auth = firebase__WEBPACK_IMPORTED_MODULE_0__.default.auth();
+var storage = firebase__WEBPACK_IMPORTED_MODULE_0__.default.storage();
 var googleAuthProvider = new firebase__WEBPACK_IMPORTED_MODULE_0__.default.auth.GoogleAuthProvider();
+var Schema = {
+  sender_id: window.lms_conversition_object.user_id,
+  avatar_url: window.lms_conversition_object.avatar_url,
+  text_msg: '',
+  room: 'public',
+  createDate: Date.now()
+};
+auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {})["catch"](function (error) {
+  auth.createUserWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {})["catch"](function (error) {
+    auth.sendPasswordResetEmail(window.lms_conversition_object.email).then(function () {})["catch"](function (error) {});
+  });
+});
 
 /***/ }),
 
@@ -58928,7 +58943,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","topHeader":"lmsc_topHeader2P9O3","closeBtn":"lmsc_closeBtn1EhlV","chatbodyLists":"lmsc_chatbodyListsJmATz","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","topHeader":"lmsc_topHeader2P9O3","closeBtn":"lmsc_closeBtn1EhlV","chatbodyLists":"lmsc_chatbodyListsJmATz","chatLists":"lmsc_chatLists1MguY","thisuser":"lmsc_thisuser2JwPE","msg":"lmsc_msgMbmHv","fromanother":"lmsc_fromanother3VlFx","userimg":"lmsc_userimg3E6TE","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","fileUPloadInput":"lmsc_fileUPloadInput2Uo2j","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
 
 /***/ }),
 
@@ -59352,6 +59367,10 @@ var IDontCareAboutFirebaseAuth = function IDontCareAboutFirebaseAuth() {
   return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, "This part won't react to firebase auth changes");
 };
 
+var coursePublicDB = _component_config__WEBPACK_IMPORTED_MODULE_5__.database.ref('/messages/public/' + lms_conversition_object.post_id);
+var storageRef = _component_config__WEBPACK_IMPORTED_MODULE_5__.storage.ref();
+var imageRef = storageRef.child('images');
+
 var App = /*#__PURE__*/function (_Component) {
   _inherits(App, _Component);
 
@@ -59384,6 +59403,41 @@ var App = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "onFormSubmit", function (e) {
+      e.preventDefault();
+      _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.createDate = Date.now();
+
+      if (_component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.text_msg != '') {
+        coursePublicDB.push(_component_config__WEBPACK_IMPORTED_MODULE_5__.Schema);
+      }
+
+      _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.text_msg = '';
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "changeHandler", function (e) {
+      e.preventDefault();
+
+      switch (e.target.name) {
+        case 'attachment':
+          var filename = Math.floor(Math.random() * 90000000000) + e.target.files[0].name;
+          var type = filename.split('.')[1];
+          console.log('type: ', type);
+          _component_config__WEBPACK_IMPORTED_MODULE_5__.storage.ref("/images/".concat(filename)).put(e.target.files[0]).then(function (snapshot) {
+            snapshot.ref.getDownloadURL().then(function (downloadUrl) {
+              _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema[e.target.name] = downloadUrl;
+              _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.type = type;
+              coursePublicDB.push(_component_config__WEBPACK_IMPORTED_MODULE_5__.Schema);
+              _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema[e.target.name] = '';
+              _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.type = '';
+            });
+          });
+          break;
+
+        default:
+          _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema[e.target.name] = e.target.value;
+      }
+    });
+
     _this.state = {
       loader: false,
       saving: false,
@@ -59411,12 +59465,23 @@ var App = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       // this.fetchData();
-      var exercisesRef = _component_config__WEBPACK_IMPORTED_MODULE_5__.database.ref('/messages/public/59');
-      exercisesRef.on('value', function (snapshot) {
+      coursePublicDB.orderByChild('room').equalTo('public').on('value', function (snapshot) {
         _this2.setState({
           chats: snapshot.val()
         });
-      });
+      }); // storage.ref('/images/').listAll().then( res => {
+      //     let promises = []
+      //     res.items.forEach( item => {
+      //         item.getDownloadURL().then( (downloadURL) => {
+      //             var filename = downloadURL.split('/').pop()
+      //             filename = filename.split('?').shift()
+      //             promises[filename] = downloadURL
+      //         })
+      //     })
+      //     this.setState({
+      //         download: promises
+      //     })
+      // })
     }
   }, {
     key: "componentWillUnmount",
@@ -59439,6 +59504,12 @@ var App = /*#__PURE__*/function (_Component) {
       //             });
       //         });
     }
+    /**
+     * 
+     * @param {*} e default event
+     * @perpose form submit
+     */
+
   }, {
     key: "render",
     value: function render() {
@@ -59446,7 +59517,10 @@ var App = /*#__PURE__*/function (_Component) {
 
       var _this$state = this.state,
           config = _this$state.config,
-          chats = _this$state.chats;
+          chats = _this$state.chats,
+          download = _this$state.download;
+      if (!chats) chats = [];
+      console.log('all chats: ', chats);
       var activeClass = this.state.chat_window_active ? 'active' : 'close';
       return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatWrap
@@ -59476,6 +59550,7 @@ var App = /*#__PURE__*/function (_Component) {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.searchbar
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
         type: "search",
+        onChange: this.changeHandler,
         name: "search",
         id: "search",
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Search', 'lms-conversation')
@@ -59500,23 +59575,53 @@ var App = /*#__PURE__*/function (_Component) {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.closeBtn
       }))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatbodyLists
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
-        onClick: function onClick() {
-          return _component_config__WEBPACK_IMPORTED_MODULE_5__.auth.signInWithRedirect(_component_config__WEBPACK_IMPORTED_MODULE_5__.googleAuthProvider);
-        }
-      }, "Sign In")), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatLists
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("ul", null, Object.keys(chats).map(function (k, v) {
+        return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
+          className: chats[k].sender_id == window.lms_conversition_object.user_id ? _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.thisuser : _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.fromanother,
+          key: v
+        }, chats[k].sender_id != window.lms_conversition_object.user_id && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+          className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userimg,
+          style: {
+            backgroundImage: "url(" + chats[k].avatar_url + ")"
+          }
+        }), typeof chats[k].attachment != 'undefined' && chats[k].attachment != '' && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("a", {
+          target: "_blank",
+          href: chats[k].attachment
+        }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("img", {
+          src: chats[k].attachment,
+          alt: ""
+        })), chats[k].text_msg != '' && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+          className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.msg
+        }, chats[k].text_msg));
+      })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatForm
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("form", {
+        onSubmit: this.onFormSubmit
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.imoji
-      }), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+      }), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("label", {
+        "for": "attachment"
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.imgUpload
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.fileUPloadInput,
+        type: "file",
+        onChange: this.changeHandler,
+        name: "attachment",
+        id: "attachment"
       })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
+        onChange: this.changeHandler,
         type: "text",
         name: "text_msg",
+        value: _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.text_msg,
         id: "text_msg"
-      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
+        type: "submit"
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.sendBtn
-      }))))))));
+      }))))))))));
     }
   }]);
 

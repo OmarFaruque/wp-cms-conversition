@@ -72,7 +72,9 @@ if (!function_exists('LMSC_Helper')) {
 
 // Front end.
 LMSC_Public();
+
 if (is_admin()) {
     LMSC_Backend();
 }
+
 // new CMSC_Api();
