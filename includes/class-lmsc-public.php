@@ -52,6 +52,12 @@ class LMSC_Public
     public $assets_url;
 
     /**
+     * Wp db
+     * @access  private
+     */
+    private $wpdb;
+
+    /**
      * Constructor function.
      *
      * @access  public
@@ -60,6 +66,8 @@ class LMSC_Public
      */
     public function __construct($file = '')
     {
+        global $wpdb; 
+        $this->wpdb = $wpdb;
         $this->version = LMSC_VERSION;
         $this->token = LMSC_TOKEN;
         $this->file = $file;
@@ -68,6 +76,35 @@ class LMSC_Public
         if(LMSC_Helper()->is_any_cms_activated()){
             add_action('init', array($this, 'init'));
         }
+
+        add_action( 'wp_head', array($this, 'testF') );
+    }
+
+
+    public function testF(){
+        // $enrolled_usrs = $this->lmsc_get_enrolled_usrs();
+        // echo 'enrolled Usrs <br/><pre>';
+        // print_r($enrolled_usrs);
+        // echo '</pre>';
+    }
+
+
+
+    /**
+     * @access  private
+     * @desc    get enrolled users
+     */
+    public function lmsc_get_enrolled_usrs(){
+        global $post;
+        $activity_table = LDLMS_DB::get_table_name( 'user_activity' );
+        $usres = array($post->post_author);
+        $enrolled_users = $this->wpdb->get_results($this->wpdb->prepare( 'SELECT `user_id` FROM '.$activity_table.' WHERE `post_id`=%d AND `activity_type`=%s', $post->ID, 'access'), OBJECT);
+        $enrolled_users = array_map(function($v){
+            return $v->user_id;
+        }, $enrolled_users); 
+
+        $usres = array_merge($usres, $enrolled_users);
+        return $usres;
     }
 
     /**
@@ -76,6 +113,14 @@ class LMSC_Public
      */
     public function lmsc_foother_callback(){
         global $post, $current_user;
+
+        echo 'current usres data <pre>';
+        print_r($current_user);
+        echo '</pre>';
+
+        echo 'current usres data <pre>';
+        print_r($post);
+        echo '</pre>';
         
         $append = false;
         if(is_singular( 'sfwd-courses' ))
@@ -102,7 +147,8 @@ class LMSC_Public
                 'user_id' => get_current_user_id(  ),
                 'avatar_url' => get_avatar_url( get_current_user_id(  ) ), 
                 'email' => $current_user->user_email, 
-                'pass' => $current_user->data->user_pass
+                'display_name' => $current_user->data->display_name, 
+                'user_type' => $post->post_author == get_current_user_id(  ) ? 'teacher' : 'student'
             )
         );
 

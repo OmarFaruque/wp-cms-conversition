@@ -58269,7 +58269,16 @@ var Schema = {
   createDate: Date.now()
 };
 auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {})["catch"](function (error) {
-  auth.createUserWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {})["catch"](function (error) {
+  auth.createUserWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {
+    //Store user info. 
+    var coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id + '/users');
+    coursePublicDB.push({
+      name: window.lms_conversition_object.display_name,
+      user_type: window.lms_conversition_object.user_type,
+      user_id: window.lms_conversition_object.user_id,
+      status: 'online'
+    });
+  })["catch"](function (error) {
     auth.sendPasswordResetEmail(window.lms_conversition_object.email).then(function () {})["catch"](function (error) {});
   });
 });
@@ -59367,7 +59376,7 @@ var IDontCareAboutFirebaseAuth = function IDontCareAboutFirebaseAuth() {
   return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, "This part won't react to firebase auth changes");
 };
 
-var coursePublicDB = _component_config__WEBPACK_IMPORTED_MODULE_5__.database.ref('/messages/public/' + lms_conversition_object.post_id);
+var coursePublicDB = _component_config__WEBPACK_IMPORTED_MODULE_5__.database.ref('/messages/' + lms_conversition_object.post_id);
 var storageRef = _component_config__WEBPACK_IMPORTED_MODULE_5__.storage.ref();
 var imageRef = storageRef.child('images');
 
@@ -59405,37 +59414,73 @@ var App = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onFormSubmit", function (e) {
       e.preventDefault();
-      _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.createDate = Date.now();
+      var _this$state = _this.state,
+          room = _this$state.room,
+          schema = _this$state.schema;
+      schema.createDate = Date.now();
+      schema.room = room;
+      console.log('Schema: ', schema);
 
-      if (_component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.text_msg != '') {
-        coursePublicDB.push(_component_config__WEBPACK_IMPORTED_MODULE_5__.Schema);
+      if (schema.text_msg != '') {
+        coursePublicDB.child('msg').push(schema);
       }
 
-      _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.text_msg = '';
+      schema.text_msg = '';
+
+      _this.setState({
+        schema: schema
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "changeHandler", function (e) {
+      var _this$state2 = _this.state,
+          schema = _this$state2.schema,
+          room = _this$state2.room;
       e.preventDefault();
 
       switch (e.target.name) {
         case 'attachment':
           var filename = Math.floor(Math.random() * 90000000000) + e.target.files[0].name;
           var type = filename.split('.')[1];
-          console.log('type: ', type);
-          _component_config__WEBPACK_IMPORTED_MODULE_5__.storage.ref("/images/".concat(filename)).put(e.target.files[0]).then(function (snapshot) {
+          _component_config__WEBPACK_IMPORTED_MODULE_5__.storage.ref("/images/public/".concat(filename)).put(e.target.files[0]).then(function (snapshot) {
             snapshot.ref.getDownloadURL().then(function (downloadUrl) {
-              _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema[e.target.name] = downloadUrl;
-              _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.type = type;
-              coursePublicDB.push(_component_config__WEBPACK_IMPORTED_MODULE_5__.Schema);
-              _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema[e.target.name] = '';
-              _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.type = '';
+              schema[e.target.name] = downloadUrl;
+              schema.type = type;
+              schema.room = room;
+              coursePublicDB.push(schema);
+              schema[e.target.name] = '';
+              schema.type = '';
             });
           });
           break;
 
         default:
-          _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema[e.target.name] = e.target.value;
+          schema[e.target.name] = e.target.value;
       }
+
+      _this.setState({
+        schema: schema
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "roomHandler", function (e, user_id) {
+      var room = 'public';
+
+      if (user_id != 'public') {
+        var current_user_id = window.lms_conversition_object.user_id;
+        room = [user_id, current_user_id];
+        room = room.sort(function (a, b) {
+          return a - b;
+        });
+        room = room.join('');
+      }
+
+      coursePublicDB.child('msg').orderByChild('room').equalTo(room).on('value', function (snapshot) {
+        _this.setState({
+          chats: snapshot.val(),
+          room: room
+        });
+      });
     });
 
     _this.state = {
@@ -59450,12 +59495,16 @@ var App = /*#__PURE__*/function (_Component) {
         }
       },
       chats: [],
-      chat_window_active: false
+      chat_window_active: false,
+      users: [],
+      room: 'public',
+      schema: _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema
     };
     _this.fetchWP = new _utils_fetchWP__WEBPACK_IMPORTED_MODULE_1__.default({
       restURL: window.lms_conversition_object.root,
       restNonce: window.lms_conversition_object.api_nonce
     });
+    _this.changeHandler = _this.changeHandler.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -59465,11 +59514,28 @@ var App = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       // this.fetchData();
-      coursePublicDB.orderByChild('room').equalTo('public').on('value', function (snapshot) {
+      coursePublicDB.child('msg').orderByChild('room').equalTo('public').on('value', function (snapshot) {
         _this2.setState({
           chats: snapshot.val()
         });
-      }); // storage.ref('/images/').listAll().then( res => {
+      }); // Users 
+
+      var users = this.state.users;
+      coursePublicDB.child('users').on('value', function (snapshot) {
+        users = snapshot.val();
+        Object.keys(snapshot.val()).map(function (k, v) {
+          coursePublicDB.child('msg').limitToLast(1).once('value', function (lstmsg) {
+            var key = Object.keys(lstmsg.val());
+            users[k]['text_msg'] = lstmsg.val()[key].text_msg;
+            users[k]['createDate'] = lstmsg.val()[key].createDate;
+          });
+        });
+
+        _this2.setState({
+          users: users
+        });
+      });
+      console.log('previous usrs: ', this.state.users); // storage.ref('/images/').listAll().then( res => {
       //     let promises = []
       //     res.items.forEach( item => {
       //         item.getDownloadURL().then( (downloadURL) => {
@@ -59485,7 +59551,12 @@ var App = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "componentWillUnmount",
-    value: function componentWillUnmount() {}
+    value: function componentWillUnmount() {
+      console.log('state room: ', this.state.room);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {}
   }, {
     key: "handleUpdate",
     value: function handleUpdate(conf) {// this.setState({conf});
@@ -59515,12 +59586,15 @@ var App = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var _this$state = this.state,
-          config = _this$state.config,
-          chats = _this$state.chats,
-          download = _this$state.download;
-      if (!chats) chats = [];
-      console.log('all chats: ', chats);
+      var _this$state3 = this.state,
+          config = _this$state3.config,
+          chats = _this$state3.chats,
+          download = _this$state3.download,
+          users = _this$state3.users,
+          schema = _this$state3.schema;
+      if (!chats) chats = []; // console.log('all chats: ', chats)
+
+      console.log('all usrs: ', users);
       var activeClass = this.state.chat_window_active ? 'active' : 'close';
       return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatWrap
@@ -59556,15 +59630,24 @@ var App = /*#__PURE__*/function (_Component) {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Search', 'lms-conversation')
       })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userList
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        onClick: function onClick(e) {
+          return _this3.roomHandler(e, 'public');
+        }
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
-      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Group Chat', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
-      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
-      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
-      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm")))))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Group Chat', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), Object.keys(users).map(function (k, v) {
+        if (users[k].user_id != window.lms_conversition_object.user_id) {
+          return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+            onClick: function onClick(e) {
+              return _this3.roomHandler(e, users[k].user_id);
+            },
+            key: v
+          }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+            className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
+          })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, users[k].name), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, users[k].user_type), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, typeof users[k].text_msg != 'undefined' ? users[k].text_msg : '')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)));
+        }
+      })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.topHeader
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.profiInfo
@@ -59615,7 +59698,7 @@ var App = /*#__PURE__*/function (_Component) {
         onChange: this.changeHandler,
         type: "text",
         name: "text_msg",
-        value: _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema.text_msg,
+        value: schema.text_msg,
         id: "text_msg"
       })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
         type: "submit"

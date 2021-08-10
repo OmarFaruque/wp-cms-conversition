@@ -2,6 +2,7 @@ import { render, h, Component } from 'preact';
 import FetchWP from './utils/fetchWP';
 import chaticon from './icons/chat.svg';
 
+
 //CSS 
 import style from './frontend.scss';
 import { sprintf, _n, __ } from '@wordpress/i18n';
@@ -15,7 +16,8 @@ const IDontCareAboutFirebaseAuth = () => {
     return <div>This part won't react to firebase auth changes</div>;
 };
 
-const coursePublicDB = database.ref('/messages/public/' + lms_conversition_object.post_id);
+const coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id);
+
 const storageRef = storage.ref();
 const imageRef = storageRef.child('images')
 
@@ -33,7 +35,10 @@ class App extends Component {
                 page2: {title: ''}
             }, 
             chats: [], 
-            chat_window_active: false
+            chat_window_active: false, 
+            users: [], 
+            room: 'public', 
+            schema: Schema
         }
 
         this.fetchWP = new FetchWP({
@@ -42,17 +47,43 @@ class App extends Component {
 
         });
 
+        this.changeHandler = this.changeHandler.bind(this)
+
     }
 
 
     componentDidMount() {
         // this.fetchData();
         coursePublicDB
+        .child('msg')
         .orderByChild('room')
         .equalTo('public')
         .on('value', snapshot => {
             this.setState({ chats: snapshot.val() });
         });
+
+        // Users 
+        let {users} = this.state
+        coursePublicDB
+        .child('users')
+        .on('value', snapshot => {
+            users = snapshot.val();
+            Object.keys(snapshot.val()).map( (k, v) => {
+                coursePublicDB
+                .child('msg')
+                .limitToLast(1).once('value', lstmsg => {
+                    let key = Object.keys(lstmsg.val());
+                    users[k]['text_msg'] = lstmsg.val()[key].text_msg
+                    users[k]['createDate'] = lstmsg.val()[key].createDate
+                })
+            })
+            this.setState({
+                users: users
+            })
+        });
+        
+
+        console.log('previous usrs: ', this.state.users)
 
 
         // storage.ref('/images/').listAll().then( res => {
@@ -80,8 +111,13 @@ class App extends Component {
     }
 
     componentWillUnmount() {
-
+        console.log('state room: ', this.state.room)
     }
+
+
+    componentDidUpdate(){
+    }
+
 
     handleUpdate(conf) {
 
@@ -136,11 +172,16 @@ class App extends Component {
      */
     onFormSubmit = (e) => {
         e.preventDefault()
-        Schema.createDate = Date.now()
-        if(Schema.text_msg != ''){
-            coursePublicDB.push(Schema)
+        let {room, schema} = this.state
+        schema.createDate = Date.now()
+        schema.room = room
+
+        console.log('Schema: ', schema)
+        if(schema.text_msg != ''){
+            coursePublicDB.child('msg').push(schema)
         }
-        Schema.text_msg = ''
+        schema.text_msg = ''
+        this.setState({schema: schema})
     }
 
     /**
@@ -149,33 +190,59 @@ class App extends Component {
      * @Input change hander
      */
     changeHandler = (e) => {
-        
+        let {schema, room} = this.state
         e.preventDefault()
         switch(e.target.name){
             case 'attachment': 
                 const filename = Math.floor(Math.random() * 90000000000) + e.target.files[0].name
                 const type = filename.split('.')[1]
-                console.log('type: ', type)
-                storage.ref(`/images/${filename}`).put(e.target.files[0]).then((snapshot) => {
+                storage.ref(`/images/public/${filename}`).put(e.target.files[0]).then((snapshot) => {
                     snapshot.ref.getDownloadURL().then(downloadUrl => {
-                        Schema[e.target.name] = downloadUrl
-                        Schema.type = type
-                        coursePublicDB.push(Schema)
-                        Schema[e.target.name] = ''
-                        Schema.type = ''
+                        schema[e.target.name] = downloadUrl
+                        schema.type = type
+                        schema.room = room
+                        coursePublicDB.push(schema)
+                        schema[e.target.name] = ''
+                        schema.type = ''
                     })
                 })
             break;
             default:
-                Schema[e.target.name] = e.target.value
+                schema[e.target.name] = e.target.value
         }
+        this.setState({schema: schema})
+    }
+
+
+    roomHandler = (e, user_id) => {
+        let room = 'public'
+        if(user_id != 'public'){
+            let current_user_id = window.lms_conversition_object.user_id
+            room = [user_id, current_user_id]
+            room = room.sort((a, b) => a - b)
+            room = room.join('')
+        }
+        
+        
+        coursePublicDB
+        .child('msg')
+        .orderByChild('room')
+        .equalTo(room)
+        .on('value', snapshot => {
+            this.setState({ 
+                chats: snapshot.val(), 
+                room: room
+            });
+        });
+
         
     }
 
     render() {
-        let {config, chats, download} = this.state
+        let {config, chats, download, users, schema} = this.state
         if(!chats) chats = []
-        console.log('all chats: ', chats)
+        // console.log('all chats: ', chats)
+        console.log('all usrs: ', users)
         
 
         
@@ -214,7 +281,8 @@ class App extends Component {
                                         </div>
                                     </div>
                                     <div className={style.userList}>
-                                        <div>
+
+                                        <div onClick={(e) => this.roomHandler(e, 'public')}>
                                             <div>
                                                 <div className={style.userImg}></div>
                                             </div>
@@ -228,47 +296,32 @@ class App extends Component {
                                             </div>
                                         </div>
 
-                                        <div>
-                                            <div>
-                                                <div className={style.userImg}></div>
-                                            </div>
-                                            <div>
-                                                <h4>{__('Student Name', 'lms-conversation')}</h4>
-                                                <h5>{__('Student', 'lms-conversation')}</h5>
-                                                <p>{__('Really? That\'s greet...', 'lms-conversation')}</p>
-                                            </div>
-                                            <div>
-                                                <span>2:34pm</span>
-                                            </div>
-                                        </div>
+                                        {/* Users */}
+                                        {
+                                             
+                                                Object.keys(users).map( (k, v) => {
+                                                    if(users[k].user_id != window.lms_conversition_object.user_id){
+                                                        return(
+                                                            <div onClick={(e) => this.roomHandler(e, users[k].user_id)} key={v}>
+                                                                <div>
+                                                                    <div className={style.userImg}></div>
+                                                                </div>
+                                                                <div>
+                                                                    <h4>{users[k].name}</h4>
+                                                                    <h5>{users[k].user_type}</h5>
+                                                                    <p>{typeof users[k].text_msg != 'undefined' ? users[k].text_msg : ''}</p>
+                                                                </div>
+                                                                <div>
+                                                                    <span>
+                                                                        {/* <Moment date={users[k].createDate} /> */}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                })
+                                        }
 
-                                        <div>
-                                            <div>
-                                                <div className={style.userImg}></div>
-                                            </div>
-                                            <div>
-                                                <h4>{__('Student Name', 'lms-conversation')}</h4>
-                                                <h5>{__('Student', 'lms-conversation')}</h5>
-                                                <p>{__('Really? That\'s greet...', 'lms-conversation')}</p>
-                                            </div>
-                                            <div>
-                                                <span>2:34pm</span>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div>
-                                                <div className={style.userImg}></div>
-                                            </div>
-                                            <div>
-                                                <h4>{__('Student Name', 'lms-conversation')}</h4>
-                                                <h5>{__('Student', 'lms-conversation')}</h5>
-                                                <p>{__('Really? That\'s greet...', 'lms-conversation')}</p>
-                                            </div>
-                                            <div>
-                                                <span>2:34pm</span>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -341,7 +394,7 @@ class App extends Component {
                                                 <input onChange={this.changeHandler} 
                                                     type="text" 
                                                     name="text_msg" 
-                                                    value={Schema.text_msg}
+                                                    value={schema.text_msg}
                                                     id="text_msg" />
                                             </div>
                                             <div>
