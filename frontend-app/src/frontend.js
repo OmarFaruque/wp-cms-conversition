@@ -1,7 +1,7 @@
 import { render, h, Component } from 'preact';
 import FetchWP from './utils/fetchWP';
 import chaticon from './icons/chat.svg';
-
+import attachment from './icons/attachment.svg';
 
 //CSS 
 import style from './frontend.scss';
@@ -21,7 +21,7 @@ const coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_
 const storageRef = storage.ref();
 const imageRef = storageRef.child('images')
 
-
+const imgsType = ['png', 'svg', 'jpg', 'jpeg'];
 
 
 class App extends Component {
@@ -67,19 +67,22 @@ class App extends Component {
         coursePublicDB
         .child('users')
         .on('value', snapshot => {
-            users = snapshot.val();
-            Object.keys(snapshot.val()).map( (k, v) => {
-                coursePublicDB
-                .child('msg')
-                .limitToLast(1).once('value', lstmsg => {
-                    let key = Object.keys(lstmsg.val());
-                    users[k]['text_msg'] = lstmsg.val()[key].text_msg
-                    users[k]['createDate'] = lstmsg.val()[key].createDate
+            if(snapshot.val()){
+                users = snapshot.val();
+                Object.keys(snapshot.val()).map( (k, v) => {
+                    coursePublicDB
+                    .child('msg')
+                    .limitToLast(1).once('value', lstmsg => {
+                        let key = Object.keys(lstmsg.val());
+                        users[k]['text_msg'] = lstmsg.val()[key].text_msg
+                        users[k]['createDate'] = lstmsg.val()[key].createDate
+                    })
                 })
-            })
-            this.setState({
-                users: users
-            })
+
+                this.setState({
+                    users: users
+                })
+            }
         });
         
 
@@ -201,7 +204,7 @@ class App extends Component {
                         schema[e.target.name] = downloadUrl
                         schema.type = type
                         schema.room = room
-                        coursePublicDB.push(schema)
+                        coursePublicDB.child('msg').push(schema)
                         schema[e.target.name] = ''
                         schema.type = ''
                     })
@@ -241,8 +244,8 @@ class App extends Component {
     render() {
         let {config, chats, download, users, schema} = this.state
         if(!chats) chats = []
-        // console.log('all chats: ', chats)
-        console.log('all usrs: ', users)
+        console.log('all chats: ', chats)
+        // console.log('all usrs: ', users)
         
 
         
@@ -348,7 +351,7 @@ class App extends Component {
                                         <ul>
                                             {     
                                                 Object.keys(chats).map( (k, v) => {
-
+                                                    console.log('this k: ', k)
                                                     return(
                                                         <li className={ chats[k].sender_id == window.lms_conversition_object.user_id ? style.thisuser : style.fromanother } key={v}>
                                                             {
@@ -359,10 +362,26 @@ class App extends Component {
                                                             {
                                                                 (typeof chats[k].attachment != 'undefined' && chats[k].attachment != '') && (
                                                                     <a target="_blank" href={chats[k].attachment}>
-                                                                        <img src={chats[k].attachment} alt="" />
+                                                                        {
+                                                                            (() => {
+                                                                                if(imgsType.includes( chats[k].type )){
+                                                                                    return(
+                                                                                        <img src={chats[k].attachment} alt="Images" />
+                                                                                    )
+                                                                                }else{
+                                                                                    return(
+                                                                                        <img src={attachment} Alt={__('Attachment', 'lms-conversation')}/>
+                                                                                    )
+                                                                                }
+                                                                            })()
+                                                                        }
                                                                     </a>
                                                                 )
                                                             }
+
+                                                            
+
+
                                                             {
                                                                 chats[k].text_msg != '' && (
                                                                     <span className={style.msg}>{chats[k].text_msg}</span>

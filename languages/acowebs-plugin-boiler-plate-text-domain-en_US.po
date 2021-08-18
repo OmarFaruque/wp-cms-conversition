@@ -3,34 +3,38 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/frontend.js:253
+#: src/frontend.js:256
 msgid "LMS Chat"
 msgstr ""
 
-#: src/frontend.js:276
+#: src/frontend.js:279
 msgid "Messages"
 msgstr ""
 
-#: src/frontend.js:279
+#: src/frontend.js:282
 msgid "Search"
 msgstr ""
 
-#: src/frontend.js:290
+#: src/frontend.js:293
 msgid "Group Chat"
 msgstr ""
 
-#: src/frontend.js:291
+#: src/frontend.js:294
 msgid "Student"
 msgstr ""
 
-#: src/frontend.js:292
+#: src/frontend.js:295
 msgid "Really? That's greet..."
 msgstr ""
 
-#: src/frontend.js:333
+#: src/frontend.js:336
 msgid "Student Name"
 msgstr ""
 
-#: src/frontend.js:334
+#: src/frontend.js:337
 msgid "Active Now"
+msgstr ""
+
+#: src/frontend.js:373
+msgid "Attachment"
 msgstr ""

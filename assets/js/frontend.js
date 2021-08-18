@@ -1,178 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _arrayLikeToArray)
-/* harmony export */ });
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _arrayWithoutHoles)
-/* harmony export */ });
-/* harmony import */ var _arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js");
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(arr);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _classCallCheck)
-/* harmony export */ });
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _defineProperty)
-/* harmony export */ });
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _iterableToArray)
-/* harmony export */ });
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _nonIterableSpread)
-/* harmony export */ });
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _toConsumableArray)
-/* harmony export */ });
-/* harmony import */ var _arrayWithoutHoles_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithoutHoles.js */ "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js");
-/* harmony import */ var _iterableToArray_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArray.js */ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js");
-/* harmony import */ var _unsupportedIterableToArray_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./unsupportedIterableToArray.js */ "./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js");
-/* harmony import */ var _nonIterableSpread_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./nonIterableSpread.js */ "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js");
-
-
-
-
-function _toConsumableArray(arr) {
-  return (0,_arrayWithoutHoles_js__WEBPACK_IMPORTED_MODULE_0__.default)(arr) || (0,_iterableToArray_js__WEBPACK_IMPORTED_MODULE_1__.default)(arr) || (0,_unsupportedIterableToArray_js__WEBPACK_IMPORTED_MODULE_2__.default)(arr) || (0,_nonIterableSpread_js__WEBPACK_IMPORTED_MODULE_3__.default)();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _unsupportedIterableToArray)
-/* harmony export */ });
-/* harmony import */ var _arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js");
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(o, minLen);
-}
-
-/***/ }),
-
 /***/ "./node_modules/@firebase/analytics/dist/index.esm.js":
 /*!************************************************************!*\
   !*** ./node_modules/@firebase/analytics/dist/index.esm.js ***!
@@ -58268,7 +58096,19 @@ var Schema = {
   room: 'public',
   createDate: Date.now()
 };
-auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {})["catch"](function (error) {
+auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {
+  var coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id + '/users');
+  coursePublicDB.orderByChild('user_id').equalTo(window.lms_conversition_object.user_id).on('value', function (snapshot) {
+    if (!snapshot.val()) {
+      coursePublicDB.push({
+        name: window.lms_conversition_object.display_name,
+        user_type: window.lms_conversition_object.user_type,
+        user_id: window.lms_conversition_object.user_id,
+        status: 'online'
+      });
+    }
+  });
+})["catch"](function (error) {
   auth.createUserWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {
     //Store user info. 
     var coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id + '/users');
@@ -59213,6 +59053,21 @@ Tannin.prototype.dcnpgettext = function( domain, context, singular, plural, n ) 
 
 /***/ }),
 
+/***/ "./src/icons/attachment.svg":
+/*!**********************************!*\
+  !*** ./src/icons/attachment.svg ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("./../images/attachment.svg");
+
+/***/ }),
+
 /***/ "./src/icons/chat.svg":
 /*!****************************!*\
   !*** ./src/icons/chat.svg ***!
@@ -59225,6 +59080,178 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("./../images/chat.svg");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _arrayLikeToArray)
+/* harmony export */ });
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _arrayWithoutHoles)
+/* harmony export */ });
+/* harmony import */ var _arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js");
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(arr);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _classCallCheck)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _defineProperty)
+/* harmony export */ });
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _iterableToArray)
+/* harmony export */ });
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _nonIterableSpread)
+/* harmony export */ });
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _toConsumableArray)
+/* harmony export */ });
+/* harmony import */ var _arrayWithoutHoles_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithoutHoles.js */ "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js");
+/* harmony import */ var _iterableToArray_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArray.js */ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js");
+/* harmony import */ var _unsupportedIterableToArray_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./unsupportedIterableToArray.js */ "./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js");
+/* harmony import */ var _nonIterableSpread_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./nonIterableSpread.js */ "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js");
+
+
+
+
+function _toConsumableArray(arr) {
+  return (0,_arrayWithoutHoles_js__WEBPACK_IMPORTED_MODULE_0__.default)(arr) || (0,_iterableToArray_js__WEBPACK_IMPORTED_MODULE_1__.default)(arr) || (0,_unsupportedIterableToArray_js__WEBPACK_IMPORTED_MODULE_2__.default)(arr) || (0,_nonIterableSpread_js__WEBPACK_IMPORTED_MODULE_3__.default)();
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _unsupportedIterableToArray)
+/* harmony export */ });
+/* harmony import */ var _arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(o, minLen);
+}
 
 /***/ })
 
@@ -59337,9 +59364,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
 /* harmony import */ var _utils_fetchWP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/fetchWP */ "./src/utils/fetchWP.js");
 /* harmony import */ var _icons_chat_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./icons/chat.svg */ "./src/icons/chat.svg");
-/* harmony import */ var _frontend_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./frontend.scss */ "./src/frontend.scss");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
-/* harmony import */ var _component_config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./component/config */ "./src/component/config.js");
+/* harmony import */ var _icons_attachment_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icons/attachment.svg */ "./src/icons/attachment.svg");
+/* harmony import */ var _frontend_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./frontend.scss */ "./src/frontend.scss");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
+/* harmony import */ var _component_config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./component/config */ "./src/component/config.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59366,6 +59394,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
  //CSS 
 
 
@@ -59376,9 +59405,10 @@ var IDontCareAboutFirebaseAuth = function IDontCareAboutFirebaseAuth() {
   return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, "This part won't react to firebase auth changes");
 };
 
-var coursePublicDB = _component_config__WEBPACK_IMPORTED_MODULE_5__.database.ref('/messages/' + lms_conversition_object.post_id);
-var storageRef = _component_config__WEBPACK_IMPORTED_MODULE_5__.storage.ref();
+var coursePublicDB = _component_config__WEBPACK_IMPORTED_MODULE_6__.database.ref('/messages/' + lms_conversition_object.post_id);
+var storageRef = _component_config__WEBPACK_IMPORTED_MODULE_6__.storage.ref();
 var imageRef = storageRef.child('images');
+var imgsType = ['png', 'svg', 'jpg', 'jpeg'];
 
 var App = /*#__PURE__*/function (_Component) {
   _inherits(App, _Component);
@@ -59442,12 +59472,12 @@ var App = /*#__PURE__*/function (_Component) {
         case 'attachment':
           var filename = Math.floor(Math.random() * 90000000000) + e.target.files[0].name;
           var type = filename.split('.')[1];
-          _component_config__WEBPACK_IMPORTED_MODULE_5__.storage.ref("/images/public/".concat(filename)).put(e.target.files[0]).then(function (snapshot) {
+          _component_config__WEBPACK_IMPORTED_MODULE_6__.storage.ref("/images/public/".concat(filename)).put(e.target.files[0]).then(function (snapshot) {
             snapshot.ref.getDownloadURL().then(function (downloadUrl) {
               schema[e.target.name] = downloadUrl;
               schema.type = type;
               schema.room = room;
-              coursePublicDB.push(schema);
+              coursePublicDB.child('msg').push(schema);
               schema[e.target.name] = '';
               schema.type = '';
             });
@@ -59498,7 +59528,7 @@ var App = /*#__PURE__*/function (_Component) {
       chat_window_active: false,
       users: [],
       room: 'public',
-      schema: _component_config__WEBPACK_IMPORTED_MODULE_5__.Schema
+      schema: _component_config__WEBPACK_IMPORTED_MODULE_6__.Schema
     };
     _this.fetchWP = new _utils_fetchWP__WEBPACK_IMPORTED_MODULE_1__.default({
       restURL: window.lms_conversition_object.root,
@@ -59522,18 +59552,20 @@ var App = /*#__PURE__*/function (_Component) {
 
       var users = this.state.users;
       coursePublicDB.child('users').on('value', function (snapshot) {
-        users = snapshot.val();
-        Object.keys(snapshot.val()).map(function (k, v) {
-          coursePublicDB.child('msg').limitToLast(1).once('value', function (lstmsg) {
-            var key = Object.keys(lstmsg.val());
-            users[k]['text_msg'] = lstmsg.val()[key].text_msg;
-            users[k]['createDate'] = lstmsg.val()[key].createDate;
+        if (snapshot.val()) {
+          users = snapshot.val();
+          Object.keys(snapshot.val()).map(function (k, v) {
+            coursePublicDB.child('msg').limitToLast(1).once('value', function (lstmsg) {
+              var key = Object.keys(lstmsg.val());
+              users[k]['text_msg'] = lstmsg.val()[key].text_msg;
+              users[k]['createDate'] = lstmsg.val()[key].createDate;
+            });
           });
-        });
 
-        _this2.setState({
-          users: users
-        });
+          _this2.setState({
+            users: users
+          });
+        }
       });
       console.log('previous usrs: ', this.state.users); // storage.ref('/images/').listAll().then( res => {
       //     let promises = []
@@ -59592,51 +59624,51 @@ var App = /*#__PURE__*/function (_Component) {
           download = _this$state3.download,
           users = _this$state3.users,
           schema = _this$state3.schema;
-      if (!chats) chats = []; // console.log('all chats: ', chats)
+      if (!chats) chats = [];
+      console.log('all chats: ', chats); // console.log('all usrs: ', users)
 
-      console.log('all usrs: ', users);
       var activeClass = this.state.chat_window_active ? 'active' : 'close';
       return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatWrap
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatWrap
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatIcon,
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatIcon,
         onClick: function onClick(e) {
           return _this3.toggleChatWindow(e);
         }
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("img", {
         src: "".concat(window.lms_conversition_object.assets_url, "images/").concat(_icons_chat_svg__WEBPACK_IMPORTED_MODULE_2__.default),
-        alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('LMS Chat', 'lms-conversation')
+        alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('LMS Chat', 'lms-conversation')
       })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: "".concat(_frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatWindow, " ").concat(activeClass)
+        className: "".concat(_frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatWindow, " ").concat(activeClass)
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatBody
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatBody
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.profileInfo
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.profileInfo
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.profileImg
-      }), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("ul", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.inbox
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.profileImg
+      }), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Student', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("ul", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.inbox
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.friends
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.friends
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.listHeader
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Messages', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.searchbar
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.listHeader
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Messages', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.searchbar
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
         type: "search",
         onChange: this.changeHandler,
         name: "search",
         id: "search",
-        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Search', 'lms-conversation')
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Search', 'lms-conversation')
       })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userList
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.userList
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         onClick: function onClick(e) {
           return _this3.roomHandler(e, 'public');
         }
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
-      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Group Chat', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), Object.keys(users).map(function (k, v) {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.userImg
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Group Chat', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Student', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Really? That\'s greet...', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, "2:34pm"))), Object.keys(users).map(function (k, v) {
         if (users[k].user_id != window.lms_conversition_object.user_id) {
           return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
             onClick: function onClick(e) {
@@ -59644,52 +59676,62 @@ var App = /*#__PURE__*/function (_Component) {
             },
             key: v
           }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-            className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userImg
+            className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.userImg
           })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, users[k].name), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, users[k].user_type), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, typeof users[k].text_msg != 'undefined' ? users[k].text_msg : '')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null)));
         }
       })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.topHeader
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.topHeader
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.profiInfo
-      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Active Now', 'lms-conversation')))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.profiInfo
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Student Name', 'lms-conversation')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Active Now', 'lms-conversation')))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
         onClick: function onClick(e) {
           return _this3.toggleChatWindow(e);
         },
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.closeBtn
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.closeBtn
       }))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatbodyLists
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatbodyLists
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatLists
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatLists
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("ul", null, Object.keys(chats).map(function (k, v) {
+        console.log('this k: ', k);
         return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("li", {
-          className: chats[k].sender_id == window.lms_conversition_object.user_id ? _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.thisuser : _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.fromanother,
+          className: chats[k].sender_id == window.lms_conversition_object.user_id ? _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.thisuser : _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.fromanother,
           key: v
         }, chats[k].sender_id != window.lms_conversition_object.user_id && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-          className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.userimg,
+          className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.userimg,
           style: {
             backgroundImage: "url(" + chats[k].avatar_url + ")"
           }
         }), typeof chats[k].attachment != 'undefined' && chats[k].attachment != '' && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("a", {
           target: "_blank",
           href: chats[k].attachment
-        }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("img", {
-          src: chats[k].attachment,
-          alt: ""
-        })), chats[k].text_msg != '' && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-          className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.msg
+        }, function () {
+          if (imgsType.includes(chats[k].type)) {
+            return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("img", {
+              src: chats[k].attachment,
+              alt: "Images"
+            });
+          } else {
+            return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("img", {
+              src: _icons_attachment_svg__WEBPACK_IMPORTED_MODULE_3__.default,
+              Alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Attachment', 'lms-conversation')
+            });
+          }
+        }()), chats[k].text_msg != '' && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+          className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.msg
         }, chats[k].text_msg));
       })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.chatForm
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatForm
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("form", {
         onSubmit: this.onFormSubmit
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.imoji
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.imoji
       }), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("label", {
         "for": "attachment"
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.imgUpload
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.imgUpload
       })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.fileUPloadInput,
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.fileUPloadInput,
         type: "file",
         onChange: this.changeHandler,
         name: "attachment",
@@ -59703,7 +59745,7 @@ var App = /*#__PURE__*/function (_Component) {
       })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
         type: "submit"
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_3__.default.sendBtn
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.sendBtn
       }))))))))));
     }
   }]);

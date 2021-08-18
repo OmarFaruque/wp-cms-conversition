@@ -30,6 +30,22 @@ export const Schema = {
 
 auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email)
   .then((userCredential) => {
+      const coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id +'/users');
+      coursePublicDB
+      .orderByChild('user_id')
+      .equalTo(window.lms_conversition_object.user_id)
+      .on('value', snapshot => {
+          if(!snapshot.val()){
+            coursePublicDB.push({
+              name: window.lms_conversition_object.display_name, 
+              user_type: window.lms_conversition_object.user_type, 
+              user_id: window.lms_conversition_object.user_id,
+              status: 'online'
+            })
+          }
+      });
+
+      
   })
   .catch((error) => {
     auth.createUserWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email)
