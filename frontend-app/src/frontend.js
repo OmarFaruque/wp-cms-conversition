@@ -201,7 +201,8 @@ class App extends Component {
                 const type = filename.split('.')[1]
                 storage.ref(`/images/public/${filename}`).put(e.target.files[0]).then((snapshot) => {
                     snapshot.ref.getDownloadURL().then(downloadUrl => {
-                        schema[e.target.name] = downloadUrl
+                        schema[e.target.name] = downloadUrl, 
+                        schema.name = filename
                         schema.type = type
                         schema.room = room
                         coursePublicDB.child('msg').push(schema)
@@ -369,8 +370,16 @@ class App extends Component {
                                                                                         <img src={chats[k].attachment} alt="Images" />
                                                                                     )
                                                                                 }else{
+                                                                                    
                                                                                     return(
-                                                                                        <img src={attachment} Alt={__('Attachment', 'lms-conversation')}/>
+                                                                                        <span className={`${style.attachmentWrap} ${style.msg}`}>
+                                                                                            <img className={style.otherAttachment} src={`${window.lms_conversition_object.assets_url}images/${attachment}`} Alt={__('Attachment', 'lms-conversation')}/>
+                                                                                            <span>
+                                                                                                {
+                                                                                                    typeof chats[k].name != 'undefined' ? chats[k].name : __('Download Attachment', 'lms-conversation')
+                                                                                                }
+                                                                                            </span>
+                                                                                        </span>
                                                                                     )
                                                                                 }
                                                                             })()
