@@ -58096,30 +58096,47 @@ var Schema = {
   room: 'public',
   createDate: Date.now()
 };
-auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {
-  var coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id + '/users');
-  coursePublicDB.orderByChild('user_id').equalTo(window.lms_conversition_object.user_id).on('value', function (snapshot) {
-    if (!snapshot.val()) {
-      coursePublicDB.push({
-        name: window.lms_conversition_object.display_name,
-        user_type: window.lms_conversition_object.user_type,
-        user_id: window.lms_conversition_object.user_id,
-        status: 'online'
-      });
-    }
-  });
-})["catch"](function (error) {
-  auth.createUserWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {
-    //Store user info. 
-    var coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id + '/users');
-    coursePublicDB.push({
-      name: window.lms_conversition_object.display_name,
-      user_type: window.lms_conversition_object.user_type,
-      user_id: window.lms_conversition_object.user_id,
-      status: 'online'
-    });
-  })["catch"](function (error) {
+auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {})["catch"](function (error) {
+  auth.createUserWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {})["catch"](function (error) {
     auth.sendPasswordResetEmail(window.lms_conversition_object.email).then(function () {})["catch"](function (error) {});
+  });
+});
+var isOfflineForDatabase = {
+  name: window.lms_conversition_object.display_name,
+  user_type: window.lms_conversition_object.user_type,
+  user_id: window.lms_conversition_object.user_id,
+  last_changed: firebase__WEBPACK_IMPORTED_MODULE_0__.default.database.ServerValue.TIMESTAMP,
+  status: 'offline'
+};
+var isOnlineForDatabase = {
+  name: window.lms_conversition_object.display_name,
+  user_type: window.lms_conversition_object.user_type,
+  user_id: window.lms_conversition_object.user_id,
+  last_changed: firebase__WEBPACK_IMPORTED_MODULE_0__.default.database.ServerValue.TIMESTAMP,
+  status: 'online'
+};
+database.ref('.info/connected').on('value', function (snapshot) {
+  if (snapshot.val() == false) {
+    return;
+  }
+
+  ;
+  var uid = auth.currentUser.uid;
+  var userStatusDatabaseRef = database.ref('/messages/' + lms_conversition_object.post_id + '/users/' + uid); // var uid = firebase.auth().currentUser.uid;
+  // console.log('auth id: ', uid)
+  // If we are currently connected, then use the 'onDisconnect()' 
+  // method to add a set which will only trigger once this 
+  // client has disconnected by closing the app, 
+  // losing internet, or any other means.
+
+  userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function () {
+    // The promise returned from .onDisconnect().set() will
+    // resolve as soon as the server acknowledges the onDisconnect() 
+    // request, NOT once we've actually disconnected:
+    // https://firebase.google.com/docs/reference/js/firebase.database.OnDisconnect
+    // We can now safely set ourselves as 'online' knowing that the
+    // server will mark us as offline once we lose connection.
+    userStatusDatabaseRef.set(isOnlineForDatabase);
   });
 });
 
@@ -58792,7 +58809,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","topHeader":"lmsc_topHeader2P9O3","closeBtn":"lmsc_closeBtn1EhlV","chatbodyLists":"lmsc_chatbodyListsJmATz","chatLists":"lmsc_chatLists1MguY","thisuser":"lmsc_thisuser2JwPE","msg":"lmsc_msgMbmHv","fromanother":"lmsc_fromanother3VlFx","userimg":"lmsc_userimg3E6TE","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","fileUPloadInput":"lmsc_fileUPloadInput2Uo2j","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","topHeader":"lmsc_topHeader2P9O3","closeBtn":"lmsc_closeBtn1EhlV","chatbodyLists":"lmsc_chatbodyListsJmATz","chatLists":"lmsc_chatLists1MguY","attachmentWrap":"lmsc_attachmentWrapU3iPp","thisuser":"lmsc_thisuser2JwPE","msg":"lmsc_msgMbmHv","fromanother":"lmsc_fromanother3VlFx","userimg":"lmsc_userimg3E6TE","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","fileUPloadInput":"lmsc_fileUPloadInput2Uo2j","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
 
 /***/ }),
 
@@ -59474,7 +59491,7 @@ var App = /*#__PURE__*/function (_Component) {
           var type = filename.split('.')[1];
           _component_config__WEBPACK_IMPORTED_MODULE_6__.storage.ref("/images/public/".concat(filename)).put(e.target.files[0]).then(function (snapshot) {
             snapshot.ref.getDownloadURL().then(function (downloadUrl) {
-              schema[e.target.name] = downloadUrl;
+              schema[e.target.name] = downloadUrl, schema.name = filename;
               schema.type = type;
               schema.room = room;
               coursePublicDB.child('msg').push(schema);
@@ -59567,19 +59584,7 @@ var App = /*#__PURE__*/function (_Component) {
           });
         }
       });
-      console.log('previous usrs: ', this.state.users); // storage.ref('/images/').listAll().then( res => {
-      //     let promises = []
-      //     res.items.forEach( item => {
-      //         item.getDownloadURL().then( (downloadURL) => {
-      //             var filename = downloadURL.split('/').pop()
-      //             filename = filename.split('?').shift()
-      //             promises[filename] = downloadURL
-      //         })
-      //     })
-      //     this.setState({
-      //         download: promises
-      //     })
-      // })
+      console.log('this is upate omar');
     }
   }, {
     key: "componentWillUnmount",
@@ -59712,10 +59717,13 @@ var App = /*#__PURE__*/function (_Component) {
               alt: "Images"
             });
           } else {
-            return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("img", {
-              src: _icons_attachment_svg__WEBPACK_IMPORTED_MODULE_3__.default,
+            return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+              className: "".concat(_frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.attachmentWrap, " ").concat(_frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.msg)
+            }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("img", {
+              className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.otherAttachment,
+              src: "".concat(window.lms_conversition_object.assets_url, "images/").concat(_icons_attachment_svg__WEBPACK_IMPORTED_MODULE_3__.default),
               Alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Attachment', 'lms-conversation')
-            });
+            }), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, typeof chats[k].name != 'undefined' ? chats[k].name : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Download Attachment', 'lms-conversation')));
           }
         }()), chats[k].text_msg != '' && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
           className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.msg

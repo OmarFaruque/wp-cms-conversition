@@ -86,29 +86,9 @@ class App extends Component {
         });
         
 
-        console.log('previous usrs: ', this.state.users)
+        
 
-
-        // storage.ref('/images/').listAll().then( res => {
-        //     let promises = []
-        //     res.items.forEach( item => {
-        //         item.getDownloadURL().then( (downloadURL) => {
-
-                    
-
-        //             var filename = downloadURL.split('/').pop()
-        //             filename = filename.split('?').shift()
-        //             promises[filename] = downloadURL
-        //         })
-        //     })
-            
-            
-
-        //     this.setState({
-        //         download: promises
-        //     })
-        // })
-
+      console.log('this is upate omar')
       
 
     }

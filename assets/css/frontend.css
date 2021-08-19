@@ -223,6 +223,20 @@ body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq.active {
             .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li img {
               max-width: 200px;
               min-width: 20px; }
+            .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li a span.lmsc_attachmentWrapU3iPp {
+              display: flex;
+              align-items: center;
+              background-color: #6a87f4;
+              padding: 7px 20px;
+              border-radius: 25px 25px 0px 25px;
+              color: white; }
+              .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li a span.lmsc_attachmentWrapU3iPp img {
+                max-width: 50px;
+                margin-right: 10px;
+                width: 20px;
+                opacity: 0.5; }
+              .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li a span.lmsc_attachmentWrapU3iPp span {
+                white-space: nowrap; }
             .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li.lmsc_thisuser2JwPE {
               justify-content: flex-end; }
               .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li.lmsc_thisuser2JwPE > span.lmsc_msgMbmHv {
