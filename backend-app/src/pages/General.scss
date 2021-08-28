@@ -1,5 +1,94 @@
-.test_class{
-  width: 900px;
-  height: 100px;
-  background: #ffad4e;
+@import '../common.scss';
+.generalWrap{
+  display: flex;
+  .bodyWrap{
+    flex: 5;
+    width: 100%;
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 20px;
+    margin-right: 15px;
+    h2{
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+    .tooltip{
+      cursor: pointer;
+    }
+    >div{
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      article{
+        font-size: 14px;
+        color: #555;
+        span:global(.dashicons){
+          color: #999;
+          margin-left: 5px;
+        }
+      }
+      label{
+        margin-left: auto;
+      }
+    }
+  }
+  .promo{
+    flex: 2;
+    >div{
+      // background-image: url('../icons/DashedBg.svg');
+      background-repeat: no-repeat;
+      background-position: top left;
+      background-size: cover;
+      padding: 30px 40px;
+      margin-top: 50px;
+      min-height: 760px;
+     >div{
+      h2{
+        color: white;
+        font-size: 25px;      
+        line-height: 40px;
+        margin-top: 0;
+        font-weight: bold;
+      }
+      ul{
+        li{
+          position: relative;
+          padding-left: 28px;
+          color: white;
+          opacity: 0.7;
+          margin: 30px 0;
+          font-size: 16px;
+          &:before{
+            content: '';
+            width: 20px;
+            height: 20px;
+            // background-image: url('../icons/CorrectSign.svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: inline-block;
+            vertical-align: middle;
+            position: absolute;
+            left: 0;
+            top: 3px;
+          }
+        }
+      }
+      a{
+        text-decoration: none;
+        text-align: center;
+        color: #DE2582;
+        background-color: white;
+        border-radius: 100px;
+        display: block;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 20px;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        position: relative;
+      }
+     }
+    }
+  }
 }

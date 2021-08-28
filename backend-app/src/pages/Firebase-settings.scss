@@ -1,0 +1,35 @@
+.Wrap{
+  display: flex;
+  .bodyWrap{
+    flex: 5;
+    width: 100%;
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 20px;
+    margin-right: 15px;
+    h2{
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+    .inputWrap{
+      .row{
+        display: flex;
+        align-items: center;
+        margin: 16px 0;
+        >div{
+          &:first-child{
+            flex: 1;
+            .tooltip{
+              cursor: pointer;
+              color: #999;
+              margin-left: 5px;
+            }
+          }
+          &:last-child{
+            flex: 3;
+          }
+        }
+      }
+    }
+  }
+}

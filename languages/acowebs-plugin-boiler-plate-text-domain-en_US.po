@@ -3,38 +3,88 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/frontend.js:263
-msgid "Group Chat"
+#: src/backend.js:88
+msgid "LMS Conversation"
 msgstr ""
 
-#: src/frontend.js:264
-msgid "Active Now"
+#: src/backend.js:93
+msgid "Check Premium Options"
 msgstr ""
 
-#: src/frontend.js:264
-msgid "Inactive Now"
+#: src/components/Tabs/index.js:22
+#: src/pages/General.js:13
+msgid "General Settings"
 msgstr ""
 
-#: src/frontend.js:309
-msgid "LMS Chat"
+#: src/components/Tabs/index.js:30
+#: src/pages/Firebase-settings.js:24
+msgid "Firebase Settings"
 msgstr ""
 
-#: src/frontend.js:338
-msgid "Messages"
+#: src/pages/Firebase-settings.js:110
+msgid "Storage Bucket"
 msgstr ""
 
-#: src/frontend.js:341
-msgid "Search"
+#: src/pages/Firebase-settings.js:113
+msgid "Firebase Storage Bucket."
 msgstr ""
 
-#: src/frontend.js:354
-msgid "All Participants"
+#: src/pages/Firebase-settings.js:131
+msgid "Messaging Sender ID"
 msgstr ""
 
-#: src/frontend.js:442
-msgid "Attachment"
+#: src/pages/Firebase-settings.js:134
+msgid "Firebase Messaging Sender ID."
 msgstr ""
 
-#: src/frontend.js:445
-msgid "Download Attachment"
+#: src/pages/Firebase-settings.js:152
+msgid "App ID"
+msgstr ""
+
+#: src/pages/Firebase-settings.js:155
+msgid "Firebase Application ID."
+msgstr ""
+
+#: src/pages/Firebase-settings.js:30
+msgid "API Key"
+msgstr ""
+
+#: src/pages/Firebase-settings.js:50
+msgid "Auth Domain"
+msgstr ""
+
+#: src/pages/Firebase-settings.js:53
+msgid "Firebase API Key."
+msgstr ""
+
+#: src/pages/Firebase-settings.js:70
+msgid "Database URL"
+msgstr ""
+
+#: src/pages/Firebase-settings.js:73
+msgid "Firebase Database Url."
+msgstr ""
+
+#: src/pages/Firebase-settings.js:90
+msgid "Project ID"
+msgstr ""
+
+#: src/pages/Firebase-settings.js:93
+msgid "Firebase Project ID."
+msgstr ""
+
+#: src/pages/General.js:18
+msgid "Enable LMS Conversation"
+msgstr ""
+
+#: src/pages/General.js:21
+msgid "Enable / Disable LMS Conversation for Fornt-end."
+msgstr ""
+
+#: src/pages/General.js:39
+msgid "Conversation Controller on Course"
+msgstr ""
+
+#: src/pages/General.js:42
+msgid "Allow Teacher / Author to set Enable / Disable conversation for each course."
 msgstr ""

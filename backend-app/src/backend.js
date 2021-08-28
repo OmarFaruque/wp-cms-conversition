@@ -3,7 +3,7 @@ import {HashRouter, Route, Switch} from 'react-router-dom'
 import ReactDOM from "react-dom";
 import FetchWP from './utils/fetchWP';
 import General from "./pages/General";
-import Page2 from "./pages/Page2";
+import FirebaseSettings from "./pages/Firebase-settings";
 import Tabs from "./components/Tabs";
 
 //CSS 
@@ -17,17 +17,16 @@ class App extends React.Component {
         this.state = {
             loader: false,
             saving: false,
-            config: {
-                general: {title: ''},
-                page2: {title: ''}
-            }
+            config: {}
         }
 
         this.fetchWP = new FetchWP({
             restURL: window.lms_conversition_object.root,
             restNonce: window.lms_conversition_object.api_nonce,
-
         });
+
+
+        this.handleUpdate = this.handleUpdate.bind(this)
 
     }
 
@@ -41,9 +40,13 @@ class App extends React.Component {
 
     }
 
-    handleUpdate(conf) {
+    handleUpdate(e) {
+        const {config} = this.state
+        config[e.target.name] = e.target.value
 
-        this.setState({conf});
+        this.setState({
+            config:config
+        })
     }
 
     SaveChanges = () => {
@@ -103,9 +106,12 @@ class App extends React.Component {
                             />
                             <Route
                                 exact
-                                path="/page2"
+                                path="/firebase-settings"
                                 render={props =>
-                                    <Page2/>
+                                    <FirebaseSettings
+                                        handleUpdate={this.handleUpdate}
+                                        config={config}
+                                    />
                                 }
                             />
                         </Switch>
