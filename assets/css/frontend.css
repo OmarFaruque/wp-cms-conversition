@@ -34,7 +34,6 @@ body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq.active {
       .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div .lmsc_profileInfo3DiKL .lmsc_profileImg3ma4E {
         width: 70px;
         height: 70px;
-        background-image: url(./../images/demo-pic36.jpg);
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -44,9 +43,13 @@ body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq.active {
         color: #ccc;
         font-weight: 500;
         font-size: 18px;
-        line-height: 18px; }
+        line-height: 18px;
+        text-transform: capitalize;
+        margin: 0; }
       .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div .lmsc_profileInfo3DiKL p {
-        color: #ccc; }
+        color: #cccccc78;
+        margin-top: 0;
+        text-transform: capitalize; }
     .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:first-child {
       flex: 1;
       background-color: #373759; }
@@ -95,6 +98,9 @@ body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq.active {
             outline: none;
             box-shadow: 0 0 0.5em #ddd;
             border-radius: 10px; }
+            .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:nth-child(2) > div .lmsc_listHeaderu5f7_ .lmsc_searchbar1UEj_ > div input:focus::placeholder {
+              background-image: unset;
+              padding-left: 5px; }
           .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:nth-child(2) > div .lmsc_listHeaderu5f7_ .lmsc_searchbar1UEj_ > div input::placeholder {
             color: #ccc;
             padding-left: 30px;
@@ -149,7 +155,18 @@ body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq.active {
                 height: 70px;
                 border-radius: 100px;
                 width: 70px;
-                margin: 0 auto; }
+                margin: 0 auto;
+                position: relative; }
+                .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:nth-child(2) > div .lmsc_userLista8g0H > div:not(:first-child) > div:first-child > div .lmsc_userPresentStatus1CIYZ {
+                  width: 10px;
+                  height: 10px;
+                  border-radius: 100px;
+                  background-color: #6a87f4;
+                  position: absolute;
+                  top: 53px;
+                  left: 53px; }
+                  .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:nth-child(2) > div .lmsc_userLista8g0H > div:not(:first-child) > div:first-child > div .lmsc_userPresentStatus1CIYZ.lmsc_offline1sVjj {
+                    background-color: lightgray; }
             .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:nth-child(2) > div .lmsc_userLista8g0H > div:not(:first-child) > div:nth-child(2) {
               flex: 5; }
               .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:nth-child(2) > div .lmsc_userLista8g0H > div:not(:first-child) > div:nth-child(2) h4 {
@@ -256,6 +273,10 @@ body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq.active {
               margin-right: 8px;
               background-repeat: no-repeat;
               border-radius: 100px; }
+              .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li > span.lmsc_userimg3E6TE span.lmsc_userPresentStatus1CIYZ {
+                width: 5px;
+                height: 5px;
+                display: block; }
       .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatFormPWs0X {
         position: absolute;
         bottom: 0;

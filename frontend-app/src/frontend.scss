@@ -45,7 +45,6 @@
                     .profileImg{
                         width: 70px;
                         height: 70px;
-                        background-image: url(./icons/demo-pic36.jpg);
                         background-repeat: no-repeat;
                         background-size: contain;
                         background-position: center;
@@ -57,9 +56,13 @@
                         font-weight: 500;
                         font-size: 18px;
                         line-height: 18px;
+                        text-transform: capitalize;
+                        margin: 0;
                     }
                     p{
-                        color: #ccc;
+                        color: #cccccc78;
+                        margin-top: 0;
+                        text-transform: capitalize;
                     }
                 }
                 &:first-child{
@@ -132,6 +135,12 @@
                                         outline: none;
                                         box-shadow: 0 0 0.5em #ddd;
                                         border-radius: 10px;
+                                        &:focus{
+                                            &::placeholder{
+                                                background-image: unset;
+                                                padding-left: 5px;
+                                            }
+                                        }
                                     }
                                     input::placeholder{
                                         color:#ccc;
@@ -204,6 +213,19 @@
                                             border-radius: 100px;
                                             width: 70px;
                                             margin: 0 auto;
+                                            position: relative;
+                                            .userPresentStatus{
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 100px;
+                                                background-color: #6a87f4;
+                                                position: absolute;
+                                                top: 53px;
+                                                left: 53px;
+                                                &.offline{
+                                                    background-color: lightgray;
+                                                }
+                                            }
                                         }
                                     }
                                     &:nth-child(2){
@@ -354,6 +376,14 @@
                                             margin-right: 8px;
                                             background-repeat: no-repeat;
                                             border-radius: 100px;
+                                            span{
+                                                &.userPresentStatus{
+                                                    width: 5px;
+                                                    height: 5px;
+                                                    display: block;
+                                                    
+                                                }
+                                            }
                                         }
                                     }
                                 }

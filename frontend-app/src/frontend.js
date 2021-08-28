@@ -3,12 +3,13 @@ import FetchWP from './utils/fetchWP';
 import chaticon from './icons/chat.svg';
 import attachment from './icons/attachment.svg';
 
+
 //CSS 
 import style from './frontend.scss';
 import { sprintf, _n, __ } from '@wordpress/i18n';
+import group_img from './icons/user-group-img.svg';
 
-
-import { auth, googleAuthProvider, database, Schema, storage } from "./component/config";
+import firebase, { auth, googleAuthProvider, database, Schema, storage } from "./component/config";
 
 
 
@@ -38,7 +39,10 @@ class App extends Component {
             chat_window_active: false, 
             users: [], 
             room: 'public', 
-            schema: Schema
+            schema: Schema, 
+            room_name: __('Group Chat', 'lms-conversation'), 
+            room_status: __('Active Now', 'lms-conversation'), 
+            user_img: window.lms_conversition_object.assets_url + 'images/' + group_img
         }
 
         this.fetchWP = new FetchWP({
@@ -48,53 +52,67 @@ class App extends Component {
         });
 
         this.changeHandler = this.changeHandler.bind(this)
+        this.searchUserHandler = this.searchUserHandler.bind(this)
 
     }
 
 
     componentDidMount() {
-        // this.fetchData();
-        coursePublicDB
-        .child('msg')
-        .orderByChild('room')
-        .equalTo('public')
-        .on('value', snapshot => {
-            this.setState({ chats: snapshot.val() });
-        });
-
-        // Users 
-        let {users} = this.state
-        coursePublicDB
-        .child('users')
-        .on('value', snapshot => {
-            if(snapshot.val()){
-                users = snapshot.val();
-                Object.keys(snapshot.val()).map( (k, v) => {
-                    coursePublicDB
-                    .child('msg')
-                    .limitToLast(1).once('value', lstmsg => {
-                        let key = Object.keys(lstmsg.val());
-                        users[k]['text_msg'] = lstmsg.val()[key].text_msg
-                        users[k]['createDate'] = lstmsg.val()[key].createDate
-                    })
-                })
-
-                this.setState({
-                    users: users
-                })
-            }
-        });
-        
-
-        
-
-      console.log('this is upate omar')
-      
-
+        this.fetchData()
+        this.userPresentStatus()
     }
 
+    userPresentStatus = () => {
+        
+        const isOfflineForDatabase = {
+            name: window.lms_conversition_object.display_name, 
+            user_type: window.lms_conversition_object.user_type, 
+            user_id: window.lms_conversition_object.user_id,
+            user_img: window.lms_conversition_object.avatar_url,
+            last_changed: firebase.database.ServerValue.TIMESTAMP,
+            status: 'offline'
+        };
+
+        const isOnlineForDatabase = {
+            name: window.lms_conversition_object.display_name, 
+            user_type: window.lms_conversition_object.user_type, 
+            user_id: window.lms_conversition_object.user_id,
+            user_img: window.lms_conversition_object.avatar_url,
+            last_changed: firebase.database.ServerValue.TIMESTAMP,
+            status: 'online'
+        };
+
+        database.ref('.info/connected').on('value', function(snapshot) {
+        if (snapshot.val() == false) {
+            return;
+        };  
+
+        let uid = auth.currentUser.uid;
+        let userStatusDatabaseRef = database.ref('/messages/' + lms_conversition_object.post_id +'/users/' + uid)
+        // var uid = firebase.auth().currentUser.uid;
+        // console.log('auth id: ', uid)
+        // If we are currently connected, then use the 'onDisconnect()' 
+        // method to add a set which will only trigger once this 
+        // client has disconnected by closing the app, 
+        // losing internet, or any other means.
+        userStatusDatabaseRef.onDisconnect()
+            .set(isOfflineForDatabase).then(function() {
+                // The promise returned from .onDisconnect().set() will
+                // resolve as soon as the server acknowledges the onDisconnect() 
+                // request, NOT once we've actually disconnected:
+                // https://firebase.google.com/docs/reference/js/firebase.database.OnDisconnect
+
+                // We can now safely set ourselves as 'online' knowing that the
+                // server will mark us as offline once we lose connection.
+                userStatusDatabaseRef.set(isOnlineForDatabase);
+            });
+        });
+    }
+
+
+
     componentWillUnmount() {
-        console.log('state room: ', this.state.room)
+        // console.log('state room: ', this.state.room)
     }
 
 
@@ -123,7 +141,6 @@ class App extends Component {
      */
     toggleChatWindow = (e) => {
         e.preventDefault()
-        console.log('button Clicked');
         const {chat_window_active} = this.state
         this.setState({
             chat_window_active: !chat_window_active ? true : false
@@ -135,14 +152,39 @@ class App extends Component {
             loader: true,
         });
 
-        // this.fetchWP.get('config/')
-        //     .then(
-        //         (json) => {
-        //             this.setState({
-        //                 loader: false,
-        //                 config: json,
-        //             });
-        //         });
+        coursePublicDB
+        .child('msg')
+        .orderByChild('room')
+        .equalTo('public')
+        .on('value', snapshot => {
+            this.setState({ chats: snapshot.val() });
+        });
+
+
+        // Users 
+        let {users} = this.state
+        coursePublicDB
+        .child('users')
+        .on('value', snapshot => {
+            if(snapshot.val()){
+                users = snapshot.val();
+                Object.keys(snapshot.val()).map( (k, v) => {
+                    coursePublicDB
+                    .child('msg')
+                    .limitToLast(1).once('value', lstmsg => {
+                        let key = Object.keys(lstmsg.val());
+                        users[k]['text_msg'] = lstmsg.val()[key].text_msg
+                        users[k]['createDate'] = lstmsg.val()[key].createDate      
+                    })
+                })
+
+                this.setState({
+                    users: users
+                })
+                
+            }
+        });
+        
 
 
     }
@@ -159,7 +201,6 @@ class App extends Component {
         schema.createDate = Date.now()
         schema.room = room
 
-        console.log('Schema: ', schema)
         if(schema.text_msg != ''){
             coursePublicDB.child('msg').push(schema)
         }
@@ -199,10 +240,13 @@ class App extends Component {
 
 
     roomHandler = (e, user_id) => {
+        let {users} = this.state
+
+        
         let room = 'public'
         if(user_id != 'public'){
             let current_user_id = window.lms_conversition_object.user_id
-            room = [user_id, current_user_id]
+            room = [users[user_id].user_id, current_user_id]
             room = room.sort((a, b) => a - b)
             room = room.join('')
         }
@@ -215,21 +259,49 @@ class App extends Component {
         .on('value', snapshot => {
             this.setState({ 
                 chats: snapshot.val(), 
-                room: room
+                room: room, 
+                room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : __('Group Chat', 'lms-conversation'), 
+                room_status: (typeof users[user_id] != 'undefined' && users[user_id].status == 'online' && room != 'public') || room == 'public' ? __('Active Now', 'lms-conversation') : __('Inactive Now', 'lms-conversation'),
+                user_img: typeof users[user_id] != 'undefined' && users[user_id].user_img != '' && room != 'public' ? users[user_id].user_img : window.lms_conversition_object.assets_url + 'images/' + group_img
             });
         });
 
         
     }
 
-    render() {
-        let {config, chats, download, users, schema} = this.state
-        if(!chats) chats = []
-        console.log('all chats: ', chats)
-        // console.log('all usrs: ', users)
-        
 
+    searchUserHandler = (e) => {
+        let svalue = e.target.value
         
+        // Users 
+        this.setState({users: []})
+        let {users} = this.state
+        coursePublicDB
+        .child('users')
+        .orderByChild('name')
+        .startAt(svalue)
+        .on('value', snapshot => {
+            if(snapshot.val()){
+                users = snapshot.val();
+                Object.keys(snapshot.val()).map( (k, v) => {
+                    coursePublicDB
+                    .child('msg')
+                    .limitToLast(1).once('value', lstmsg => {
+                        let key = Object.keys(lstmsg.val());
+                        users[k]['text_msg'] = lstmsg.val()[key].text_msg
+                        users[k]['createDate'] = lstmsg.val()[key].createDate        
+                    })
+                })
+                this.setState({
+                    users: users
+                })
+            }
+        });
+    }
+
+    render() {
+        let {config, chats, download, users, schema, room_name, room_status, user_img} = this.state
+        if(!chats) chats = []
         const activeClass = this.state.chat_window_active ? 'active' : 'close';
         return (
                 <div className={style.chatWrap}>
@@ -240,11 +312,17 @@ class App extends Component {
                         <div className={style.chatBody}>
                             <div>
                                 <div className={style.profileInfo}>
-                                    <div className={style.profileImg}></div>
-                                    <h4>{__('Student Name', 'lms-conversation')}</h4>
-                                    <p>{__('Student', 'lms-conversation')}</p>
+                                    <div className={style.profileImg}
+                                        style={{
+                                            backgroundImage: `url(${window.lms_conversition_object.avatar_url})`
+                                        }}
+                                    >
+
+                                    </div>
+                                    <h4>{window.lms_conversition_object.display_name}</h4>
+                                    <p>{window.lms_conversition_object.user_type}</p>
                                 </div>
-                                <ul>
+                                {/* <ul>
                                     <li className={style.inbox}>
                                         <span></span>
                                     </li>
@@ -252,7 +330,7 @@ class App extends Component {
                                         <span></span>
                                     </li>
                                     
-                                </ul>
+                                </ul> */}
                             </div>
                             <div>
                                 <div>
@@ -260,23 +338,23 @@ class App extends Component {
                                         <h2>{__('Messages', 'lms-conversation')}</h2>
                                         <div className={style.searchbar}>
                                             <div>
-                                                <input type="search" onChange={this.changeHandler} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
+                                                <input type="search" onChange={this.searchUserHandler} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
                                             </div>
                                         </div>
                                     </div>
                                     <div className={style.userList}>
 
-                                        <div onClick={(e) => this.roomHandler(e, 'public')}>
+                                        <div onClick={(e) => this.roomHandler(e, 'public', '', 'online')}>
                                             <div>
-                                                <div className={style.userImg}></div>
+                                                <div className={style.userImg}>
+                                                </div>
                                             </div>
                                             <div>
                                                 <h4>{__('Group Chat', 'lms-conversation')}</h4>
-                                                <h5>{__('Student', 'lms-conversation')}</h5>
-                                                <p>{__('Really? That\'s greet...', 'lms-conversation')}</p>
+                                                <h5>{__('All Participants', 'lms-conversation')}</h5>
                                             </div>
                                             <div>
-                                                <span>2:34pm</span>
+                                                <span></span>
                                             </div>
                                         </div>
 
@@ -284,11 +362,16 @@ class App extends Component {
                                         {
                                              
                                                 Object.keys(users).map( (k, v) => {
+                                                    let dateis = new Date(users[k].last_changed).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
                                                     if(users[k].user_id != window.lms_conversition_object.user_id){
                                                         return(
-                                                            <div onClick={(e) => this.roomHandler(e, users[k].user_id)} key={v}>
+                                                            <div onClick={(e) => this.roomHandler(e, k)} key={v}>
                                                                 <div>
-                                                                    <div className={style.userImg}></div>
+                                                                    <div 
+                                                                    style={{backgroundImage: `url(${users[k].user_img})`}}
+                                                                    className={style.userImg}>
+                                                                        <span className={`${style.userPresentStatus} ${ style[users[k].status]}`}></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div>
                                                                     <h4>{users[k].name}</h4>
@@ -297,7 +380,7 @@ class App extends Component {
                                                                 </div>
                                                                 <div>
                                                                     <span>
-                                                                        {/* <Moment date={users[k].createDate} /> */}
+                                                                        {dateis}
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -312,10 +395,14 @@ class App extends Component {
                             <div>
                                 <div className={style.topHeader}>
                                     <div className={style.profiInfo}>
-                                        <div></div>
+                                        <div style={{
+                                            backgroundImage: `url(${user_img})`
+                                        }}>
+
+                                        </div>
                                         <div>
-                                            <h5>{__('Student Name', 'lms-conversation')}</h5>
-                                            <p>{__('Active Now', 'lms-conversation')}</p>
+                                            <h5>{room_name}</h5>
+                                            <p>{room_status}</p>
                                         </div>
                                     </div>
                                     <div>
@@ -332,7 +419,6 @@ class App extends Component {
                                         <ul>
                                             {     
                                                 Object.keys(chats).map( (k, v) => {
-                                                    console.log('this k: ', k)
                                                     return(
                                                         <li className={ chats[k].sender_id == window.lms_conversition_object.user_id ? style.thisuser : style.fromanother } key={v}>
                                                             {
