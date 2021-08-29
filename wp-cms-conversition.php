@@ -77,4 +77,4 @@ if (is_admin()) {
     LMSC_Backend();
 }
 
-// new CMSC_Api();
+new LMSC_Api();

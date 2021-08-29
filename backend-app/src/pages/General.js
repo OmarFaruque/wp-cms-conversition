@@ -26,8 +26,9 @@ export default function General(props) {
                     <label className={style.switch}>
                         <input type="checkbox" 
                             onChange={props.handleUpdate}
-                            name="enable_currency_switcher"
+                            name="enable_lms_conversation"
                             value={1}
+                            checked={typeof config.enable_lms_conversation != 'undefined' && config.enable_lms_conversation ? true : false}
                         />
                         <span className={style.slider}></span>
                     </label> 
@@ -47,14 +48,17 @@ export default function General(props) {
                     <label className={style.switch}>
                         <input type="checkbox" 
                             onChange={props.handleUpdate}
-                            name="enable_currency_switcher"
+                            name="allow_tacher_capability"
                             value={1}
+                            checked={typeof config.allow_tacher_capability != 'undefined' && config.allow_tacher_capability ? true : false}
                         />
                         <span className={style.slider}></span>
                     </label> 
                 </div>
 
-                <button onclick={props.saveHandler} ></button>
+                <button className={style.saveBtn} onClick={props.SaveChanges}>
+                    <span>{__('Save', 'lms-conversation')}</span>
+                </button>
             </div>
         </div>
     </>

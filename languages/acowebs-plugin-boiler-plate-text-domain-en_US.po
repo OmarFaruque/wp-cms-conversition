@@ -3,11 +3,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/backend.js:88
+#: src/backend.js:104
 msgid "LMS Conversation"
 msgstr ""
 
-#: src/backend.js:93
+#: src/backend.js:109
 msgid "Check Premium Options"
 msgstr ""
 
@@ -43,6 +43,11 @@ msgstr ""
 
 #: src/pages/Firebase-settings.js:155
 msgid "Firebase Application ID."
+msgstr ""
+
+#: src/pages/Firebase-settings.js:171
+#: src/pages/General.js:60
+msgid "Save"
 msgstr ""
 
 #: src/pages/Firebase-settings.js:30
@@ -81,10 +86,10 @@ msgstr ""
 msgid "Enable / Disable LMS Conversation for Fornt-end."
 msgstr ""
 
-#: src/pages/General.js:39
+#: src/pages/General.js:40
 msgid "Conversation Controller on Course"
 msgstr ""
 
-#: src/pages/General.js:42
+#: src/pages/General.js:43
 msgid "Allow Teacher / Author to set Enable / Disable conversation for each course."
 msgstr ""

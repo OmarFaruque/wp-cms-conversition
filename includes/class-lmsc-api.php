@@ -34,11 +34,13 @@ class LMSC_Api
 
     public function __construct()
     {
-        $this->token = ACOTRS_TOKEN;
+        $this->token = LMSC_TOKEN;
 
         add_action(
             'rest_api_init',
             function () {
+                
+                // Get Config from DB
                 register_rest_route(
                     $this->token . '/v1',
                     '/config/',
@@ -48,16 +50,44 @@ class LMSC_Api
                         'permission_callback' => array($this, 'getPermission'),
                     )
                 );
+
+
+
+                // Save Config to DB
+                register_rest_route(
+                    $this->token . '/v1',
+                    '/save/',
+                    array(
+                        'methods' => 'POST',
+                        'callback' => array($this, 'setConfig'),
+                        'permission_callback' => array($this, 'getPermission'),
+                    )
+                );
+
             }
         );
     }
 
+
+    /**
+     * @access  public
+     * @param   post array 
+     * @return  success message
+     */
+    public function setConfig($data){
+        $config = $data['config'];
+        update_option( 'lmsc_config', $config, 'yes' );
+        return new WP_REST_Response('success', 200);
+    }
+
+
+    /**
+     * @access  public
+     * @return  config from DB
+     */
     public function getConfig()
     {
-        $config = ['general' =>
-            ['title' => 'Acowebs Boiler Plate']
-        ];
-
+        $config = get_option( 'lmsc_config', array() );
         return new WP_REST_Response($config, 200);
     }
 

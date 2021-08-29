@@ -2,6 +2,7 @@ import React from "react";
 import {HashRouter, Route, Switch} from 'react-router-dom'
 import ReactDOM from "react-dom";
 import FetchWP from './utils/fetchWP';
+import Loader from './utils/loader';
 import General from "./pages/General";
 import FirebaseSettings from "./pages/Firebase-settings";
 import Tabs from "./components/Tabs";
@@ -27,7 +28,7 @@ class App extends React.Component {
 
 
         this.handleUpdate = this.handleUpdate.bind(this)
-
+        this.SaveChanges = this.SaveChanges.bind(this)
     }
 
 
@@ -41,8 +42,19 @@ class App extends React.Component {
     }
 
     handleUpdate(e) {
+
+        
         const {config} = this.state
-        config[e.target.name] = e.target.value
+
+        switch(e.target.type){
+            case 'checkbox':
+                config[e.target.name] = !config[e.target.name] ? true : false
+            break;
+            default:
+                config[e.target.name] = e.target.value
+        }
+
+        
 
         this.setState({
             config:config
@@ -50,10 +62,14 @@ class App extends React.Component {
     }
 
     SaveChanges = () => {
-
+        this.setState({
+            loader: true
+        });
         const {config} = this.state;
         this.fetchWP.post('save', {'config': config}).then(json => {
-
+            this.setState({
+                loader: false
+            });
         }).catch(error => {
             alert("Some thing went wrong");
         })
@@ -65,20 +81,20 @@ class App extends React.Component {
             loader: true,
         });
 
-        // this.fetchWP.get('config/')
-        //     .then(
-        //         (json) => {
-        //             this.setState({
-        //                 loader: false,
-        //                 config: json,
-        //             });
-        //         });
-
-
+        this.fetchWP.get('config/')
+            .then(
+                (json) => {
+                    this.setState({
+                        loader: false,
+                        config: json,
+                    });
+                });
     }
 
     render() {
-        const {config} = this.state;
+        
+        const {config, loader} = this.state;
+        if(loader) return <Loader />
         return (
             <div className={style.lmsWrap}>
                 <div className={style.header}>
@@ -101,7 +117,11 @@ class App extends React.Component {
                                 path="/"
                                 exact
                                 render={props =>
-                                    <General config={config} handleUpdate={this.handleUpdate}/>
+                                    <General 
+                                        config={config} 
+                                        handleUpdate={this.handleUpdate}
+                                        SaveChanges={this.SaveChanges}
+                                        />
                                 }
                             />
                             <Route
@@ -111,6 +131,7 @@ class App extends React.Component {
                                     <FirebaseSettings
                                         handleUpdate={this.handleUpdate}
                                         config={config}
+                                        SaveChanges={this.SaveChanges}
                                     />
                                 }
                             />

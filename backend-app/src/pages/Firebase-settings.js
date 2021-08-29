@@ -166,6 +166,10 @@ class Page2 extends React.Component {
                                 </div>
                             </div>
                         </div>
+
+                        <button className={style.saveBtn} onClick={this.props.SaveChanges}>
+                            <span>{__('Save', 'lms-conversation')}</span>
+                        </button>
                     </div>
                 </div>
             </>
