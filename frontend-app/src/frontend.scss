@@ -407,6 +407,7 @@
                                     &:first-child{
                                         display: inline-flex;
                                         padding: 10px;
+                                        max-width: 65px;
                                         >span{
                                             background-repeat: no-repeat;
                                             width: 26px;

@@ -4,6 +4,7 @@ import style from './style.scss'
 import { Icon, InlineIcon } from "@iconify/react";
 import cogOutline from "@iconify/icons-mdi/cog-outline";
 import firebase from "@iconify/icons-mdi/firebase";
+import info from "@iconify/icons-mdi/information";
 
 
 const { __ } = window.wp.i18n;
@@ -28,6 +29,14 @@ const Tabs = (props) => {
                             <InlineIcon icon={firebase} />
                         </span>
                         {__('Firebase Settings', 'lms-conversation')}
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink exact activeClassName={style.active} to="/info">
+                        <span className={style.icon}>
+                            <InlineIcon icon={info} />
+                        </span>
+                        {__('Info', 'lms-conversation')}
                     </NavLink>
                 </li>
             </ul>

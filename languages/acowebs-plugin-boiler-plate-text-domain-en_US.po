@@ -3,22 +3,26 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/backend.js:104
+#: src/backend.js:105
 msgid "LMS Conversation"
 msgstr ""
 
-#: src/backend.js:109
+#: src/backend.js:110
 msgid "Check Premium Options"
 msgstr ""
 
-#: src/components/Tabs/index.js:22
+#: src/components/Tabs/index.js:23
 #: src/pages/General.js:13
 msgid "General Settings"
 msgstr ""
 
-#: src/components/Tabs/index.js:30
+#: src/components/Tabs/index.js:31
 #: src/pages/Firebase-settings.js:24
 msgid "Firebase Settings"
+msgstr ""
+
+#: src/components/Tabs/index.js:39
+msgid "Info"
 msgstr ""
 
 #: src/pages/Firebase-settings.js:110
@@ -92,4 +96,53 @@ msgstr ""
 
 #: src/pages/General.js:43
 msgid "Allow Teacher / Author to set Enable / Disable conversation for each course."
+msgstr ""
+
+#: src/pages/Info.js:24
+msgid "Information"
+msgstr ""
+
+#: src/pages/Info.js:30
+msgid "For setup your firebase database, follow the below steps."
+msgstr ""
+
+#: src/pages/Info.js:33
+msgid "Firebase Settings Information"
+msgstr ""
+
+#: src/pages/Info.js:39
+msgid "For setup firebase settings you should go to "
+msgstr ""
+
+#: src/pages/Info.js:39
+msgid " and login with your gmail account."
+msgstr ""
+
+#: src/pages/Info.js:40
+msgid "Press \"Add project\" if you want to start with a new project."
+msgstr ""
+
+#: src/pages/Info.js:41
+msgid ""
+"Press \"Authentication\" from left menu and Enable \"Email/Password\" if "
+"Disabled."
+msgstr ""
+
+#: src/pages/Info.js:42
+msgid ""
+"Press \"Realtime Database\" from left menu and then press \"Rules\" from "
+"top menu. Add rules:{\".read\": true, \".write\": true} in \"Edit Rules\" "
+"window."
+msgstr ""
+
+#: src/pages/Info.js:43
+msgid ""
+"At last step, you should press settings icon from the right side of "
+"\"Project Overview\" in top left corner."
+msgstr ""
+
+#: src/pages/Info.js:44
+msgid ""
+"Scroll down and you can see necessary settings information for use your "
+"\"Firebase Settings\" tab"
 msgstr ""

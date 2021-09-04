@@ -6,6 +6,7 @@ import Loader from './utils/loader';
 import General from "./pages/General";
 import FirebaseSettings from "./pages/Firebase-settings";
 import Tabs from "./components/Tabs";
+import Info from "./pages/Info";
 
 //CSS 
 import style from './backend.scss';
@@ -129,6 +130,18 @@ class App extends React.Component {
                                 path="/firebase-settings"
                                 render={props =>
                                     <FirebaseSettings
+                                        handleUpdate={this.handleUpdate}
+                                        config={config}
+                                        SaveChanges={this.SaveChanges}
+                                    />
+                                }
+                            />
+
+                            <Route
+                                exact
+                                path="/info"
+                                render={props =>
+                                    <Info
                                         handleUpdate={this.handleUpdate}
                                         config={config}
                                         SaveChanges={this.SaveChanges}

@@ -7,7 +7,7 @@ import TextInput from "../components/TextInput"
 
 const { __ } = window.wp.i18n;
 
-class Page2 extends React.Component {
+class FirebaseSettings extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -178,4 +178,4 @@ class Page2 extends React.Component {
 }
 
 
-export default Page2;
+export default FirebaseSettings;

@@ -13,6 +13,7 @@ import firebase, { auth, googleAuthProvider, database, Schema, storage } from ".
 
 
 
+
 const IDontCareAboutFirebaseAuth = () => {
     return <div>This part won't react to firebase auth changes</div>;
 };
@@ -322,15 +323,7 @@ class App extends Component {
                                     <h4>{window.lms_conversition_object.display_name}</h4>
                                     <p>{window.lms_conversition_object.user_type}</p>
                                 </div>
-                                {/* <ul>
-                                    <li className={style.inbox}>
-                                        <span></span>
-                                    </li>
-                                    <li className={style.friends}>
-                                        <span></span>
-                                    </li>
-                                    
-                                </ul> */}
+                               
                             </div>
                             <div>
                                 <div>
@@ -412,9 +405,6 @@ class App extends Component {
 
 
                                 <div className={style.chatbodyLists}>
-                                    {/* <button onClick={() => auth.signInWithRedirect(googleAuthProvider)}>
-                                    Sign In
-                                    </button> */}
                                     <div className={style.chatLists}>
                                         <ul>
                                             {     
@@ -470,16 +460,11 @@ class App extends Component {
                                     </div>
                                 </div>
 
-
-
-
-
-
                                 <div className={style.chatForm}>
                                     <div>
                                         <form onSubmit={this.onFormSubmit}>
                                             <div>
-                                                <span className={style.imoji}></span>
+                                                {/* <span className={style.imoji}></span> */}
                                                 <label for="attachment"><span className={style.imgUpload}></span></label>
                                                 <input className={style.fileUPloadInput} type="file" onChange={this.changeHandler} name="attachment" id="attachment" />
                                             </div>

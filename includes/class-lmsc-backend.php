@@ -130,10 +130,84 @@ class LMSC_Backend
             // enqueue scripts & styles.
             add_action('admin_enqueue_scripts', array($this, 'adminEnqueueScripts'), 10, 1);
             add_action('admin_enqueue_scripts', array($this, 'adminEnqueueStyles'), 10, 1);
+
+            //Metabox on course for teacher control
+            add_action( 'add_meta_boxes', array($this, 'lmsc_course_metabox_callback') );
+            add_action( 'save_post', array( $this, 'lmsc_save_course') );
+
         }else{
             add_action( 'admin_notices', array($this, 'notice_need_a_cms_plugin') );
         }
     }
+
+
+    /**
+     * @access  public 
+     * @return  NULL 
+     * @desc    Save custom metabox data to DB
+     */
+    public function lmsc_save_course($post_id){
+            // Check if our nonce is set.
+            if ( ! isset( $_POST['lmsc_course_nonce'] ) ) {
+                return $post_id;
+            }
+            $nonce = $_POST['lmsc_course_nonce'];
+
+            // Verify that the nonce is valid.
+            if ( ! wp_verify_nonce( $nonce, 'lmsc_course' ) ) {
+                return $post_id;
+            }
+
+            /*
+            * If this is an autosave, our form has not been submitted,
+            * so we don't want to do anything.
+            */
+            if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+                return $post_id;
+            }
+
+            // Check the user's permissions.
+            if ( ! current_user_can( 'edit_post', $post_id ) ) {
+                return $post_id;
+            }
+
+            // Sanitize the user input.
+            $allow_conversation = sanitize_text_field( $_POST['allow_conversation'] );
+
+            // Update the meta field.
+            update_post_meta( $post_id, 'allow_conversation', $allow_conversation );
+    }
+
+
+    /**
+     * @access  public 
+     * @return  metabox on course page 
+     * @desc    add metabox for control conversation on frontend for each course by course teacher / author
+     */
+    public function lmsc_course_metabox_callback(){
+        add_meta_box(
+            'lmsc_metabox',             // Unique ID
+            'LMS Conversation',    // Box title
+            array($this, 'lmsc_course_metabox_controller_callback'),    // Content callback, must be of type callable
+            array('sfwd-courses'),       // Post type
+            'side'
+        );
+    }
+
+
+
+    /**
+     * @access  public
+     * @return  html
+     * @desc    LMS Course conversation controller UI
+     */
+    public function lmsc_course_metabox_controller_callback($post){
+        // Add an nonce field so we can check for it later.
+        wp_nonce_field( 'lmsc_course', 'lmsc_course_nonce' );
+        require_once($this->dir . '/view/backend-metabox.php');
+    }
+
+
 
     /**
      * Ensures only one instance of Class is loaded or can be loaded.

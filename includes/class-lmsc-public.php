@@ -82,6 +82,8 @@ class LMSC_Public
 
 
     public function testF(){
+        global $post;
+        echo 'converstation allow is : ' . get_post_meta( $post->ID, 'allow_conversation', true ) . '<br/>';
         // $enrolled_usrs = $this->lmsc_get_enrolled_usrs();
         // echo 'enrolled Usrs <br/><pre>';
         // print_r($enrolled_usrs);
@@ -113,14 +115,14 @@ class LMSC_Public
      */
     public function lmsc_foother_callback(){
         global $post, $current_user;
+        $config = get_option( 'lmsc_config', array() );
 
-        echo 'current usres data <pre>';
-        print_r($current_user);
-        echo '</pre>';
+        if(!$config['enable_lms_conversation'])
+            return false;
 
-        echo 'current usres data <pre>';
-        print_r($post);
-        echo '</pre>';
+        if($config['allow_tacher_capability'] && !get_post_meta( $post->ID, 'allow_conversation', true ))
+            return false;
+        
         
         $append = false;
         if(is_singular( 'sfwd-courses' ))
