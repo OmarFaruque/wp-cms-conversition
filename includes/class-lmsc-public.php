@@ -83,11 +83,7 @@ class LMSC_Public
 
     public function testF(){
         global $post;
-        echo 'converstation allow is : ' . get_post_meta( $post->ID, 'allow_conversation', true ) . '<br/>';
-        // $enrolled_usrs = $this->lmsc_get_enrolled_usrs();
-        // echo 'enrolled Usrs <br/><pre>';
-        // print_r($enrolled_usrs);
-        // echo '</pre>';
+        
     }
 
 
@@ -124,10 +120,40 @@ class LMSC_Public
             return false;
         
         
-        $append = false;
-        if(is_singular( 'sfwd-courses' ))
-            $append = true;    
+
         
+        $append = false;
+        if(
+            is_singular( 'sfwd-courses' )
+        ){
+            
+            $append = true;    
+        }
+        
+
+        //Course Subscribe if student
+        if(is_singular( 'lp_course' )){ // If Learnpress
+            $user = learn_press_get_current_user();
+            if ( $user->has_enrolled_course( $post->ID ) || get_current_user_id(  ) == $post->post_author ) {
+                $append = true;
+            }
+        }
+
+        if(is_singular( 'course' )){ // LifterLMS
+            if(class_exists('LLMS_Student')){
+                $student = new LLMS_Student( get_current_user_id(  ) );
+                if($student->is_enrolled($post->ID) || get_current_user_id(  ) == $post->post_author ){
+                    $append = true;
+                }
+            }
+        }
+
+
+
+
+
+
+
         if($append === false)
             return false;
 

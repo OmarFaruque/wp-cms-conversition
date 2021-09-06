@@ -189,7 +189,7 @@ class LMSC_Backend
             'lmsc_metabox',             // Unique ID
             'LMS Conversation',    // Box title
             array($this, 'lmsc_course_metabox_controller_callback'),    // Content callback, must be of type callable
-            array('sfwd-courses'),       // Post type
+            array('sfwd-courses', 'course', 'lp_course'),       // Post type
             'side'
         );
     }

@@ -143,7 +143,10 @@ class LMSC_Helper
     public function is_any_cms_activated()
     {
         $allowed_plugins = apply_filters( 'lmsc_allowed_plugins', array(
-            'sfwd-lms/sfwd_lms.php'
+            'sfwd-lms/sfwd_lms.php', 
+            'sensei-lms/sensei-lms.php', 
+            'learnpress/learnpress.php', 
+            'lifterlms/lifterlms.php'
         ));
         
         if (count(array_intersect($allowed_plugins, apply_filters('active_plugins', get_option('active_plugins')))) > 0) {
