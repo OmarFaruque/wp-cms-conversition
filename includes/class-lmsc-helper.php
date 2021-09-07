@@ -146,7 +146,9 @@ class LMSC_Helper
             'sfwd-lms/sfwd_lms.php', 
             'sensei-lms/sensei-lms.php', 
             'learnpress/learnpress.php', 
-            'lifterlms/lifterlms.php'
+            'lifterlms/lifterlms.php', 
+            'masterstudy-lms-learning-management-system/masterstudy-lms-learning-management-system.php', 
+            'tutor/tutor.php'
         ));
         
         if (count(array_intersect($allowed_plugins, apply_filters('active_plugins', get_option('active_plugins')))) > 0) {

@@ -123,9 +123,7 @@ class LMSC_Public
 
         
         $append = false;
-        if(
-            is_singular( 'sfwd-courses' )
-        ){
+        if(is_singular( 'sfwd-courses' )){
             
             $append = true;    
         }
@@ -139,13 +137,35 @@ class LMSC_Public
             }
         }
 
-        if(is_singular( 'course' )){ // LifterLMS
-            if(class_exists('LLMS_Student')){
+        if(is_singular( 'course' )){ 
+            if(class_exists('LLMS_Student')){ // LifterLMS
                 $student = new LLMS_Student( get_current_user_id(  ) );
                 if($student->is_enrolled($post->ID) || get_current_user_id(  ) == $post->post_author ){
                     $append = true;
                 }
             }
+
+            
+            if(class_exists('Sensei_Course')){ // Sensei LMS
+                if(Sensei_Course::is_user_enrolled( $post->ID )){
+                    $append = true;
+                }
+            }
+        }
+        
+        if(is_singular( 'stm-courses' )){ // Masterstudy
+            $courses = stm_lms_get_user_courses(get_current_user_id(  ), '', '', array('course_id'));
+            $key = array_search($post->ID, array_column($courses, 'course_id'));
+            
+            if($key !== false || get_current_user_id(  ) == $post->post_author)
+                $append = true;
+        }
+
+
+        if(is_singular( 'courses' )){ //Tutor LMS
+            if(tutor_utils()->is_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author)
+                $append = true;
+                
         }
 
 
