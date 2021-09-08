@@ -3,146 +3,38 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/backend.js:105
-msgid "LMS Conversation"
+#: src/frontend.js:264
+msgid "Group Chat"
 msgstr ""
 
-#: src/backend.js:110
-msgid "Check Premium Options"
+#: src/frontend.js:265
+msgid "Active Now"
 msgstr ""
 
-#: src/components/Tabs/index.js:23
-#: src/pages/General.js:13
-msgid "General Settings"
+#: src/frontend.js:265
+msgid "Inactive Now"
 msgstr ""
 
-#: src/components/Tabs/index.js:31
-#: src/pages/Firebase-settings.js:24
-msgid "Firebase Settings"
+#: src/frontend.js:310
+msgid "LMS Chat"
 msgstr ""
 
-#: src/components/Tabs/index.js:39
-msgid "Info"
+#: src/frontend.js:331
+msgid "Messages"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:110
-msgid "Storage Bucket"
+#: src/frontend.js:334
+msgid "Search"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:113
-msgid "Firebase Storage Bucket."
+#: src/frontend.js:347
+msgid "All Participants"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:131
-msgid "Messaging Sender ID"
+#: src/frontend.js:432
+msgid "Attachment"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:134
-msgid "Firebase Messaging Sender ID."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:152
-msgid "App ID"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:155
-msgid "Firebase Application ID."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:171
-#: src/pages/General.js:60
-msgid "Save"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:30
-msgid "API Key"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:50
-msgid "Auth Domain"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:53
-msgid "Firebase API Key."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:70
-msgid "Database URL"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:73
-msgid "Firebase Database Url."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:90
-msgid "Project ID"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:93
-msgid "Firebase Project ID."
-msgstr ""
-
-#: src/pages/General.js:18
-msgid "Enable LMS Conversation"
-msgstr ""
-
-#: src/pages/General.js:21
-msgid "Enable / Disable LMS Conversation for Fornt-end."
-msgstr ""
-
-#: src/pages/General.js:40
-msgid "Conversation Controller on Course"
-msgstr ""
-
-#: src/pages/General.js:43
-msgid "Allow Teacher / Author to set Enable / Disable conversation for each course."
-msgstr ""
-
-#: src/pages/Info.js:24
-msgid "Information"
-msgstr ""
-
-#: src/pages/Info.js:30
-msgid "For setup your firebase database, follow the below steps."
-msgstr ""
-
-#: src/pages/Info.js:33
-msgid "Firebase Settings Information"
-msgstr ""
-
-#: src/pages/Info.js:39
-msgid "For setup firebase settings you should go to "
-msgstr ""
-
-#: src/pages/Info.js:39
-msgid " and login with your gmail account."
-msgstr ""
-
-#: src/pages/Info.js:40
-msgid "Press \"Add project\" if you want to start with a new project."
-msgstr ""
-
-#: src/pages/Info.js:41
-msgid ""
-"Press \"Authentication\" from left menu and Enable \"Email/Password\" if "
-"Disabled."
-msgstr ""
-
-#: src/pages/Info.js:42
-msgid ""
-"Press \"Realtime Database\" from left menu and then press \"Rules\" from "
-"top menu. Add rules:{\".read\": true, \".write\": true} in \"Edit Rules\" "
-"window."
-msgstr ""
-
-#: src/pages/Info.js:43
-msgid ""
-"At last step, you should press settings icon from the right side of "
-"\"Project Overview\" in top left corner."
-msgstr ""
-
-#: src/pages/Info.js:44
-msgid ""
-"Scroll down and you can see necessary settings information for use your "
-"\"Firebase Settings\" tab"
+#: src/frontend.js:435
+msgid "Download Attachment"
 msgstr ""

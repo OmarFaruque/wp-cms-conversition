@@ -124,8 +124,9 @@ class LMSC_Public
         
         $append = false;
         if(is_singular( 'sfwd-courses' )){
-            
-            $append = true;    
+            $enrolledCorses = learndash_user_get_enrolled_courses(get_current_user_id(  ));
+            if(in_array($post->ID, $enrolledCorses) || get_current_user_id(  ) == $post->post_author)
+                $append = true;    
         }
         
 
@@ -165,13 +166,7 @@ class LMSC_Public
         if(is_singular( 'courses' )){ //Tutor LMS
             if(tutor_utils()->is_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author)
                 $append = true;
-                
         }
-
-
-
-
-
 
 
         if($append === false)
