@@ -66,8 +66,14 @@ class App extends React.Component {
         this.setState({
             loader: true
         });
-        const {config} = this.state;
-        this.fetchWP.post('save', {'config': config}).then(json => {
+        let {config} = this.state
+        config = { ...config }
+
+        let data = {
+            config: config
+        }
+        
+        this.fetchWP.post('save', data).then(json => {
             this.setState({
                 loader: false
             });

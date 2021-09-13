@@ -77,7 +77,11 @@ class LMSC_Api
     public function setConfig($data){
         $config = $data['config'];
         update_option( 'lmsc_config', $config, 'yes' );
-        return new WP_REST_Response('success', 200);
+
+        $return = array(
+            'msg' => 'success'
+        );
+        return new WP_REST_Response($return, 200);
     }
 
 

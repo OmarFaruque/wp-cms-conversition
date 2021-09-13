@@ -3,11 +3,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/backend.js:105
+#: src/backend.js:111
 msgid "LMS Conversation"
 msgstr ""
 
-#: src/backend.js:110
+#: src/backend.js:116
 msgid "Check Premium Options"
 msgstr ""
 
