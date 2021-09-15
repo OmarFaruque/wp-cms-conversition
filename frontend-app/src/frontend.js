@@ -3,7 +3,6 @@ import FetchWP from './utils/fetchWP';
 import chaticon from './icons/chat.svg';
 import attachment from './icons/attachment.svg';
 
-
 //CSS 
 import style from './frontend.scss';
 import { sprintf, _n, __ } from '@wordpress/i18n';
@@ -152,6 +151,8 @@ class App extends Component {
         this.setState({
             loader: true,
         });
+        let current_user_id = window.lms_conversition_object.user_id
+
 
         coursePublicDB
         .child('msg')
@@ -169,13 +170,24 @@ class App extends Component {
         .on('value', snapshot => {
             if(snapshot.val()){
                 users = snapshot.val();
+                
                 Object.keys(snapshot.val()).map( (k, v) => {
+                    
+                    let room = [users[k]['user_id'], current_user_id]
+                    room = room.sort((a, b) => a - b)
+                    room = room.join('')
+
                     coursePublicDB
                     .child('msg')
+                    .orderByChild('room')
+                    .equalTo(room)
                     .limitToLast(1).once('value', lstmsg => {
-                        let key = Object.keys(lstmsg.val());
-                        users[k]['text_msg'] = lstmsg.val()[key].text_msg
-                        users[k]['createDate'] = lstmsg.val()[key].createDate      
+                        
+                        if(lstmsg.val()){
+                            let key = Object.keys(lstmsg.val());
+                            users[k]['text_msg'] = lstmsg.val()[key].text_msg
+                            users[k]['createDate'] = lstmsg.val()[key].createDate      
+                        }
                     })
                 })
 
@@ -274,6 +286,7 @@ class App extends Component {
     searchUserHandler = (e) => {
         let svalue = e.target.value
         
+        
         // Users 
         this.setState({users: []})
         let {users} = this.state
@@ -331,7 +344,7 @@ class App extends Component {
                                         <h2>{__('Messages', 'lms-conversation')}</h2>
                                         <div className={style.searchbar}>
                                             <div>
-                                                <input type="search" onChange={this.searchUserHandler} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
+                                                <input type="search" onKeyPress={this.searchUserHandler} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
                                             </div>
                                         </div>
                                     </div>
@@ -411,11 +424,23 @@ class App extends Component {
                                                 Object.keys(chats).map( (k, v) => {
                                                     return(
                                                         <li className={ chats[k].sender_id == window.lms_conversition_object.user_id ? style.thisuser : style.fromanother } key={v}>
+                                                            
+                                                            {/* Avater */}
                                                             {
                                                                 chats[k].sender_id != window.lms_conversition_object.user_id && (
                                                                     <span className={style.userimg} style={{backgroundImage: "url("+chats[k].avatar_url+")"}} ></span>
                                                                 )
                                                             }
+
+                                                            {/* Message Delete Option */}
+                                                            {
+                                                                chats[k].sender_id == window.lms_conversition_object.user_id && (
+                                                                    <span className={style.deleteOption}>
+                                                                        <span className={style.deleteThis}></span>
+                                                                    </span>
+                                                                )
+                                                            }
+
                                                             {
                                                                 (typeof chats[k].attachment != 'undefined' && chats[k].attachment != '') && (
                                                                     <a target="_blank" href={chats[k].attachment}>
