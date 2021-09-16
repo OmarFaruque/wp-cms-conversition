@@ -148,7 +148,7 @@ class LMSC_Public
 
             
             if(class_exists('Sensei_Course')){ // Sensei LMS
-                if(Sensei_Course::is_user_enrolled( $post->ID )){
+                if(Sensei_Course::is_user_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author){
                     $append = true;
                 }
             }
@@ -191,7 +191,8 @@ class LMSC_Public
                 'avatar_url' => get_avatar_url( get_current_user_id(  ) ), 
                 'email' => $current_user->user_email, 
                 'display_name' => $current_user->data->display_name, 
-                'user_type' => $post->post_author == get_current_user_id(  ) ? 'teacher' : 'student'
+                'user_type' => $post->post_author == get_current_user_id(  ) ? 'teacher' : 'student',
+                'settings' => get_option( 'lmsc_config', array() )
             )
         );
 

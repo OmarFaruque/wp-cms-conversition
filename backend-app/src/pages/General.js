@@ -56,6 +56,28 @@ export default function General(props) {
                     </label> 
                 </div>
 
+                {/* Allow user to remove message */}
+                <div>
+                    <article>
+                        {__('Allow user to remove own message', 'lms-conversation')}
+                        <span data-tip data-for="removeownmessage" className={style.tooltip + ' dashicons dashicons-editor-help'}>
+                            <ReactTooltip id="removeownmessage" place="top" effect="solid">
+                                {__('Allow chat user to remove their own message.', 'lms-conversation')}
+                            </ReactTooltip>
+                        </span>
+                    </article>
+
+                    <label className={style.switch}>
+                        <input type="checkbox" 
+                            onChange={props.handleUpdate}
+                            name="remove_access"
+                            value={1}
+                            checked={typeof config.remove_access != 'undefined' && config.remove_access ? true : false}
+                        />
+                        <span className={style.slider}></span>
+                    </label> 
+                </div>
+
                 <button className={style.saveBtn} onClick={props.SaveChanges}>
                     <span>{__('Save', 'lms-conversation')}</span>
                 </button>

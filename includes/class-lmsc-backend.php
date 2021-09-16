@@ -14,6 +14,13 @@ if(!class_exists('LMSC_Backend')){
 class LMSC_Backend
 {
     /**
+     * settings from db
+     * @var     object
+     * @access  private
+     */
+    private $settings;
+
+    /**
      * Class intance for singleton  class
      *
      * @var    object
@@ -111,6 +118,7 @@ class LMSC_Backend
         $this->assets_url = esc_url(trailingslashit(plugins_url('/assets/', $this->file)));
         $this->script_suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         $plugin = plugin_basename($this->file);
+        $this->set_init();
 
         if(LMSC_Helper()->is_any_cms_activated()){
             // add action links to link to link list display on the plugins page.
@@ -141,6 +149,11 @@ class LMSC_Backend
     }
 
 
+
+    private function set_init(){
+        $settings = get_option( 'lmsc_config', array() );
+        $this->settings = $settings;
+    }
     /**
      * @access  public 
      * @return  NULL 
@@ -185,13 +198,15 @@ class LMSC_Backend
      * @desc    add metabox for control conversation on frontend for each course by course teacher / author
      */
     public function lmsc_course_metabox_callback(){
-        add_meta_box(
-            'lmsc_metabox',             // Unique ID
-            'LMS Conversation',    // Box title
-            array($this, 'lmsc_course_metabox_controller_callback'),    // Content callback, must be of type callable
-            array('sfwd-courses', 'course', 'lp_course', 'stm-courses', 'courses'),       // Post type
-            'side'
-        ); 
+        if(isset($this->settings['allow_tacher_capability']) && $this->settings['allow_tacher_capability']){
+            add_meta_box(
+                'lmsc_metabox',             // Unique ID
+                'LMS Conversation',    // Box title
+                array($this, 'lmsc_course_metabox_controller_callback'),    // Content callback, must be of type callable
+                array('sfwd-courses', 'course', 'lp_course', 'stm-courses', 'courses'),       // Post type
+                'side'
+            ); 
+        }
     }
 
 
