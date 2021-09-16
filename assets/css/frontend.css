@@ -238,12 +238,23 @@ body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq.active {
             display: flex;
             margin: 15px 10px;
             align-items: center; }
-            .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li .lmsc_deleteOption3lUSl .lmsc_deleteThisssYNC {
-              display: block;
-              width: 20px;
-              height: 20px;
-              position: relative;
-              background-color: red; }
+            .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li .lmsc_deleteOption3lUSl {
+              margin-right: 10px;
+              display: none; }
+              .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li .lmsc_deleteOption3lUSl .lmsc_deleteThisssYNC {
+                display: block;
+                width: 15px;
+                height: 15px;
+                position: relative;
+                background-image: url(./../images/delete.svg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                cursor: pointer;
+                opacity: 0.7; }
+                .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li .lmsc_deleteOption3lUSl .lmsc_deleteThisssYNC:hover {
+                  opacity: 1; }
+            .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li:hover .lmsc_deleteOption3lUSl {
+              display: block; }
             .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq .lmsc_chatBody1Rhs8 > div:last-child .lmsc_chatbodyListsJmATz .lmsc_chatLists1MguY ul li img {
               max-width: 200px;
               min-width: 20px; }

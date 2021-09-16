@@ -324,13 +324,27 @@
                                     margin: 15px 10px;
                                     align-items: center;
                                     .deleteOption{
+                                        margin-right: 10px;
+                                        display: none;
                                         .deleteThis{
                                             display: block;
-                                            width: 20px;
-                                            height: 20px;
+                                            width: 15px;
+                                            height: 15px;
                                             position: relative;
-                                            background-color: red;
+                                            background-image: url(./icons/delete.svg);
+                                            background-size: contain;
+                                            background-repeat: no-repeat;
+                                            cursor: pointer;
+                                            opacity: 0.7;
+                                            &:hover{
+                                                opacity: 1;
+                                            }
                                         }
+                                    }
+                                    &:hover{
+                                       .deleteOption{
+                                           display: block;
+                                       } 
                                     }
                                     img{
                                         max-width: 200px;

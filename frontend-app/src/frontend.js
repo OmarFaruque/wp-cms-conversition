@@ -53,6 +53,7 @@ class App extends Component {
 
         this.changeHandler = this.changeHandler.bind(this)
         this.searchUserHandler = this.searchUserHandler.bind(this)
+        this.deleteThis = this.deleteThis.bind(this)
 
     }
 
@@ -313,6 +314,14 @@ class App extends Component {
         });
     }
 
+
+
+    deleteThis = (key) => {
+        coursePublicDB
+        .child('msg')
+        .child(key).set({})
+    }
+
     render() {
         let {config, chats, download, users, schema, room_name, room_status, user_img} = this.state
         if(!chats) chats = []
@@ -436,7 +445,7 @@ class App extends Component {
                                                             {
                                                                 chats[k].sender_id == window.lms_conversition_object.user_id && (
                                                                     <span className={style.deleteOption}>
-                                                                        <span className={style.deleteThis}></span>
+                                                                        <span onClick={(e) => this.deleteThis(k)} className={style.deleteThis}></span>
                                                                     </span>
                                                                 )
                                                             }

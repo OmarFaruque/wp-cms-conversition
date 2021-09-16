@@ -59580,6 +59580,10 @@ var App = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "deleteThis", function (key) {
+      coursePublicDB.child('msg').child(key).set({});
+    });
+
     _this.state = {
       loader: false,
       saving: false,
@@ -59606,6 +59610,7 @@ var App = /*#__PURE__*/function (_Component) {
     });
     _this.changeHandler = _this.changeHandler.bind(_assertThisInitialized(_this));
     _this.searchUserHandler = _this.searchUserHandler.bind(_assertThisInitialized(_this));
+    _this.deleteThis = _this.deleteThis.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -59777,6 +59782,9 @@ var App = /*#__PURE__*/function (_Component) {
         }), chats[k].sender_id == window.lms_conversition_object.user_id && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
           className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.deleteOption
         }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+          onClick: function onClick(e) {
+            return _this3.deleteThis(k);
+          },
           className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.deleteThis
         })), typeof chats[k].attachment != 'undefined' && chats[k].attachment != '' && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("a", {
           target: "_blank",
