@@ -443,7 +443,7 @@ class App extends Component {
 
                                                             {/* Message Delete Option */}
                                                             {
-                                                                chats[k].sender_id == window.lms_conversition_object.user_id && (
+                                                                (typeof window.lms_conversition_object.settings.remove_access != 'undefined' && window.lms_conversition_object.settings.remove_access === true && chats[k].sender_id == window.lms_conversition_object.user_id) && (
                                                                     <span className={style.deleteOption}>
                                                                         <span onClick={(e) => this.deleteThis(k)} className={style.deleteThis}></span>
                                                                     </span>

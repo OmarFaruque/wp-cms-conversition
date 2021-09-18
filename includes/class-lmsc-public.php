@@ -112,20 +112,42 @@ class LMSC_Public
     public function lmsc_foother_callback(){
         global $post, $current_user;
         $config = get_option( 'lmsc_config', array() );
+        $course_id = $post->ID; 
+
+        switch($post->post_type){
+            case 'sfwd-lessons':
+            case 'sfwd-topic':
+            case 'sfwd-quiz':
+                $course_id = get_post_meta( $post->ID, 'course_id', true );
+            break;
+
+            case 'lesson':
+                if(class_exists('LLMS_Student'))
+                    $course_id = get_post_meta( $post->ID, '_llms_parent_course', true );
+                
+                if(class_exists('Sensei_Course'))
+                    $course_id = get_post_meta( $post->ID, '_lesson_course', true );
+                    
+            break;
+        }
+
 
         if(!$config['enable_lms_conversation'])
             return false;
 
-        if($config['allow_tacher_capability'] && !get_post_meta( $post->ID, 'allow_conversation', true ))
-            return false;
+        if($config['allow_tacher_capability']){
+            if(!get_post_meta( $course_id, 'allow_conversation', true ))
+                return false;
+        }
+            
         
         
 
         
         $append = false;
-        if(is_singular( 'sfwd-courses' )){
+        if(in_array($post->post_type, array('sfwd-courses', 'sfwd-lessons', 'sfwd-topic', 'sfwd-quiz'))){ // Learndash LMS post type
             $enrolledCorses = learndash_user_get_enrolled_courses(get_current_user_id(  ));
-            if(in_array($post->ID, $enrolledCorses) || get_current_user_id(  ) == $post->post_author)
+            if(in_array($course_id, $enrolledCorses) || get_current_user_id(  ) == $post->post_author)
                 $append = true;    
         }
         
@@ -133,30 +155,31 @@ class LMSC_Public
         //Course Subscribe if student
         if(is_singular( 'lp_course' )){ // If Learnpress
             $user = learn_press_get_current_user();
-            if ( $user->has_enrolled_course( $post->ID ) || get_current_user_id(  ) == $post->post_author ) {
+            if ( $user->has_enrolled_course( $course_id ) || get_current_user_id(  ) == $post->post_author ) {
                 $append = true;
             }
         }
 
-        if(is_singular( 'course' )){ 
+        if(in_array($post->post_type, array('course', 'lesson'))){
             if(class_exists('LLMS_Student')){ // LifterLMS
                 $student = new LLMS_Student( get_current_user_id(  ) );
-                if($student->is_enrolled($post->ID) || get_current_user_id(  ) == $post->post_author ){
+                if($student->is_enrolled($course_id) || get_current_user_id(  ) == $post->post_author ){
                     $append = true;
                 }
             }
 
             
             if(class_exists('Sensei_Course')){ // Sensei LMS
-                if(Sensei_Course::is_user_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author){
+                if(Sensei_Course::is_user_enrolled( $course_id ) || get_current_user_id(  ) == $post->post_author){
                     $append = true;
                 }
             }
         }
         
+        
         if(is_singular( 'stm-courses' )){ // Masterstudy
             $courses = stm_lms_get_user_courses(get_current_user_id(  ), '', '', array('course_id'));
-            $key = array_search($post->ID, array_column($courses, 'course_id'));
+            $key = array_search($course_id, array_column($courses, 'course_id'));
             
             if($key !== false || get_current_user_id(  ) == $post->post_author)
                 $append = true;
@@ -186,7 +209,7 @@ class LMSC_Public
                 'api_nonce' => wp_create_nonce('wp_rest'),
                 'root' => rest_url($this->token . '/v1/'),
                 'assets_url' => $this->assets_url,
-                'post_id' => $post->ID, 
+                'post_id' => $course_id, 
                 'user_id' => get_current_user_id(  ),
                 'avatar_url' => get_avatar_url( get_current_user_id(  ) ), 
                 'email' => $current_user->user_email, 

@@ -8,6 +8,12 @@
     }    
 }
 
+:global(div#lms_conversition_chat_ui){
+    overflow: hidden;
+    z-index: 999;
+    position: relative;
+}
+
 .chatWrap{
     .chatIcon{
         position: fixed;

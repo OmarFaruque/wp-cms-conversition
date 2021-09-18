@@ -59779,7 +59779,7 @@ var App = /*#__PURE__*/function (_Component) {
           style: {
             backgroundImage: "url(" + chats[k].avatar_url + ")"
           }
-        }), chats[k].sender_id == window.lms_conversition_object.user_id && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+        }), typeof window.lms_conversition_object.settings.remove_access != 'undefined' && window.lms_conversition_object.settings.remove_access === true && chats[k].sender_id == window.lms_conversition_object.user_id && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
           className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.deleteOption
         }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
           onClick: function onClick(e) {

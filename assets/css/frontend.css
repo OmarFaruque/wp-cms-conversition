@@ -1,6 +1,11 @@
 body.logged-in.admin-bar .lmsc_chatWrap3tIVm .lmsc_chatWindowPoQJq.active {
   top: 32px; }
 
+div#lms_conversition_chat_ui {
+  overflow: hidden;
+  z-index: 999;
+  position: relative; }
+
 .lmsc_chatWrap3tIVm .lmsc_chatIcon1oJ8F {
   position: fixed;
   right: 10px;
