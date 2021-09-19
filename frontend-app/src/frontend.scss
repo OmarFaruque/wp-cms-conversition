@@ -219,12 +219,13 @@
                                             border-radius: 100px;
                                             width: 70px;
                                             margin: 0 auto;
+                                            margin-right: 5px;
                                             position: relative;
                                             .userPresentStatus{
                                                 width: 10px;
                                                 height: 10px;
                                                 border-radius: 100px;
-                                                background-color: #6a87f4;
+                                                background-color: #00FF00;
                                                 position: absolute;
                                                 top: 53px;
                                                 left: 53px;
@@ -278,6 +279,7 @@
                                         margin: 0;
                                         font-size: 18px;
                                         font-weight: 600;
+                                        text-transform: capitalize;
                                     }
                                     p{
                                         margin: 0;
@@ -326,9 +328,25 @@
                                 margin: 0;
                                 list-style: none;
                                 li{
-                                    display: flex;
+                                    display: grid;
                                     margin: 15px 10px;
                                     align-items: center;
+                                    span{
+                                        display: flex;
+                                        align-items: center;
+                                        &.date{
+                                            position: relative;
+                                            width: 100%;
+                                            display: flex;
+                                            justify-content: center;
+                                            >span{
+                                                background-color: #6a87f447;
+                                                padding: 2px 10px;
+                                                border-radius: 20px;
+                                                font-size: 12px;
+                                            }
+                                        }
+                                    }
                                     .deleteOption{
                                         margin-right: 10px;
                                         display: none;
@@ -378,40 +396,68 @@
                                         }
                                     }
                                     &.thisuser{
-                                        justify-content: flex-end;
                                         >span{
-                                            &.msg{
-                                                background-color: #6a87f4;
-                                                padding: 7px 20px;
-                                                border-radius: 25px 25px 0px 25px;
-                                                color: white;
+                                            &.msgBody{
+                                                justify-content: flex-end;
+                                                >span{
+                                                    &.msg{
+                                                        background-color: #6a87f4;
+                                                        padding: 7px 20px;
+                                                        border-radius: 25px 25px 0px 25px;
+                                                        color: white;
+                                                        display: block;
+                                                        >span{
+                                                            &.msgDate{
+                                                                display: block;
+                                                                color: #ccc;
+                                                                text-align: right;
+                                                                font-size: 12px;
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                     &.fromanother{
                                         >span{
-                                            &.msg{
-                                                background-color: white;
-                                                padding: 7px 20px;
-                                                border-radius: 25px 25px 25px 0px;
+                                            &.msgBody{
+                                                >span{
+                                                    &.msg{
+                                                        background-color: white;
+                                                        padding: 7px 20px;
+                                                        border-radius: 25px 25px 25px 0px;
+                                                        display: block;
+                                                        >span{
+                                                            &.msgDate{
+                                                                display: block;
+                                                                color: #999;
+                                                                text-align: right;
+                                                                font-size: 12px;
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                     >span{
-                                        &.userimg{
-                                            width: 25px;
-                                            height: 25px;
-                                            background-size: contain;
-                                            background-position: center;
-                                            margin-right: 8px;
-                                            background-repeat: no-repeat;
-                                            border-radius: 100px;
-                                            span{
-                                                &.userPresentStatus{
-                                                    width: 5px;
-                                                    height: 5px;
-                                                    display: block;
-                                                    
+                                        &.msgBody{
+                                            .userimg{
+                                                width: 25px;
+                                                height: 25px;
+                                                background-size: contain;
+                                                background-position: center;
+                                                margin-right: 8px;
+                                                background-repeat: no-repeat;
+                                                border-radius: 100px;
+                                                span{
+                                                    &.userPresentStatus{
+                                                        width: 5px;
+                                                        height: 5px;
+                                                        display: block;
+                                                        
+                                                    }
                                                 }
                                             }
                                         }

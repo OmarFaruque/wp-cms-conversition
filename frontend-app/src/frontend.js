@@ -40,7 +40,7 @@ class App extends Component {
             users: [], 
             room: 'public', 
             schema: Schema, 
-            room_name: __('Group Chat', 'lms-conversation'), 
+            room_name: window.lms_conversition_object.post_title, 
             room_status: __('Active Now', 'lms-conversation'), 
             user_img: window.lms_conversition_object.assets_url + 'images/' + group_img
         }
@@ -274,7 +274,7 @@ class App extends Component {
             this.setState({ 
                 chats: snapshot.val(), 
                 room: room, 
-                room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : __('Group Chat', 'lms-conversation'), 
+                room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : window.lms_conversition_object.post_title, 
                 room_status: (typeof users[user_id] != 'undefined' && users[user_id].status == 'online' && room != 'public') || room == 'public' ? __('Active Now', 'lms-conversation') : __('Inactive Now', 'lms-conversation'),
                 user_img: typeof users[user_id] != 'undefined' && users[user_id].user_img != '' && room != 'public' ? users[user_id].user_img : window.lms_conversition_object.assets_url + 'images/' + group_img
             });
@@ -325,6 +325,7 @@ class App extends Component {
     render() {
         let {config, chats, download, users, schema, room_name, room_status, user_img} = this.state
         if(!chats) chats = []
+        let dates = []
         const activeClass = this.state.chat_window_active ? 'active' : 'close';
         return (
                 <div className={style.chatWrap}>
@@ -365,7 +366,7 @@ class App extends Component {
                                                 </div>
                                             </div>
                                             <div>
-                                                <h4>{__('Group Chat', 'lms-conversation')}</h4>
+                                                <h4>{window.lms_conversition_object.post_title}</h4>
                                                 <h5>{__('All Participants', 'lms-conversation')}</h5>
                                             </div>
                                             <div>
@@ -377,7 +378,7 @@ class App extends Component {
                                         {
                                              
                                                 Object.keys(users).map( (k, v) => {
-                                                    let dateis = new Date(users[k].last_changed).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+                                                    // let dateis = new Date(users[k].last_changed).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
                                                     if(users[k].user_id != window.lms_conversition_object.user_id){
                                                         return(
                                                             <div onClick={(e) => this.roomHandler(e, k)} key={v}>
@@ -394,9 +395,9 @@ class App extends Component {
                                                                     <p>{typeof users[k].text_msg != 'undefined' ? users[k].text_msg : ''}</p>
                                                                 </div>
                                                                 <div>
-                                                                    <span>
+                                                                    {/* <span>
                                                                         {dateis}
-                                                                    </span>
+                                                                    </span> */}
                                                                 </div>
                                                             </div>
                                                         )
@@ -431,9 +432,35 @@ class App extends Component {
                                         <ul>
                                             {     
                                                 Object.keys(chats).map( (k, v) => {
+                                                    let date = new Date(chats[k].createDate)
+                                                    let today = new Date()
+                                                    let difTime = Math.abs(today - date);
+                                                    let difDays = Math.ceil(difTime / (1000 * 60 * 60 * 24)); 
+
+
+                                                    let msgDate = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+
+                                                    today = today.toISOString().split('T')[0]
+                                                    date = date.toISOString().split('T')[0]
+                                                    if(date == today) date = __('Today', 'lms-conversation')
+                                                    if(difDays == 2) date = __('Yesterday', 'lms-conversation')
+                                                    
                                                     return(
                                                         <li className={ chats[k].sender_id == window.lms_conversition_object.user_id ? style.thisuser : style.fromanother } key={v}>
-                                                            
+                                                            {/* Dates */}
+                                                            {
+                                                                (() => {
+                                                                    if(dates.includes(date) === false){
+                                                                        dates.push(date)
+                                                                        return(
+                                                                            <span className={style.date}>
+                                                                                <span>{date}</span>
+                                                                            </span>
+                                                                        )
+                                                                    }
+                                                                })()
+                                                            }
+                                                            <span className={style.msgBody}>
                                                             {/* Avater */}
                                                             {
                                                                 chats[k].sender_id != window.lms_conversition_object.user_id && (
@@ -478,14 +505,18 @@ class App extends Component {
                                                                 )
                                                             }
 
-                                                            
-
-
                                                             {
                                                                 chats[k].text_msg != '' && (
-                                                                    <span className={style.msg}>{chats[k].text_msg}</span>
+                                                                    <span className={style.msg}>
+                                                                        <span>{chats[k].text_msg}</span>
+                                                                        <span className={style.msgDate}>{msgDate}</span>
+                                                                    </span>
+
+                                                                    
                                                                 )
                                                             }
+                                                                
+                                                            </span>
                                                         </li>
                                                     )
                                                 })        
