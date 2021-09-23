@@ -214,7 +214,7 @@ class LMSC_Public
                 'user_id' => get_current_user_id(  ),
                 'avatar_url' => get_avatar_url( get_current_user_id(  ) ), 
                 'email' => $current_user->user_email, 
-                'display_name' => $current_user->data->display_name, 
+                'display_name' => strtolower($current_user->data->display_name), 
                 'user_type' => $post->post_author == get_current_user_id(  ) ? 'teacher' : 'student',
                 'settings' => get_option( 'lmsc_config', array() )
             )

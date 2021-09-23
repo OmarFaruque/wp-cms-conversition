@@ -8,7 +8,7 @@ import style from './frontend.scss';
 import { sprintf, _n, __ } from '@wordpress/i18n';
 import group_img from './icons/user-group-img.svg';
 
-import firebase, { auth, googleAuthProvider, database, Schema, storage } from "./component/config";
+import firebase, { auth, database, Schema, storage } from "./component/config";
 
 
 
@@ -171,7 +171,7 @@ class App extends Component {
         .on('value', snapshot => {
             if(snapshot.val()){
                 users = snapshot.val();
-                
+                console.log('users: ', users)
                 Object.keys(snapshot.val()).map( (k, v) => {
                     
                     let room = [users[k]['user_id'], current_user_id]
@@ -286,32 +286,60 @@ class App extends Component {
 
     searchUserHandler = (e) => {
         let svalue = e.target.value
-        
-        
+
         // Users 
         this.setState({users: []})
         let {users} = this.state
-        coursePublicDB
-        .child('users')
-        .orderByChild('name')
-        .startAt(svalue)
-        .on('value', snapshot => {
-            if(snapshot.val()){
-                users = snapshot.val();
-                Object.keys(snapshot.val()).map( (k, v) => {
-                    coursePublicDB
-                    .child('msg')
-                    .limitToLast(1).once('value', lstmsg => {
-                        let key = Object.keys(lstmsg.val());
-                        users[k]['text_msg'] = lstmsg.val()[key].text_msg
-                        users[k]['createDate'] = lstmsg.val()[key].createDate        
+
+        if(svalue == ''){
+            coursePublicDB
+            .child('users')
+            .on('value', snapshot => {
+                if(snapshot.val()){
+                    users = snapshot.val();
+                    Object.keys(snapshot.val()).map( (k, v) => {
+                        coursePublicDB
+                        .child('msg')
+                        .limitToLast(1).once('value', lstmsg => {
+                            let key = Object.keys(lstmsg.val());
+                            users[k]['text_msg'] = lstmsg.val()[key].text_msg
+                            users[k]['createDate'] = lstmsg.val()[key].createDate        
+                        })
                     })
-                })
-                this.setState({
-                    users: users
-                })
-            }
-        });
+                    this.setState({
+                        users: users
+                    })
+                }
+            });
+        }else{
+            
+            coursePublicDB
+            .child('users')
+            .orderByChild('name')
+
+            .startAt(svalue)
+            .endAt(svalue+"\uf8ff")
+            .on('value', snapshot => {
+                if(snapshot.val()){
+                    users = snapshot.val();
+
+                    
+
+                    Object.keys(snapshot.val()).map( (k, v) => {
+                        coursePublicDB
+                        .child('msg')
+                        .limitToLast(1).once('value', lstmsg => {
+                            let key = Object.keys(lstmsg.val());
+                            users[k]['text_msg'] = lstmsg.val()[key].text_msg
+                            users[k]['createDate'] = lstmsg.val()[key].createDate        
+                        })
+                    })
+                    this.setState({
+                        users: users
+                    })
+                }
+            });
+        }
     }
 
 
@@ -354,7 +382,7 @@ class App extends Component {
                                         <h2>{__('Messages', 'lms-conversation')}</h2>
                                         <div className={style.searchbar}>
                                             <div>
-                                                <input type="search" onKeyPress={this.searchUserHandler} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
+                                                <input type="search" onKeyDown={this.searchUserHandler} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
                                             </div>
                                         </div>
                                     </div>
