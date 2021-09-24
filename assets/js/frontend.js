@@ -58771,7 +58771,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","userPresentStatus":"lmsc_userPresentStatus1CIYZ","offline":"lmsc_offline1sVjj","topHeader":"lmsc_topHeader2P9O3","closeBtn":"lmsc_closeBtn1EhlV","chatbodyLists":"lmsc_chatbodyListsJmATz","chatLists":"lmsc_chatLists1MguY","date":"lmsc_date3Yr4X","deleteOption":"lmsc_deleteOption3lUSl","deleteThis":"lmsc_deleteThisssYNC","attachmentWrap":"lmsc_attachmentWrapU3iPp","thisuser":"lmsc_thisuser2JwPE","msgBody":"lmsc_msgBodyeqPD5","msg":"lmsc_msgMbmHv","msgDate":"lmsc_msgDate1oW_l","fromanother":"lmsc_fromanother3VlFx","userimg":"lmsc_userimg3E6TE","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","fileUPloadInput":"lmsc_fileUPloadInput2Uo2j","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","userPresentStatus":"lmsc_userPresentStatus1CIYZ","offline":"lmsc_offline1sVjj","readNotification":"lmsc_readNotification3WohY","topHeader":"lmsc_topHeader2P9O3","closeBtn":"lmsc_closeBtn1EhlV","chatbodyLists":"lmsc_chatbodyListsJmATz","chatLists":"lmsc_chatLists1MguY","date":"lmsc_date3Yr4X","deleteOption":"lmsc_deleteOption3lUSl","deleteThis":"lmsc_deleteThisssYNC","attachmentWrap":"lmsc_attachmentWrapU3iPp","thisuser":"lmsc_thisuser2JwPE","msgBody":"lmsc_msgBodyeqPD5","msg":"lmsc_msgMbmHv","msgDate":"lmsc_msgDate1oW_l","fromanother":"lmsc_fromanother3VlFx","userimg":"lmsc_userimg3E6TE","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","fileUPloadInput":"lmsc_fileUPloadInput2Uo2j","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
 
 /***/ }),
 
@@ -59418,6 +59418,31 @@ var App = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
+    _defineProperty(_assertThisInitialized(_this), "alertHandler", function () {
+      var _this$state = _this.state,
+          duesee = _this$state.duesee,
+          room = _this$state.room;
+      coursePublicDB.on('child_changed', function (snapshot) {
+        if (snapshot.key === 'msg') {
+          var roomcount = {};
+          Object.keys(snapshot.val()).map(function (k, v) {
+            if (typeof roomcount[snapshot.val()[k].room] == 'undefined') roomcount[snapshot.val()[k].room] = 0;
+            roomcount[snapshot.val()[k].room] = roomcount[snapshot.val()[k].room] += 1;
+          });
+          Object.keys(roomcount).map(function (k, v) {
+            var localvalue = localStorage.getItem("lmsc_".concat(k)) !== null ? parseInt(localStorage.getItem("lmsc_".concat(k))) : 0;
+            duesee[k] = roomcount[k] - localvalue;
+          });
+          console.log('last change value check: ', snapshot.val());
+          var lastitem = '';
+        }
+      });
+
+      _this.setState({
+        duesee: duesee
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "userPresentStatus", function () {
       var isOfflineForDatabase = {
         name: window.lms_conversition_object.display_name,
@@ -59482,9 +59507,9 @@ var App = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onFormSubmit", function (e) {
       e.preventDefault();
-      var _this$state = _this.state,
-          room = _this$state.room,
-          schema = _this$state.schema;
+      var _this$state2 = _this.state,
+          room = _this$state2.room,
+          schema = _this$state2.schema;
       schema.createDate = Date.now();
       schema.room = room;
 
@@ -59500,9 +59525,9 @@ var App = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "changeHandler", function (e) {
-      var _this$state2 = _this.state,
-          schema = _this$state2.schema,
-          room = _this$state2.room;
+      var _this$state3 = _this.state,
+          schema = _this$state3.schema,
+          room = _this$state3.room;
       e.preventDefault();
 
       switch (e.target.name) {
@@ -59531,7 +59556,9 @@ var App = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "roomHandler", function (e, user_id) {
-      var users = _this.state.users;
+      var _this$state4 = _this.state,
+          users = _this$state4.users,
+          duesee = _this$state4.duesee;
       var room = 'public';
 
       if (user_id != 'public') {
@@ -59544,9 +59571,13 @@ var App = /*#__PURE__*/function (_Component) {
       }
 
       coursePublicDB.child('msg').orderByChild('room').equalTo(room).on('value', function (snapshot) {
+        localStorage.setItem("lmsc_".concat(room), Object.keys(snapshot.val()).length);
+        duesee[room] = 0;
+
         _this.setState({
           chats: snapshot.val(),
           room: room,
+          duesee: duesee,
           room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : window.lms_conversition_object.post_title,
           room_status: typeof users[user_id] != 'undefined' && users[user_id].status == 'online' && room != 'public' || room == 'public' ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Active Now', 'lms-conversation') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Inactive Now', 'lms-conversation'),
           user_img: typeof users[user_id] != 'undefined' && users[user_id].user_img != '' && room != 'public' ? users[user_id].user_img : window.lms_conversition_object.assets_url + 'images/' + _icons_user_group_img_svg__WEBPACK_IMPORTED_MODULE_6__.default
@@ -59572,11 +59603,11 @@ var App = /*#__PURE__*/function (_Component) {
                 var key = Object.keys(lstmsg.val());
                 users[k]['text_msg'] = lstmsg.val()[key].text_msg;
                 users[k]['createDate'] = lstmsg.val()[key].createDate;
-              });
-            });
 
-            _this.setState({
-              users: users
+                _this.setState({
+                  users: users
+                });
+              });
             });
           }
         });
@@ -59615,6 +59646,7 @@ var App = /*#__PURE__*/function (_Component) {
           title: ''
         }
       },
+      duesee: {},
       chats: [],
       chat_window_active: false,
       users: [],
@@ -59639,6 +59671,7 @@ var App = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       this.fetchData();
       this.userPresentStatus();
+      this.alertHandler();
     }
   }, {
     key: "componentWillUnmount",
@@ -59683,11 +59716,11 @@ var App = /*#__PURE__*/function (_Component) {
                 users[k]['text_msg'] = lstmsg.val()[key].text_msg;
                 users[k]['createDate'] = lstmsg.val()[key].createDate;
               }
-            });
-          });
 
-          _this2.setState({
-            users: users
+              _this2.setState({
+                users: users
+              });
+            });
           });
         }
       });
@@ -59703,17 +59736,20 @@ var App = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var _this$state3 = this.state,
-          config = _this$state3.config,
-          chats = _this$state3.chats,
-          download = _this$state3.download,
-          users = _this$state3.users,
-          schema = _this$state3.schema,
-          room_name = _this$state3.room_name,
-          room_status = _this$state3.room_status,
-          user_img = _this$state3.user_img;
+      var _this$state5 = this.state,
+          config = _this$state5.config,
+          chats = _this$state5.chats,
+          download = _this$state5.download,
+          users = _this$state5.users,
+          schema = _this$state5.schema,
+          room_name = _this$state5.room_name,
+          room_status = _this$state5.room_status,
+          user_img = _this$state5.user_img,
+          duesee = _this$state5.duesee;
       if (!chats) chats = [];
       var dates = [];
+      console.log('duesee: ', duesee);
+      console.log('room name: ', room_name);
       var activeClass = this.state.chat_window_active ? 'active' : 'close';
       return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatWrap
@@ -59755,7 +59791,15 @@ var App = /*#__PURE__*/function (_Component) {
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.userImg
       })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, window.lms_conversition_object.post_title), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('All Participants', 'lms-conversation'))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", null))), Object.keys(users).map(function (k, v) {
-        // let dateis = new Date(users[k].last_changed).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        var current_user_id = window.lms_conversition_object.user_id;
+        var room = [users[k].user_id, current_user_id];
+        room = room.sort(function (a, b) {
+          return a - b;
+        });
+        room = room.join('');
+        console.log('usrs room: ', room);
+        console.log('duecss: ', duesee[room]); // let dateis = new Date(users[k].last_changed).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+
         if (users[k].user_id != window.lms_conversition_object.user_id) {
           return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
             onClick: function onClick(e) {
@@ -59769,7 +59813,9 @@ var App = /*#__PURE__*/function (_Component) {
             className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.userImg
           }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
             className: "".concat(_frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.userPresentStatus, " ").concat(_frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default[users[k].status])
-          }))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, users[k].name), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, users[k].user_type), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, typeof users[k].text_msg != 'undefined' ? users[k].text_msg : '')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null));
+          }), typeof duesee[room] != 'undefined' && duesee[room] > 0 && (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+            className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.readNotification
+          }, duesee[room]))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h4", null, users[k].name), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("h5", null, users[k].user_type), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, typeof users[k].text_msg != 'undefined' ? users[k].text_msg : '')), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null));
         }
       })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.topHeader

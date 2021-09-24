@@ -35,6 +35,7 @@ class App extends Component {
                 general: {title: ''},
                 page2: {title: ''}
             }, 
+            duesee: {},
             chats: [], 
             chat_window_active: false, 
             users: [], 
@@ -61,8 +62,47 @@ class App extends Component {
     componentDidMount() {
         this.fetchData()
         this.userPresentStatus()
+        this.alertHandler()
+
+        
+
+
     }
 
+
+
+
+    alertHandler = () =>{
+        let {duesee, room} = this.state
+        coursePublicDB
+        .on('child_changed', function(snapshot) {
+            if(snapshot.key === 'msg'){
+                let roomcount = {}
+
+                Object.keys(snapshot.val()).map((k, v) => {
+                    if(typeof roomcount[snapshot.val()[k].room] == 'undefined') roomcount[snapshot.val()[k].room] = 0 
+                    roomcount[snapshot.val()[k].room] = roomcount[snapshot.val()[k].room] +=1;
+                })
+
+                Object.keys(roomcount).map((k, v) => {
+                    let localvalue = localStorage.getItem(`lmsc_${k}`) !== null ? parseInt(localStorage.getItem(`lmsc_${k}`) ) : 0 
+                    duesee[k] =  roomcount[k] - localvalue
+                })
+
+                console.log('last change value check: ', snapshot.val())
+                let lastitem = ''
+                
+            }
+
+            
+        })
+
+        this.setState({
+            duesee: duesee
+        })
+
+        
+    }
     userPresentStatus = () => {
         
         const isOfflineForDatabase = {
@@ -187,14 +227,17 @@ class App extends Component {
                         if(lstmsg.val()){
                             let key = Object.keys(lstmsg.val());
                             users[k]['text_msg'] = lstmsg.val()[key].text_msg
-                            users[k]['createDate'] = lstmsg.val()[key].createDate      
+                            users[k]['createDate'] = lstmsg.val()[key].createDate    
+
                         }
+
+                        this.setState({
+                            users: users
+                        })
                     })
                 })
 
-                this.setState({
-                    users: users
-                })
+                
                 
             }
         });
@@ -254,7 +297,7 @@ class App extends Component {
 
 
     roomHandler = (e, user_id) => {
-        let {users} = this.state
+        let {users, duesee} = this.state
 
         
         let room = 'public'
@@ -265,15 +308,21 @@ class App extends Component {
             room = room.join('')
         }
         
+
         
+
+
         coursePublicDB
         .child('msg')
         .orderByChild('room')
         .equalTo(room)
         .on('value', snapshot => {
+            localStorage.setItem(`lmsc_${room}`, Object.keys(snapshot.val()).length)
+            duesee[room] = 0;
             this.setState({ 
                 chats: snapshot.val(), 
                 room: room, 
+                duesee: duesee,
                 room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : window.lms_conversition_object.post_title, 
                 room_status: (typeof users[user_id] != 'undefined' && users[user_id].status == 'online' && room != 'public') || room == 'public' ? __('Active Now', 'lms-conversation') : __('Inactive Now', 'lms-conversation'),
                 user_img: typeof users[user_id] != 'undefined' && users[user_id].user_img != '' && room != 'public' ? users[user_id].user_img : window.lms_conversition_object.assets_url + 'images/' + group_img
@@ -303,12 +352,15 @@ class App extends Component {
                         .limitToLast(1).once('value', lstmsg => {
                             let key = Object.keys(lstmsg.val());
                             users[k]['text_msg'] = lstmsg.val()[key].text_msg
-                            users[k]['createDate'] = lstmsg.val()[key].createDate        
+                            users[k]['createDate'] = lstmsg.val()[key].createDate     
+                            
+                            
+                            this.setState({
+                                users: users
+                            })
                         })
                     })
-                    this.setState({
-                        users: users
-                    })
+                    
                 }
             });
         }else{
@@ -322,8 +374,6 @@ class App extends Component {
             .on('value', snapshot => {
                 if(snapshot.val()){
                     users = snapshot.val();
-
-                    
 
                     Object.keys(snapshot.val()).map( (k, v) => {
                         coursePublicDB
@@ -351,9 +401,12 @@ class App extends Component {
     }
 
     render() {
-        let {config, chats, download, users, schema, room_name, room_status, user_img} = this.state
+        let {config, chats, download, users, schema, room_name, room_status, user_img, duesee} = this.state
         if(!chats) chats = []
         let dates = []
+
+        console.log('duesee: ', duesee)
+        console.log('room name: ', room_name)
         const activeClass = this.state.chat_window_active ? 'active' : 'close';
         return (
                 <div className={style.chatWrap}>
@@ -406,6 +459,17 @@ class App extends Component {
                                         {
                                              
                                                 Object.keys(users).map( (k, v) => {
+                                                    
+
+                                                    let current_user_id = window.lms_conversition_object.user_id
+                                                    let room = [users[k].user_id, current_user_id]
+                                                    room = room.sort((a, b) => a - b)
+                                                    room = room.join('')
+
+                                                    console.log('usrs room: ', room)
+                                                    console.log('duecss: ', duesee[room])
+
+
                                                     // let dateis = new Date(users[k].last_changed).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
                                                     if(users[k].user_id != window.lms_conversition_object.user_id){
                                                         return(
@@ -415,6 +479,12 @@ class App extends Component {
                                                                     style={{backgroundImage: `url(${users[k].user_img})`}}
                                                                     className={style.userImg}>
                                                                         <span className={`${style.userPresentStatus} ${ style[users[k].status]}`}></span>
+                                                                        {
+                                                                            (typeof duesee[room] != 'undefined' && duesee[room] > 0) && (
+                                                                                <span className={style.readNotification}>{duesee[room]}</span>
+                                                                            )
+                                                                        }
+                                                                        
                                                                     </div>
                                                                 </div>
                                                                 <div>

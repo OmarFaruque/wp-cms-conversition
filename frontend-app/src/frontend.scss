@@ -233,6 +233,17 @@
                                                     background-color: lightgray;
                                                 }
                                             }
+                                            .readNotification{
+                                                background-color: #a00202;
+                                                border-radius: 200px;
+                                                color: white;
+                                                width: 20px;
+                                                display: block;
+                                                height: 20px;
+                                                line-height: 19px;
+                                                text-align: center;
+                                                font-size: 12px;
+                                            }
                                         }
                                     }
                                     &:nth-child(2){
