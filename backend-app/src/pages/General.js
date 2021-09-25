@@ -1,11 +1,29 @@
 import React from "react"
 import style from './General.scss'
 import ReactTooltip from "react-tooltip"
+import TextInput from "../components/TextInput"
 
 const { __ } = window.wp.i18n;
 
+const soundsFiles = {
+    '': __('No Sound', 'lms-conversation'),
+    'juntos-607.mp3' : __('Juntos', 'lms-conversation'), 
+    'me-too-603.mp3' : __('Me-too', 'lms-conversation'),
+    'mixkit-doorbell-single-press-333.wav' : __('Doorbell Single Press', 'lms-conversation'),
+    'mixkit-dry-pop-up-notification-alert-2356.wav' : __('Dry Pop-up Notification Alert', 'lms-conversation'),
+    'mixkit-elevator-tone-2863.wav' : __('Elevator Tone', 'lms-conversation'),
+    'mixkit-gaming-lock-2848.wav' : __('Gaming Lock', 'lms-conversation'),
+    'mixkit-sci-fi-click-900.wav' : __('Sci Fi Click', 'lms-conversation'),
+    'mixkit-sci-fi-reject-notification-896.wav' : __('Sci Fi Reject Notification', 'lms-conversation'),
+    'mixkit-software-interface-back-2575.wav': __('Software Interface Back', 'lms-conversation'),
+    'mixkit-software-interface-remove-2576.wav': __('Software Interface Remove', 'lms-conversation'),
+    'mixkit-store-door-bell-ring-934.wav': __('Store Door Bell Ring', 'lms-conversation'),
+    'percussion-sound-614.mp3': __('Percussion Sound', 'lms-conversation')
+}
+
 export default function General(props) {
     const {config} = props;
+    console.log('config: ', config)
     return (
     <>
     <div className={style.generalWrap}>
@@ -76,6 +94,27 @@ export default function General(props) {
                         />
                         <span className={style.slider}></span>
                     </label> 
+                </div>
+
+
+                {/* Notification Sound */}
+                <div>
+                    <article>
+                        {__('Notification Sound', 'lms-conversation')}
+                        <span data-tip data-for="notificationSound" className={style.tooltip + ' dashicons dashicons-editor-help'}>
+                            <ReactTooltip id="notificationSound" place="top" effect="solid">
+                                {__('Set notification sound for while receive message.', 'lms-conversation')}
+                            </ReactTooltip>
+                        </span>
+                    </article>
+
+                    <TextInput
+                        type="select"
+                        options={soundsFiles}
+                        name="notifucation_sound"
+                        onChange={props.handleUpdate}
+                        value={typeof config.notifucation_sound != 'undefined' ? config.notifucation_sound : ''}
+                    /> 
                 </div>
 
                 <button className={style.saveBtn} onClick={props.SaveChanges}>

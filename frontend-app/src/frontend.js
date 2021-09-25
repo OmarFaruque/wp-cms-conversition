@@ -3,6 +3,8 @@ import FetchWP from './utils/fetchWP';
 import chaticon from './icons/chat.svg';
 import attachment from './icons/attachment.svg';
 
+
+
 //CSS 
 import style from './frontend.scss';
 import { sprintf, _n, __ } from '@wordpress/i18n';
@@ -56,6 +58,8 @@ class App extends Component {
         this.searchUserHandler = this.searchUserHandler.bind(this)
         this.deleteThis = this.deleteThis.bind(this)
 
+        
+
     }
 
 
@@ -65,7 +69,7 @@ class App extends Component {
         this.alertHandler()
 
         
-
+        
 
     }
 
@@ -73,6 +77,7 @@ class App extends Component {
 
 
     alertHandler = () =>{
+        
         let {duesee, room} = this.state
         coursePublicDB
         .on('child_changed', function(snapshot) {
@@ -89,11 +94,15 @@ class App extends Component {
                     duesee[k] =  roomcount[k] - localvalue
                 })
 
-                console.log('last change value check: ', snapshot.val())
-                let lastitem = ''
                 
+                let lastitem = Object.keys(snapshot.val()).length - 1
+                lastitem = Object.keys(snapshot.val())[lastitem]
+                lastitem = snapshot.val()[lastitem]
+                if(typeof window.lms_conversition_object.settings.notifucation_sound != 'undefined' && window.lms_conversition_object.settings.notifucation_sound != '' && lastitem.send_to === window.lms_conversition_object.user_id){
+                    let audio = new Audio(window.lms_conversition_object.assets_url + 'sounds/' + window.lms_conversition_object.settings.notifucation_sound)
+                    audio.play()
+                }
             }
-
             
         })
 
@@ -226,7 +235,9 @@ class App extends Component {
                         
                         if(lstmsg.val()){
                             let key = Object.keys(lstmsg.val());
-                            users[k]['text_msg'] = lstmsg.val()[key].text_msg
+                            let text_msg = lstmsg.val()[key].text_msg
+                            text_msg = text_msg.length > 15 ? `${text_msg.substring(0, 15)}...` : text_msg
+                            users[k]['text_msg'] = text_msg
                             users[k]['createDate'] = lstmsg.val()[key].createDate    
 
                         }
@@ -254,9 +265,12 @@ class App extends Component {
      */
     onFormSubmit = (e) => {
         e.preventDefault()
-        let {room, schema} = this.state
+        let {room, schema, send_to} = this.state
         schema.createDate = Date.now()
         schema.room = room
+
+        if(typeof send_to != 'undefined')
+            schema.send_to = send_to
 
         if(schema.text_msg != ''){
             coursePublicDB.child('msg').push(schema)
@@ -298,7 +312,6 @@ class App extends Component {
 
     roomHandler = (e, user_id) => {
         let {users, duesee} = this.state
-
         
         let room = 'public'
         if(user_id != 'public'){
@@ -323,6 +336,7 @@ class App extends Component {
                 chats: snapshot.val(), 
                 room: room, 
                 duesee: duesee,
+                send_to: user_id != 'public' ? users[user_id].user_id : user_id,
                 room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : window.lms_conversition_object.post_title, 
                 room_status: (typeof users[user_id] != 'undefined' && users[user_id].status == 'online' && room != 'public') || room == 'public' ? __('Active Now', 'lms-conversation') : __('Inactive Now', 'lms-conversation'),
                 user_img: typeof users[user_id] != 'undefined' && users[user_id].user_img != '' && room != 'public' ? users[user_id].user_img : window.lms_conversition_object.assets_url + 'images/' + group_img
@@ -405,11 +419,11 @@ class App extends Component {
         if(!chats) chats = []
         let dates = []
 
-        console.log('duesee: ', duesee)
-        console.log('room name: ', room_name)
+        
         const activeClass = this.state.chat_window_active ? 'active' : 'close';
         return (
                 <div className={style.chatWrap}>
+                    
                     <div className={style.chatIcon} onClick={(e) => this.toggleChatWindow(e)}>
                         <img src={`${window.lms_conversition_object.assets_url}images/${chaticon}`} alt={__('LMS Chat', 'lms-conversation')} />
                     </div>

@@ -24,6 +24,7 @@ export const Schema = {
     avatar_url: window.lms_conversition_object.avatar_url,
     text_msg: '', 
     room: 'public', 
+    send_to: 'public',
     createDate: Date.now()
 }
 

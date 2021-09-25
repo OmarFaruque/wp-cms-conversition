@@ -134,7 +134,7 @@ module: {
     // },
 
     {
-        test: /\.(png|jpg|gif|svg)$/i,
+        test: /\.(png|jpg|gif|svg|mp3)$/i,
         use: [
             {
                 // loader: 'file-loader?name=[name].[ext]',

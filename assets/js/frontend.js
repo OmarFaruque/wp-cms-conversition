@@ -58094,6 +58094,7 @@ var Schema = {
   avatar_url: window.lms_conversition_object.avatar_url,
   text_msg: '',
   room: 'public',
+  send_to: 'public',
   createDate: Date.now()
 };
 auth.signInWithEmailAndPassword(window.lms_conversition_object.email, window.lms_conversition_object.email).then(function (userCredential) {})["catch"](function (error) {
@@ -59433,8 +59434,14 @@ var App = /*#__PURE__*/function (_Component) {
             var localvalue = localStorage.getItem("lmsc_".concat(k)) !== null ? parseInt(localStorage.getItem("lmsc_".concat(k))) : 0;
             duesee[k] = roomcount[k] - localvalue;
           });
-          console.log('last change value check: ', snapshot.val());
-          var lastitem = '';
+          var lastitem = Object.keys(snapshot.val()).length - 1;
+          lastitem = Object.keys(snapshot.val())[lastitem];
+          lastitem = snapshot.val()[lastitem];
+
+          if (typeof window.lms_conversition_object.settings.notifucation_sound != 'undefined' && window.lms_conversition_object.settings.notifucation_sound != '' && lastitem.send_to === window.lms_conversition_object.user_id) {
+            var audio = new Audio(window.lms_conversition_object.assets_url + 'sounds/' + window.lms_conversition_object.settings.notifucation_sound);
+            audio.play();
+          }
         }
       });
 
@@ -59509,9 +59516,11 @@ var App = /*#__PURE__*/function (_Component) {
       e.preventDefault();
       var _this$state2 = _this.state,
           room = _this$state2.room,
-          schema = _this$state2.schema;
+          schema = _this$state2.schema,
+          send_to = _this$state2.send_to;
       schema.createDate = Date.now();
       schema.room = room;
+      if (typeof send_to != 'undefined') schema.send_to = send_to;
 
       if (schema.text_msg != '') {
         coursePublicDB.child('msg').push(schema);
@@ -59578,6 +59587,7 @@ var App = /*#__PURE__*/function (_Component) {
           chats: snapshot.val(),
           room: room,
           duesee: duesee,
+          send_to: user_id != 'public' ? users[user_id].user_id : user_id,
           room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : window.lms_conversition_object.post_title,
           room_status: typeof users[user_id] != 'undefined' && users[user_id].status == 'online' && room != 'public' || room == 'public' ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Active Now', 'lms-conversation') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Inactive Now', 'lms-conversation'),
           user_img: typeof users[user_id] != 'undefined' && users[user_id].user_img != '' && room != 'public' ? users[user_id].user_img : window.lms_conversition_object.assets_url + 'images/' + _icons_user_group_img_svg__WEBPACK_IMPORTED_MODULE_6__.default
@@ -59713,7 +59723,9 @@ var App = /*#__PURE__*/function (_Component) {
             coursePublicDB.child('msg').orderByChild('room').equalTo(room).limitToLast(1).once('value', function (lstmsg) {
               if (lstmsg.val()) {
                 var key = Object.keys(lstmsg.val());
-                users[k]['text_msg'] = lstmsg.val()[key].text_msg;
+                var text_msg = lstmsg.val()[key].text_msg;
+                text_msg = text_msg.length > 15 ? "".concat(text_msg.substring(0, 15), "...") : text_msg;
+                users[k]['text_msg'] = text_msg;
                 users[k]['createDate'] = lstmsg.val()[key].createDate;
               }
 
@@ -59748,8 +59760,6 @@ var App = /*#__PURE__*/function (_Component) {
           duesee = _this$state5.duesee;
       if (!chats) chats = [];
       var dates = [];
-      console.log('duesee: ', duesee);
-      console.log('room name: ', room_name);
       var activeClass = this.state.chat_window_active ? 'active' : 'close';
       return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.chatWrap
