@@ -27,18 +27,18 @@ msgstr ""
 msgid "All Participants"
 msgstr ""
 
-#: src/frontend.js:557
+#: src/frontend.js:560
 msgid "Today"
 msgstr ""
 
-#: src/frontend.js:558
+#: src/frontend.js:561
 msgid "Yesterday"
 msgstr ""
 
-#: src/frontend.js:605
+#: src/frontend.js:608
 msgid "Attachment"
 msgstr ""
 
-#: src/frontend.js:608
+#: src/frontend.js:611
 msgid "Download Attachment"
 msgstr ""

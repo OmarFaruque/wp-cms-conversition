@@ -522,6 +522,9 @@ class App extends Component {
                             </div>
                             <div>
                                 <div className={style.topHeader}>
+                                    <div className={style.clospe}>
+                                        <span onClick={(e) => this.toggleChatWindow(e)} className={style.collspeBtn}></span>
+                                    </div>
                                     <div className={style.profiInfo}>
                                         <div style={{
                                             backgroundImage: `url(${user_img})`

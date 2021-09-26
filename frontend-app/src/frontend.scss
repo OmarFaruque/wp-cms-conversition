@@ -281,9 +281,32 @@
                         display: flex;
                         background-color: white;
                         padding: 10px 40px;
+                        position: relative;
                         >div{
-                            &:first-child{
-                                flex: 2;
+                            &.clospe{
+                                flex: 1;
+                                max-width: 50px;
+                                left: 0;
+                                margin-left: -20px;
+                                span{
+                                    &.collspeBtn{
+                                        display: block;
+                                        width: 30px;
+                                        height: 100%;
+                                        background-image: url(./icons/left-arrow.svg);
+                                        background-repeat: no-repeat;
+                                        background-position: center;
+                                        background-size: contain;
+                                        cursor: pointer;
+                                        opacity: 0.2;
+                                        &:hover{
+                                            opacity: 0.5;
+                                        }
+                                    }
+                                }
+                            }
+                            &.profiInfo{
+                                flex: 6;
                                 display: inline-flex;
                                 >div{
                                     h5{
@@ -305,11 +328,12 @@
                                         background-size: contain;
                                         background-position: center;
                                         margin-right: 15px;
+                                        background-repeat: no-repeat;
                                     }
                                 }
                             }
                             &:last-child{
-                                flex: 1;
+                                flex: 2;
                                 height: 50px;
                                 display: flex;
                                 align-items: center;

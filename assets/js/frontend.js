@@ -58772,7 +58772,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // extracted by mini-css-extract-plugin
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","userPresentStatus":"lmsc_userPresentStatus1CIYZ","offline":"lmsc_offline1sVjj","readNotification":"lmsc_readNotification3WohY","topHeader":"lmsc_topHeader2P9O3","closeBtn":"lmsc_closeBtn1EhlV","chatbodyLists":"lmsc_chatbodyListsJmATz","chatLists":"lmsc_chatLists1MguY","date":"lmsc_date3Yr4X","deleteOption":"lmsc_deleteOption3lUSl","deleteThis":"lmsc_deleteThisssYNC","attachmentWrap":"lmsc_attachmentWrapU3iPp","thisuser":"lmsc_thisuser2JwPE","msgBody":"lmsc_msgBodyeqPD5","msg":"lmsc_msgMbmHv","msgDate":"lmsc_msgDate1oW_l","fromanother":"lmsc_fromanother3VlFx","userimg":"lmsc_userimg3E6TE","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","fileUPloadInput":"lmsc_fileUPloadInput2Uo2j","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"chatWrap":"lmsc_chatWrap3tIVm","chatWindow":"lmsc_chatWindowPoQJq","chatIcon":"lmsc_chatIcon1oJ8F","chatBody":"lmsc_chatBody1Rhs8","profileInfo":"lmsc_profileInfo3DiKL","profileImg":"lmsc_profileImg3ma4E","friends":"lmsc_friends2BlQX","inbox":"lmsc_inbox3UJ77","listHeader":"lmsc_listHeaderu5f7_","searchbar":"lmsc_searchbar1UEj_","userList":"lmsc_userLista8g0H","userPresentStatus":"lmsc_userPresentStatus1CIYZ","offline":"lmsc_offline1sVjj","readNotification":"lmsc_readNotification3WohY","topHeader":"lmsc_topHeader2P9O3","clospe":"lmsc_clospe1Qcmm","collspeBtn":"lmsc_collspeBtn3Tk0w","profiInfo":"lmsc_profiInfor3XQR","closeBtn":"lmsc_closeBtn1EhlV","chatbodyLists":"lmsc_chatbodyListsJmATz","chatLists":"lmsc_chatLists1MguY","date":"lmsc_date3Yr4X","deleteOption":"lmsc_deleteOption3lUSl","deleteThis":"lmsc_deleteThisssYNC","attachmentWrap":"lmsc_attachmentWrapU3iPp","thisuser":"lmsc_thisuser2JwPE","msgBody":"lmsc_msgBodyeqPD5","msg":"lmsc_msgMbmHv","msgDate":"lmsc_msgDate1oW_l","fromanother":"lmsc_fromanother3VlFx","userimg":"lmsc_userimg3E6TE","chatForm":"lmsc_chatFormPWs0X","imoji":"lmsc_imoji11OHg","fileUPloadInput":"lmsc_fileUPloadInput2Uo2j","imgUpload":"lmsc_imgUpload2xFQ3","sendBtn":"lmsc_sendBtn2Wat9"});
 
 /***/ }),
 
@@ -59830,6 +59830,13 @@ var App = /*#__PURE__*/function (_Component) {
       })))), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.topHeader
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.clospe
+      }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+        onClick: function onClick(e) {
+          return _this3.toggleChatWindow(e);
+        },
+        className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.collspeBtn
+      })), (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         className: _frontend_scss__WEBPACK_IMPORTED_MODULE_4__.default.profiInfo
       }, (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
         style: {
