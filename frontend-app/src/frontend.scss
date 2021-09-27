@@ -1,12 +1,16 @@
-:global(body.logged-in.admin-bar){
-    .chatWrap{
-        .chatWindow{
-            &:global(.active){
-                top: 32px;
-            }
+@media only screen and (min-width: 412px) {
+    :global(body.logged-in.admin-bar){
+        .chatWrap{
+            .chatWindow{
+                &:global(.active){
+                    top: 32px;
+                }
+            }    
         }    
-    }    
+    } 
 }
+
+
 
 :global(div#lms_conversition_chat_ui){
     overflow: hidden;
@@ -43,6 +47,37 @@
             width: 100%;
             display: flex;
             height: 100%;
+            &.collospe{
+                >div{
+                    &.profileInfoWrap{
+                        max-width: 0;
+                        -webkit-transition: -webkit-transform .8s ease-in-out;
+                        -ms-transition: -ms-transform .8s ease-in-out;
+                        transition: transform .8s ease-in-out;  
+                    }
+                    &.listWrap{
+                        max-width: 0;
+                        -webkit-transition: -webkit-transform .8s ease-in-out;
+                        -ms-transition: -ms-transform .8s ease-in-out;
+                        transition: transform .8s ease-in-out;  
+                    }
+                    &.bodyWrap{
+                        .topHeader{
+                            >div{
+                                &.clospe{
+                                    span{
+                                        &.collspeBtn{
+                                            transform:rotate(180deg);
+                                            -ms-transform:rotate(180deg);
+                                            -webkit-transform:rotate(180deg);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             >div{
                 .profileInfo{
                     color: white;
@@ -161,14 +196,37 @@
                         }
                         .userList{
                             padding: 20px 0;
+                            height: 75vh;
+                            overflow-x: auto;
+                            /* width */
+                            &::-webkit-scrollbar {
+                                width: 10px;
+                            }
+                            
+                            /* Track */
+                            &::-webkit-scrollbar-track {
+                                background: #f1f1f1; 
+                            }
+                            
+                            /* Handle */
+                            &::-webkit-scrollbar-thumb {
+                                background: #888; 
+                            }
+                            
+                            /* Handle on hover */
+                            &::-webkit-scrollbar-thumb:hover {
+                                background: #555; 
+                            }
                             >div{
                                 display: flex;
                                 align-items: center;
                                 cursor: pointer;
                                 padding: 20px;
+                                &.active,
                                 &:hover{
                                     background-color: #eff2fa;
                                 }
+
                                 &:first-child{
                                     >div{
                                         flex: 1;
@@ -181,6 +239,7 @@
                                                 border-radius: 100px;
                                                 width: 70px;
                                                 margin: 0 auto;
+                                                margin-right: 7px;
                                                 background-image: url(./icons/user-group-img.svg);
                                                 background-position: center;
                                             }
@@ -219,7 +278,7 @@
                                             border-radius: 100px;
                                             width: 70px;
                                             margin: 0 auto;
-                                            margin-right: 5px;
+                                            margin-right: 7px;
                                             position: relative;
                                             .userPresentStatus{
                                                 width: 10px;
@@ -359,6 +418,26 @@
                             padding: 25px 35px;
                             max-height: 78vh;
                             overflow-y: auto;
+                            
+                            /* width */
+                            &::-webkit-scrollbar {
+                                width: 10px;
+                            }
+                            
+                            /* Track */
+                            &::-webkit-scrollbar-track {
+                                background: #f1f1f1; 
+                            }
+                            
+                            /* Handle */
+                            &::-webkit-scrollbar-thumb {
+                                background: #888; 
+                            }
+                            
+                            /* Handle on hover */
+                            &::-webkit-scrollbar-thumb:hover {
+                                background: #555; 
+                            }
                             ul{
                                 margin: 0;
                                 list-style: none;
@@ -504,9 +583,10 @@
                     .chatForm{
                         position: absolute;
                         bottom: 0;
-                        padding: 30px 50px;
+                        padding: 20px 50px;
                         width: 100%;
                         >div{
+                            box-shadow: 1px 1px 3px #ddd;
                             >form{
                                 display: flex;
                                 background-color: white;
@@ -589,3 +669,56 @@
 
 }
 
+@media only screen and (max-width: 1024px) {
+    .chatWrap{
+        .chatWindow{
+            .chatBody{
+                >div{
+                    &.listWrap{
+                        flex: 4;
+                    }
+                }
+            }
+        }
+    }  
+}
+
+
+@media only screen and (max-width: 768px) {
+    .chatWrap{
+        .chatWindow{
+            .chatBody{
+                >div{
+                    &.listWrap{
+                        flex: 7;
+                    }
+                }
+            }
+        }
+    }  
+}
+
+
+@media only screen and (max-width: 411px) {
+    .chatWrap{
+        .chatWindow{
+            .chatBody{
+                >div{
+                    &.bodyWrap{
+                        max-width: 50px;
+                    }
+                }
+                &.collospe{
+                    >div{
+                        &.listWrap{
+                            flex: 7;
+                        }
+                        &.bodyWrap{
+                            max-width: unset;
+                        }
+                    }
+                }
+            }
+        }
+    }  
+}

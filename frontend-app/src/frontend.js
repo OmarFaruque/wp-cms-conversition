@@ -33,6 +33,7 @@ class App extends Component {
         this.state = {
             loader: false,
             saving: false,
+            collospe: false,
             config: {
                 general: {title: ''},
                 page2: {title: ''}
@@ -57,6 +58,7 @@ class App extends Component {
         this.changeHandler = this.changeHandler.bind(this)
         this.searchUserHandler = this.searchUserHandler.bind(this)
         this.deleteThis = this.deleteThis.bind(this)
+        this.toggleCollepseLeftWindow = this.toggleCollepseLeftWindow.bind(this)
 
         
 
@@ -67,13 +69,16 @@ class App extends Component {
         this.fetchData()
         this.userPresentStatus()
         this.alertHandler()
-
-        
-        
-
     }
 
 
+
+    toggleCollepseLeftWindow = (e) => {
+        let {collospe} = this.state
+        this.setState({
+            collospe: !collospe ? true : false
+        })
+    }
 
 
     alertHandler = () =>{
@@ -220,7 +225,6 @@ class App extends Component {
         .on('value', snapshot => {
             if(snapshot.val()){
                 users = snapshot.val();
-                console.log('users: ', users)
                 Object.keys(snapshot.val()).map( (k, v) => {
                     
                     let room = [users[k]['user_id'], current_user_id]
@@ -246,12 +250,29 @@ class App extends Component {
                             users: users
                         })
                     })
-                })
-
-                
-                
+                }) 
             }
         });
+
+
+        //Last public message
+        coursePublicDB
+        .child('msg')
+        .orderByChild('room')
+        .equalTo('public')
+        .limitToLast(1).once('value', lstmsg => {
+            if(lstmsg.val()){
+                let val = Object.values(lstmsg.val())
+                if(val[0].text_msg){
+                    let ptext_msg = val[0].text_msg
+                    ptext_msg = ptext_msg.length > 15 ? `${ptext_msg.substring(0, 15)}...` : ptext_msg
+                    this.setState({
+                        public_last_msg: ptext_msg
+                    })
+                }
+                
+            }
+        })
         
 
 
@@ -311,7 +332,11 @@ class App extends Component {
 
 
     roomHandler = (e, user_id) => {
-        let {users, duesee} = this.state
+        let {users, duesee, collospe} = this.state
+
+        let width = window.innerWidth
+        if(width < 412)
+            collospe = true
         
         let room = 'public'
         if(user_id != 'public'){
@@ -322,20 +347,22 @@ class App extends Component {
         }
         
 
-        
-
-
         coursePublicDB
         .child('msg')
         .orderByChild('room')
         .equalTo(room)
         .on('value', snapshot => {
-            localStorage.setItem(`lmsc_${room}`, Object.keys(snapshot.val()).length)
-            duesee[room] = 0;
+
+            if(snapshot.val()){
+                localStorage.setItem(`lmsc_${room}`, Object.keys(snapshot.val()).length)
+                duesee[room] = 0;
+            }
+
             this.setState({ 
-                chats: snapshot.val(), 
+                chats: snapshot.val() ? snapshot.val(): {}, 
                 room: room, 
                 duesee: duesee,
+                collospe: collospe,
                 send_to: user_id != 'public' ? users[user_id].user_id : user_id,
                 room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : window.lms_conversition_object.post_title, 
                 room_status: (typeof users[user_id] != 'undefined' && users[user_id].status == 'online' && room != 'public') || room == 'public' ? __('Active Now', 'lms-conversation') : __('Inactive Now', 'lms-conversation'),
@@ -415,7 +442,7 @@ class App extends Component {
     }
 
     render() {
-        let {config, chats, download, users, schema, room_name, room_status, user_img, duesee} = this.state
+        let {config, chats, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room} = this.state
         if(!chats) chats = []
         let dates = []
 
@@ -428,8 +455,8 @@ class App extends Component {
                         <img src={`${window.lms_conversition_object.assets_url}images/${chaticon}`} alt={__('LMS Chat', 'lms-conversation')} />
                     </div>
                     <div className={`${style.chatWindow} ${activeClass}`}>
-                        <div className={style.chatBody}>
-                            <div>
+                        <div className={`${style.chatBody} ${collospe ? style.collospe : ''}`}>
+                            <div className={style.profileInfoWrap}>
                                 <div className={style.profileInfo}>
                                     <div className={style.profileImg}
                                         style={{
@@ -443,7 +470,7 @@ class App extends Component {
                                 </div>
                                
                             </div>
-                            <div>
+                            <div className={style.listWrap}>
                                 <div>
                                     <div className={style.listHeader}>
                                         <h2>{__('Messages', 'lms-conversation')}</h2>
@@ -455,7 +482,7 @@ class App extends Component {
                                     </div>
                                     <div className={style.userList}>
 
-                                        <div onClick={(e) => this.roomHandler(e, 'public', '', 'online')}>
+                                        <div className={`${'public' === room ? style.active : ''}`} onClick={(e) => this.roomHandler(e, 'public', '', 'online')}>
                                             <div>
                                                 <div className={style.userImg}>
                                                 </div>
@@ -463,6 +490,7 @@ class App extends Component {
                                             <div>
                                                 <h4>{window.lms_conversition_object.post_title}</h4>
                                                 <h5>{__('All Participants', 'lms-conversation')}</h5>
+                                                {typeof public_last_msg != 'undefined' &&  (<p>{public_last_msg}</p>) }
                                             </div>
                                             <div>
                                                 <span></span>
@@ -474,28 +502,25 @@ class App extends Component {
                                              
                                                 Object.keys(users).map( (k, v) => {
                                                     
-
                                                     let current_user_id = window.lms_conversition_object.user_id
-                                                    let room = [users[k].user_id, current_user_id]
-                                                    room = room.sort((a, b) => a - b)
-                                                    room = room.join('')
+                                                    let room_inst = [users[k].user_id, current_user_id]
+                                                    room_inst = room_inst.sort((a, b) => a - b)
+                                                    room_inst = room_inst.join('')
 
-                                                    console.log('usrs room: ', room)
-                                                    console.log('duecss: ', duesee[room])
 
 
                                                     // let dateis = new Date(users[k].last_changed).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
                                                     if(users[k].user_id != window.lms_conversition_object.user_id){
                                                         return(
-                                                            <div onClick={(e) => this.roomHandler(e, k)} key={v}>
+                                                            <div className={`${room_inst === room ? style.active : ''}`} onClick={(e) => this.roomHandler(e, k)} key={v}>
                                                                 <div>
                                                                     <div 
                                                                     style={{backgroundImage: `url(${users[k].user_img})`}}
                                                                     className={style.userImg}>
                                                                         <span className={`${style.userPresentStatus} ${ style[users[k].status]}`}></span>
                                                                         {
-                                                                            (typeof duesee[room] != 'undefined' && duesee[room] > 0) && (
-                                                                                <span className={style.readNotification}>{duesee[room]}</span>
+                                                                            (typeof duesee[room_inst] != 'undefined' && duesee[room_inst] > 0) && (
+                                                                                <span className={style.readNotification}>{duesee[room_inst]}</span>
                                                                             )
                                                                         }
                                                                         
@@ -520,10 +545,10 @@ class App extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className={style.bodyWrap}>
                                 <div className={style.topHeader}>
                                     <div className={style.clospe}>
-                                        <span onClick={(e) => this.toggleChatWindow(e)} className={style.collspeBtn}></span>
+                                        <span onClick={(e) => this.toggleCollepseLeftWindow(e)} className={style.collspeBtn}></span>
                                     </div>
                                     <div className={style.profiInfo}>
                                         <div style={{

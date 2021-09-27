@@ -44,7 +44,6 @@ class App extends React.Component {
 
     handleUpdate(e) {
 
-        console.log('name & value: ', e.target.name)
         const {config} = this.state
 
         switch(e.target.type){

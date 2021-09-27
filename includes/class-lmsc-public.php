@@ -77,14 +77,8 @@ class LMSC_Public
             add_action('init', array($this, 'init'));
         }
 
-        add_action( 'wp_head', array($this, 'testF') );
     }
 
-
-    public function testF(){
-        global $post;
-        
-    }
 
 
 
@@ -104,6 +98,8 @@ class LMSC_Public
         $usres = array_merge($usres, $enrolled_users);
         return $usres;
     }
+
+
 
     /**
      * @access  public
@@ -135,15 +131,11 @@ class LMSC_Public
         if(!$config['enable_lms_conversation'])
             return false;
 
-        if($config['allow_tacher_capability']){
+        if(isset($config['allow_tacher_capability']) && $config['allow_tacher_capability']){
             if(!get_post_meta( $course_id, 'allow_conversation', true ))
                 return false;
         }
             
-        
-        
-
-        
         $append = false;
         if(in_array($post->post_type, array('sfwd-courses', 'sfwd-lessons', 'sfwd-topic', 'sfwd-quiz'))){ // Learndash LMS post type
             $enrolledCorses = learndash_user_get_enrolled_courses(get_current_user_id(  ));
@@ -220,13 +212,14 @@ class LMSC_Public
             )
         );
 
-
-        echo (
+        echo sprintf(
             '<div id="' . $this->token . '_chat_ui">
-              <div class="' . $this->token . '_loader"><p>' . __('Loading User Interface...', 'lms-conversation') . '</p></div>
-            </div>'
+              <div class="' . $this->token . '_loader"><p>%s</p></div>
+            </div>', __('Loading User Interface...', 'lms-conversation')
         );
     }
+
+
 
     /** Handle Post Typ registration all here
      */
@@ -234,9 +227,11 @@ class LMSC_Public
     {
         if(is_user_logged_in(  ) && !is_admin()){
             add_action('wp_enqueue_scripts', array($this, 'frontend_enqueue_styles'), 10);
-            add_action(  'wp_footer', array($this, 'lmsc_foother_callback') );
+            add_action('wp_footer', array($this, 'lmsc_foother_callback') );
         }
     }
+
+
 
     /**
      * Ensures only one instance of APIFW_Front_End is loaded or can be loaded.
@@ -269,7 +264,5 @@ class LMSC_Public
         //CSS
         wp_register_style($this->token . '-frontend', esc_url($this->assets_url) . 'css/frontend.css', array(), $this->version);
     }
-
-
 }
 }

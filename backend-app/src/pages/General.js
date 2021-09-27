@@ -23,7 +23,7 @@ const soundsFiles = {
 
 export default function General(props) {
     const {config} = props;
-    console.log('config: ', config)
+    
     return (
     <>
     <div className={style.generalWrap}>
