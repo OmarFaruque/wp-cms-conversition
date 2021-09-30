@@ -5,9 +5,12 @@ export default function TextInput(props) {
   const { label, customClass, name, type, value, placeholder, options, min, onChange } = props;
   const items = [];
 
-  Object.keys(options).forEach(function(k, v){
-    items.push(<option key={v} value={k}>{options[k]}</option>);  
-  });
+  if(typeof options != 'undefined'){
+    Object.keys(options).forEach(function(k, v){
+      items.push(<option key={v} value={k}>{options[k]}</option>);  
+    });
+  }
+  
 
   return (
     <div className={style.form_group}>
