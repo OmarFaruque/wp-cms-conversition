@@ -179,7 +179,13 @@ class LMSC_Public
 
 
         if(is_singular( 'courses' )){ //Tutor LMS
-            if(tutor_utils()->is_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author)
+
+            $instructors = tutor_utils()->get_instructors_by_course($post->ID);
+            $instructors = array_map(function($v){
+                return $v->ID;
+            }, $instructors);
+
+            if(tutor_utils()->is_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author || is_array( get_current_user_id(  ), $instructors ))
                 $append = true;
         }
 
