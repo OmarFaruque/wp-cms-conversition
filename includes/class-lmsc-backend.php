@@ -154,6 +154,8 @@ class LMSC_Backend
         $settings = get_option( 'lmsc_config', array() );
         $this->settings = $settings;
     }
+
+    
     /**
      * @access  public 
      * @return  NULL 

@@ -80,7 +80,15 @@ class LMSC_Public
     }
 
 
-
+    /** Handle Post Typ registration all here
+     */
+    public function init()
+    {
+        if(is_user_logged_in(  ) && !is_admin()){
+            add_action('wp_enqueue_scripts', array($this, 'frontend_enqueue_styles'), 10);
+            add_action('wp_footer', array($this, 'lmsc_foother_callback') );
+        }
+    }
 
     /**
      * @access  private
@@ -117,7 +125,14 @@ class LMSC_Public
                 $course_id = get_post_meta( $post->ID, 'course_id', true );
             break;
 
+            case 'tutor_quiz':
+                $parent = get_post($post->post_parent);
+                $course_id = $parent->post_parent;
+            break;
             case 'lesson':
+                if(in_array('tutor/tutor.php', apply_filters('active_plugins', get_option('active_plugins'))))
+                    $course_id = get_post_meta( $post->ID, '_tutor_course_id_for_lesson', true );
+                
                 if(class_exists('LLMS_Student'))
                     $course_id = get_post_meta( $post->ID, '_llms_parent_course', true );
                 
@@ -152,7 +167,9 @@ class LMSC_Public
             }
         }
 
-        if(in_array($post->post_type, array('course', 'lesson'))){
+
+        
+        if(in_array($post->post_type, array('course', 'lesson', 'tutor_quiz'))){
             if(class_exists('LLMS_Student')){ // LifterLMS
                 $student = new LLMS_Student( get_current_user_id(  ) );
                 if($student->is_enrolled($course_id) || get_current_user_id(  ) == $post->post_author ){
@@ -166,9 +183,15 @@ class LMSC_Public
                     $append = true;
                 }
             }
+
+            if(in_array('tutor/tutor.php', apply_filters('active_plugins', get_option('active_plugins')))){ // Tutor LMS
+                $post = get_post($course_id);
+                if(tutor_utils()->is_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author || is_array( get_current_user_id(  ), $instructors ))
+                    $append = true;
+                
+            }
         }
-        
-        
+                
         if(is_singular( 'stm-courses' )){ // Masterstudy
             $courses = stm_lms_get_user_courses(get_current_user_id(  ), '', '', array('course_id'));
             $key = array_search($course_id, array_column($courses, 'course_id'));
@@ -179,7 +202,6 @@ class LMSC_Public
 
 
         if(is_singular( 'courses' )){ //Tutor LMS
-
             $instructors = tutor_utils()->get_instructors_by_course($post->ID);
             $instructors = array_map(function($v){
                 return $v->ID;
@@ -225,17 +247,6 @@ class LMSC_Public
         );
     }
 
-
-
-    /** Handle Post Typ registration all here
-     */
-    public function init()
-    {
-        if(is_user_logged_in(  ) && !is_admin()){
-            add_action('wp_enqueue_scripts', array($this, 'frontend_enqueue_styles'), 10);
-            add_action('wp_footer', array($this, 'lmsc_foother_callback') );
-        }
-    }
 
 
 
