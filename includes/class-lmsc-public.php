@@ -117,6 +117,8 @@ class LMSC_Public
         global $post, $current_user;
         $config = get_option( 'lmsc_config', array() );
         $course_id = $post->ID; 
+        $user_type = $post->post_author == get_current_user_id(  ) ? 'teacher' : 'student';
+        
 
         switch($post->post_type){
             case 'sfwd-lessons':
@@ -154,7 +156,16 @@ class LMSC_Public
         $append = false;
         if(in_array($post->post_type, array('sfwd-courses', 'sfwd-lessons', 'sfwd-topic', 'sfwd-quiz'))){ // Learndash LMS post type
             $enrolledCorses = learndash_user_get_enrolled_courses(get_current_user_id(  ));
-            if(in_array($course_id, $enrolledCorses) || get_current_user_id(  ) == $post->post_author)
+            $instructors = get_post_meta( $course_id, 'ir_shared_instructor_ids', true );
+            $instructors = $instructors ? explode(',', $instructors) : array();
+            array_push($instructors, get_current_user_id());
+            
+            if(in_array( get_current_user_id(  ), $instructors )){
+                $user_type = 'teacher';
+                $append = true;
+            }
+
+            if(in_array($course_id, $enrolledCorses))
                 $append = true;    
         }
         
@@ -199,7 +210,7 @@ class LMSC_Public
             if($key !== false || get_current_user_id(  ) == $post->post_author)
                 $append = true;
         }
-
+        
 
         if(is_singular( 'courses' )){ //Tutor LMS
             $instructors = tutor_utils()->get_instructors_by_course($post->ID);
@@ -207,7 +218,11 @@ class LMSC_Public
                 return $v->ID;
             }, $instructors);
 
-            if(tutor_utils()->is_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author || is_array( get_current_user_id(  ), $instructors ))
+            if(is_array( get_current_user_id(  ), $instructors )){
+                $append = true;
+                $user_type = 'teacher';
+            }
+            if(tutor_utils()->is_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author )
                 $append = true;
         }
 
@@ -235,7 +250,7 @@ class LMSC_Public
                 'avatar_url' => get_avatar_url( get_current_user_id(  ) ), 
                 'email' => $current_user->user_email, 
                 'display_name' => strtolower($current_user->data->display_name), 
-                'user_type' => $post->post_author == get_current_user_id(  ) ? 'teacher' : 'student',
+                'user_type' => $user_type,
                 'settings' => get_option( 'lmsc_config', array() )
             )
         );
