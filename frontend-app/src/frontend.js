@@ -7,7 +7,7 @@ import attachment from './icons/attachment.svg';
 
 //CSS 
 import style from './frontend.scss';
-import { sprintf, _n, __ } from '@wordpress/i18n';
+import {_n, __ } from '@wordpress/i18n';
 import group_img from './icons/user-group-img.svg';
 
 import firebase, { auth, database, Schema, storage } from "./component/config";
