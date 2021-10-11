@@ -119,7 +119,6 @@ class LMSC_Public
         $course_id = $post->ID; 
         $user_type = $post->post_author == get_current_user_id(  ) ? 'teacher' : 'student';
         
-
         switch($post->post_type){
             case 'sfwd-lessons':
             case 'sfwd-topic':
@@ -158,7 +157,9 @@ class LMSC_Public
             $enrolledCorses = learndash_user_get_enrolled_courses(get_current_user_id(  ));
             $instructors = get_post_meta( $course_id, 'ir_shared_instructor_ids', true );
             $instructors = $instructors ? explode(',', $instructors) : array();
-            array_push($instructors, get_current_user_id());
+            $course = get_post($course_id);
+            if($course->post_author == get_current_user_id(  ))
+                array_push($instructors, get_current_user_id());
             
             if(in_array( get_current_user_id(  ), $instructors )){
                 $user_type = 'teacher';
@@ -169,7 +170,6 @@ class LMSC_Public
                 $append = true;    
         }
         
-
         //Course Subscribe if student
         if(is_singular( 'lp_course' )){ // If Learnpress
             $user = learn_press_get_current_user();
