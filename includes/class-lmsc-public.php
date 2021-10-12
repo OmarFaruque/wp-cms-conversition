@@ -218,7 +218,7 @@ class LMSC_Public
                 return $v->ID;
             }, $instructors);
 
-            if(is_array( get_current_user_id(  ), $instructors )){
+            if(in_array( get_current_user_id(  ), $instructors )){
                 $append = true;
                 $user_type = 'teacher';
             }
