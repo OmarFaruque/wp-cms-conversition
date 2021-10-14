@@ -10,7 +10,7 @@ import style from './frontend.scss';
 import {_n, __ } from '@wordpress/i18n';
 import group_img from './icons/user-group-img.svg';
 
-import firebase, { auth, database, Schema, storage } from "./component/config";
+import firebase, { auth, database, storage } from "./component/config";
 
 
 
@@ -43,7 +43,14 @@ class App extends Component {
             chat_window_active: false, 
             users: [], 
             room: 'public', 
-            schema: Schema, 
+            schema: {
+                sender_id: window.lms_conversition_object.user_id,
+                avatar_url: window.lms_conversition_object.avatar_url,
+                text_msg: '', 
+                room: 'public', 
+                send_to: 'public',
+                createDate: Date.now()
+            }, 
             room_name: window.lms_conversition_object.post_title, 
             room_status: __('Active Now', 'lms-conversation'), 
             user_img: window.lms_conversition_object.assets_url + 'images/' + group_img
@@ -59,12 +66,14 @@ class App extends Component {
         this.searchUserHandler = this.searchUserHandler.bind(this)
         this.deleteThis = this.deleteThis.bind(this)
         this.toggleCollepseLeftWindow = this.toggleCollepseLeftWindow.bind(this)
-
-        
-
+        this.onFormSubmit = this.onFormSubmit.bind(this)
     }
 
 
+    /**
+     * @param null 
+     * @desc initial callback function
+     */
     componentDidMount() {
         this.fetchData()
         this.userPresentStatus()
@@ -72,7 +81,11 @@ class App extends Component {
     }
 
 
-
+    /**
+     * 
+     * @param {default event} e 
+     * left toggle button
+     */
     toggleCollepseLeftWindow = (e) => {
         let {collospe} = this.state
         this.setState({
@@ -81,8 +94,11 @@ class App extends Component {
     }
 
 
+    /**
+     * @param null  
+     * @description sound alert
+     */
     alertHandler = () =>{
-        
         let {duesee, room} = this.state
         coursePublicDB
         .on('child_changed', function(snapshot) {
@@ -114,9 +130,15 @@ class App extends Component {
         this.setState({
             duesee: duesee
         })
-
-        
     }
+
+
+
+
+    /**
+     * @param null 
+     * @description user present status offline / online
+     */
     userPresentStatus = () => {
         
         const isOfflineForDatabase = {
@@ -165,29 +187,11 @@ class App extends Component {
     }
 
 
-    componentWillUnmount() {
-        // console.log('state room: ', this.state.room)
-    }
+    componentWillUnmount() {}
 
 
-    componentDidUpdate(){
-    }
+    componentDidUpdate(){}
 
-
-    handleUpdate(conf) {
-
-        // this.setState({conf});
-    }
-
-    SaveChanges = () => {
-
-        const {config} = this.state;
-        this.fetchWP.post('save', {'config': config}).then(json => {
-
-        }).catch(error => {
-            alert("Some thing went wrong");
-        })
-    }
 
 
     /**
@@ -201,6 +205,8 @@ class App extends Component {
         })
     }
 
+
+    
     fetchData() {
         this.setState({
             loader: true,
@@ -440,6 +446,8 @@ class App extends Component {
         .child(key).set({})
     }
 
+
+
     render() {
         let {config, chats, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room} = this.state
         if(!chats) chats = []
@@ -666,7 +674,8 @@ class App extends Component {
 
                                 <div className={style.chatForm}>
                                     <div>
-                                        <form onSubmit={this.onFormSubmit}>
+                                    
+                                        <form onSubmit={(e) => this.onFormSubmit(e)}>
                                             <div>
                                                 {/* <span className={style.imoji}></span> */}
                                                 <label for="attachment"><span className={style.imgUpload}></span></label>
@@ -681,7 +690,7 @@ class App extends Component {
                                                     id="text_msg" />
                                             </div>
                                             <div>
-                                                <button type="submit">
+                                                <button ref={button => this.buttonElement = button} type="submit">
                                                     <span className={style.sendBtn}></span>
                                                 </button>
                                             </div>

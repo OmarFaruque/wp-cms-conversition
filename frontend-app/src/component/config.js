@@ -19,15 +19,6 @@ export const storage = firebase.storage();
 
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-export const Schema = {
-    sender_id: window.lms_conversition_object.user_id,
-    avatar_url: window.lms_conversition_object.avatar_url,
-    text_msg: '', 
-    room: 'public', 
-    send_to: 'public',
-    createDate: Date.now()
-}
-
 
 
 if(typeof window.lms_conversition_object != 'undefined' && typeof window.lms_conversition_object.email != 'undefined'){

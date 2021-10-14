@@ -218,10 +218,12 @@ class LMSC_Public
                 return $v->ID;
             }, $instructors);
 
+
             if(in_array( get_current_user_id(  ), $instructors )){
                 $append = true;
                 $user_type = 'teacher';
             }
+
             if(tutor_utils()->is_enrolled( $post->ID ) || get_current_user_id(  ) == $post->post_author )
                 $append = true;
         }
