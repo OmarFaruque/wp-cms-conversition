@@ -80,6 +80,12 @@ class LMSC_Public
     }
 
 
+
+
+    
+
+
+
     /** Handle Post Typ registration all here
      */
     public function init()

@@ -75,6 +75,7 @@ class App extends Component {
      * @desc initial callback function
      */
     componentDidMount() {
+        console.log('component did mount');
         this.fetchData()
         this.userPresentStatus()
         this.alertHandler()
