@@ -1,9 +1,10 @@
-import { render, h, Component } from 'preact';
+import React from "react";
+import {HashRouter, Route, Switch} from 'react-router-dom'
+import ReactDOM from "react-dom";
+
 import FetchWP from './utils/fetchWP';
 import chaticon from './icons/chat.svg';
 import attachment from './icons/attachment.svg';
-
-
 
 //CSS 
 import style from './frontend.scss';
@@ -27,7 +28,7 @@ const imageRef = storageRef.child('images')
 const imgsType = ['png', 'svg', 'jpg', 'jpeg'];
 
 
-class App extends Component {
+class FrontEnd extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,6 +68,8 @@ class App extends Component {
         this.deleteThis = this.deleteThis.bind(this)
         this.toggleCollepseLeftWindow = this.toggleCollepseLeftWindow.bind(this)
         this.onFormSubmit = this.onFormSubmit.bind(this)
+        this.roomHandler = this.roomHandler.bind(this)
+        this.toggleChatWindow = this.toggleChatWindow.bind(this)
     }
 
 
@@ -75,7 +78,7 @@ class App extends Component {
      * @desc initial callback function
      */
     componentDidMount() {
-        console.log('component did mount');
+        // console.log('component did mount');
         this.fetchData()
         this.userPresentStatus()
         this.alertHandler()
@@ -275,8 +278,7 @@ class App extends Component {
                     this.setState({
                         public_last_msg: ptext_msg
                     })
-                }
-                
+                } 
             }
         })
         
@@ -296,6 +298,8 @@ class App extends Component {
         schema.createDate = Date.now()
         schema.room = room
 
+        console.log('schema: ', schema)
+
         if(typeof send_to != 'undefined')
             schema.send_to = send_to
 
@@ -314,6 +318,8 @@ class App extends Component {
     changeHandler = (e) => {
         let {schema, room} = this.state
         e.preventDefault()
+
+        console.log('eventname: ', e.target.name)
         switch(e.target.name){
             case 'attachment': 
                 const filename = Math.floor(Math.random() * 90000000000) + e.target.files[0].name
@@ -338,6 +344,8 @@ class App extends Component {
 
 
     roomHandler = (e, user_id) => {
+        e.preventDefault()
+        console.log('this is user id: ', user_id)
         let {users, duesee, collospe} = this.state
 
         let width = window.innerWidth
@@ -437,9 +445,21 @@ class App extends Component {
                 }
             });
         }
+
+        this.setState({svalue: svalue})
     }
 
 
+
+    keyPressEvent = (e) => {
+        
+        if(e.key == 'Enter'){
+            e.preventDefault()
+            document.getElementById("button").click()
+            return false
+            
+        }
+    }
 
     deleteThis = (key) => {
         coursePublicDB
@@ -450,7 +470,7 @@ class App extends Component {
 
 
     render() {
-        let {config, chats, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room} = this.state
+        let {config, chats, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room, svalue} = this.state
         if(!chats) chats = []
         let dates = []
 
@@ -459,8 +479,8 @@ class App extends Component {
         return (
                 <div className={style.chatWrap}>
                     
-                    <div className={style.chatIcon} onClick={(e) => this.toggleChatWindow(e)}>
-                        <img src={`${window.lms_conversition_object.assets_url}images/${chaticon}`} alt={__('LMS Chat', 'lms-conversation')} />
+                    <div className={style.chatIcon}>
+                        <img onClick={(e) => this.toggleChatWindow(e)} src={`${window.lms_conversition_object.assets_url}images/${chaticon}`} alt={__('LMS Chat', 'lms-conversation')} />
                     </div>
                     <div className={`${style.chatWindow} ${activeClass}`}>
                         <div className={`${style.chatBody} ${collospe ? style.collospe : ''}`}>
@@ -484,23 +504,22 @@ class App extends Component {
                                         <h2>{__('Messages', 'lms-conversation')}</h2>
                                         <div className={style.searchbar}>
                                             <div>
-                                                <input type="search" onKeyDown={this.searchUserHandler} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
+                                                <input type="text" onKeyDown={this.searchUserHandler} value={svalue} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
                                             </div>
                                         </div>
                                     </div>
                                     <div className={style.userList}>
 
-                                        <div className={`${'public' === room ? style.active : ''}`} onClick={(e) => this.roomHandler(e, 'public', '', 'online')}>
+                                        <div className={`${'public' === room ? `${style.active} ${style.singlelist}` : `${style.singlelist}`}`} >
                                             <div>
-                                                <div className={style.userImg}>
-                                                </div>
+                                                <div className={style.userImg}></div>
                                             </div>
                                             <div>
                                                 <h4>{window.lms_conversition_object.post_title}</h4>
                                                 <h5>{__('All Participants', 'lms-conversation')}</h5>
                                                 {typeof public_last_msg != 'undefined' &&  (<p>{public_last_msg}</p>) }
                                             </div>
-                                            <div>
+                                            <div className={style.clickable} onClick={(e) => this.roomHandler(e, 'public', '', 'online') }>
                                                 <span></span>
                                             </div>
                                         </div>
@@ -520,7 +539,7 @@ class App extends Component {
                                                     // let dateis = new Date(users[k].last_changed).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
                                                     if(users[k].user_id != window.lms_conversition_object.user_id){
                                                         return(
-                                                            <div className={`${room_inst === room ? style.active : ''}`} onClick={(e) => this.roomHandler(e, k)} key={v}>
+                                                            <div className={`${room_inst === room ? `${style.active} ${style.singlelist}` : `${style.singlelist}`}`} key={v}>
                                                                 <div>
                                                                     <div 
                                                                     style={{backgroundImage: `url(${users[k].user_img})`}}
@@ -539,7 +558,7 @@ class App extends Component {
                                                                     <h5>{users[k].user_type}</h5>
                                                                     <p>{typeof users[k].text_msg != 'undefined' ? users[k].text_msg : ''}</p>
                                                                 </div>
-                                                                <div>
+                                                                <div className={style.clickable} onClick={(e) => this.roomHandler(e, k) }>
                                                                     {/* <span>
                                                                         {dateis}
                                                                     </span> */}
@@ -638,7 +657,7 @@ class App extends Component {
                                                                                     
                                                                                     return(
                                                                                         <span className={`${style.attachmentWrap} ${style.msg}`}>
-                                                                                            <img className={style.otherAttachment} src={`${window.lms_conversition_object.assets_url}images/${attachment}`} Alt={__('Attachment', 'lms-conversation')}/>
+                                                                                            <img className={style.otherAttachment} src={`${window.lms_conversition_object.assets_url}images/${attachment}`} alt={__('Attachment', 'lms-conversation')}/>
                                                                                             <span>
                                                                                                 {
                                                                                                     typeof chats[k].name != 'undefined' ? chats[k].name : __('Download Attachment', 'lms-conversation')
@@ -679,7 +698,7 @@ class App extends Component {
                                         <form onSubmit={(e) => this.onFormSubmit(e)}>
                                             <div>
                                                 {/* <span className={style.imoji}></span> */}
-                                                <label for="attachment"><span className={style.imgUpload}></span></label>
+                                                <label htmlFor="attachment"><span className={style.imgUpload}></span></label>
                                                 <input className={style.fileUPloadInput} type="file" onChange={this.changeHandler} name="attachment" id="attachment" />
                                             </div>
                                             
@@ -687,6 +706,7 @@ class App extends Component {
                                                 <input onChange={this.changeHandler} 
                                                     type="text" 
                                                     name="text_msg" 
+                                                    onKeyPress={this.keyPressEvent}
                                                     value={schema.text_msg}
                                                     id="text_msg" />
                                             </div>
@@ -707,8 +727,11 @@ class App extends Component {
 
 }
 
+// if (document.getElementById("lms_conversition_chat_ui")) {
+//     render(<App/>, document.getElementById("lms_conversition_chat_ui"));
+// }
+
 
 if (document.getElementById("lms_conversition_chat_ui")) {
-    render(<App/>, document.getElementById("lms_conversition_chat_ui"));
+    ReactDOM.render(<FrontEnd/>, document.getElementById("lms_conversition_chat_ui"));
 }
-
