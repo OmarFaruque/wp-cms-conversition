@@ -24,9 +24,18 @@
         right: 10px;
         bottom: 15px;
         max-width: 65px;
+        min-width: 60px;
+        max-height: 65px;
+        min-height: 60px;
+        height: 60px;
         cursor: pointer;
-        img{
+        span{
+            background-image: url(./icons/chat.svg);
+            background-repeat: no-repeat;
+            height: 100%;
             width: 100%;
+            background-color: transparent;
+            display: block;
         }
     }
     .chatWindow{

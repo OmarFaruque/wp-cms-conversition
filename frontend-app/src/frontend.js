@@ -1,9 +1,5 @@
-import React from "react";
-import {HashRouter, Route, Switch} from 'react-router-dom'
-import ReactDOM from "react-dom";
-
+import { render, h, Component } from 'preact';
 import FetchWP from './utils/fetchWP';
-import chaticon from './icons/chat.svg';
 import attachment from './icons/attachment.svg';
 
 //CSS 
@@ -28,7 +24,7 @@ const imageRef = storageRef.child('images')
 const imgsType = ['png', 'svg', 'jpg', 'jpeg'];
 
 
-class FrontEnd extends React.Component {
+class FrontEnd extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -78,7 +74,6 @@ class FrontEnd extends React.Component {
      * @desc initial callback function
      */
     componentDidMount() {
-        // console.log('component did mount');
         this.fetchData()
         this.userPresentStatus()
         this.alertHandler()
@@ -210,7 +205,9 @@ class FrontEnd extends React.Component {
     }
 
 
-    
+    /**
+     * @desc initially featch data
+     */
     fetchData() {
         this.setState({
             loader: true,
@@ -281,9 +278,6 @@ class FrontEnd extends React.Component {
                 } 
             }
         })
-        
-
-
     }
 
 
@@ -298,7 +292,6 @@ class FrontEnd extends React.Component {
         schema.createDate = Date.now()
         schema.room = room
 
-        console.log('schema: ', schema)
 
         if(typeof send_to != 'undefined')
             schema.send_to = send_to
@@ -319,7 +312,6 @@ class FrontEnd extends React.Component {
         let {schema, room} = this.state
         e.preventDefault()
 
-        console.log('eventname: ', e.target.name)
         switch(e.target.name){
             case 'attachment': 
                 const filename = Math.floor(Math.random() * 90000000000) + e.target.files[0].name
@@ -342,10 +334,15 @@ class FrontEnd extends React.Component {
         this.setState({schema: schema})
     }
 
-
+    /**
+     * 
+     * @param {default event} e 
+     * @param {user id} user_id 
+     * @desc  Change room
+     */
     roomHandler = (e, user_id) => {
         e.preventDefault()
-        console.log('this is user id: ', user_id)
+
         let {users, duesee, collospe} = this.state
 
         let width = window.innerWidth
@@ -450,14 +447,15 @@ class FrontEnd extends React.Component {
     }
 
 
-
+    /**
+     * 
+     * @param {default event} e 
+     * @desc If sender press Enter kay then submit message
+     */
     keyPressEvent = (e) => {
-        
         if(e.key == 'Enter'){
             e.preventDefault()
-            document.getElementById("button").click()
-            return false
-            
+            this.onFormSubmit(e)
         }
     }
 
@@ -468,19 +466,17 @@ class FrontEnd extends React.Component {
     }
 
 
-
     render() {
         let {config, chats, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room, svalue} = this.state
         if(!chats) chats = []
         let dates = []
 
-        
         const activeClass = this.state.chat_window_active ? 'active' : 'close';
         return (
                 <div className={style.chatWrap}>
                     
                     <div className={style.chatIcon}>
-                        <img onClick={(e) => this.toggleChatWindow(e)} src={`${window.lms_conversition_object.assets_url}images/${chaticon}`} alt={__('LMS Chat', 'lms-conversation')} />
+                        <span onClick={(e) => this.toggleChatWindow(e)}></span>
                     </div>
                     <div className={`${style.chatWindow} ${activeClass}`}>
                         <div className={`${style.chatBody} ${collospe ? style.collospe : ''}`}>
@@ -504,7 +500,15 @@ class FrontEnd extends React.Component {
                                         <h2>{__('Messages', 'lms-conversation')}</h2>
                                         <div className={style.searchbar}>
                                             <div>
-                                                <input type="text" onKeyDown={this.searchUserHandler} value={svalue} name="search" id="search" placeholder={__('Search', 'lms-conversation')} />
+                                                <input 
+                                                    type="search" 
+                                                    onKeyPress={(e) => this.searchUserHandler(e)} 
+                                                    onChange={(e) => {e.preventDefault()}} 
+                                                    value={typeof svalue != 'undefined' ? svalue : ''} 
+                                                    name="search" 
+                                                    id="search" 
+                                                    placeholder={__('Search', 'lms-conversation')} 
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -526,7 +530,6 @@ class FrontEnd extends React.Component {
 
                                         {/* Users */}
                                         {
-                                             
                                                 Object.keys(users).map( (k, v) => {
                                                     
                                                     let current_user_id = window.lms_conversition_object.user_id
@@ -603,7 +606,6 @@ class FrontEnd extends React.Component {
                                                     let today = new Date()
                                                     let difTime = Math.abs(today - date);
                                                     let difDays = Math.ceil(difTime / (1000 * 60 * 60 * 24)); 
-
 
                                                     let msgDate = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
 
@@ -695,7 +697,7 @@ class FrontEnd extends React.Component {
                                 <div className={style.chatForm}>
                                     <div>
                                     
-                                        <form onSubmit={(e) => this.onFormSubmit(e)}>
+                                        <form>
                                             <div>
                                                 {/* <span className={style.imoji}></span> */}
                                                 <label htmlFor="attachment"><span className={style.imgUpload}></span></label>
@@ -711,7 +713,7 @@ class FrontEnd extends React.Component {
                                                     id="text_msg" />
                                             </div>
                                             <div>
-                                                <button ref={button => this.buttonElement = button} type="submit">
+                                                <button onClick={(e) => this.onFormSubmit(e)} id="submitBtn" ref={button => this.buttonElement = button} type="submit">
                                                     <span className={style.sendBtn}></span>
                                                 </button>
                                             </div>
@@ -724,14 +726,8 @@ class FrontEnd extends React.Component {
                 </div>
         )
     }
-
 }
 
-// if (document.getElementById("lms_conversition_chat_ui")) {
-//     render(<App/>, document.getElementById("lms_conversition_chat_ui"));
-// }
-
-
 if (document.getElementById("lms_conversition_chat_ui")) {
-    ReactDOM.render(<FrontEnd/>, document.getElementById("lms_conversition_chat_ui"));
+    render(<FrontEnd/>, document.getElementById("lms_conversition_chat_ui"));
 }

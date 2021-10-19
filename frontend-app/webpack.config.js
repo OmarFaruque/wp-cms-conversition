@@ -11,7 +11,7 @@ const webpackConfig = {
     devtool: 'source-map',
 
     entry: {
-        'frontend': path.resolve(__dirname, 'src/frontend.js')
+        'frontend': path.resolve(__dirname, 'src/frontend.js'),
     },
 
     output: {
@@ -22,8 +22,10 @@ const webpackConfig = {
 
     resolve: {
         extensions: [".js", ".jsx", ".json"],
-
-
+        alias: {
+            "react": "preact-compat",
+            "react-dom": "preact-compat"
+        }
     },
     devServer: {},
 
@@ -62,14 +64,14 @@ module: {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['@babel/preset-env', "@babel/preset-react"],
+                    presets: ['@babel/preset-env', "preact"],
                     "plugins": [
                         ["@babel/plugin-proposal-class-properties"],
                         ["@wordpress/babel-plugin-makepot", { "output": "../languages/acowebs-plugin-boiler-plate-text-domain-en_US.po"}]
                     ]
                 }
             }
-    },
+        },
 
         {
             test: /\.scss$/,
@@ -87,7 +89,7 @@ module: {
                     loader: 'css-loader',
                     options: {
                         modules: {
-                            localIdentName: 'acotrs_[local][hash:base64:5]',
+                            localIdentName: 'lmsc_[local][hash:base64:5]',
                         },
 
                     }
@@ -116,39 +118,33 @@ module: {
 
             ],
     },
+    // {
+    //     test: /\.(png|jp(e*)g|svg|gif)$/,
+    //     use: [
+    //       {
+    //         loader: 'file-loader',
+    //         options: {
+    //             limit: 0,
+    //             name: '../images/[name].[ext]',
+    //             publicPath: './'
+    //         },
+    //       },
+    //     ],
+    // },
 
-
-        //   {
-        //     test: /\.(css|scss|sass)$/,
-        //     use: [
-        //       {
-        //         loader: MiniCssExtractPlugin.loader,
-        //         options: {
-        //           // you can specify a publicPath here
-        //           // by default it use publicPath in webpackOptions.output
-        //           publicPath: '../'
-        //         }
-        //       },
-        //       "css-loader",
-        //       "sass-loader"
-        //
-        //     ]
-        // },
-        {
-            test: /\.(png|jpg|gif|svg)$/i,
-            use: [
-                {
-                    // loader: 'file-loader?name=[name].[ext]',
-                    loader: 'url-loader',
-                    options: {
-                        limit: 0,
-                        name: '../images/[name].[ext]',
-                        publicPath: './'
-
-                    },
-
-            }
-            ]
+    {
+        test: /\.(png|jpg|gif|svg|mp3)$/i,
+        use: [
+            {
+                // loader: 'file-loader?name=[name].[ext]',
+                loader: 'url-loader',
+                options: {
+                    limit: 0,
+                    name: '../images/[name].[ext]',
+                    publicPath: './'
+                },
+        }
+        ]
     }
 
 
