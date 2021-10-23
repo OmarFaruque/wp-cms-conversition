@@ -3,214 +3,38 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/backend.js:110
-msgid "LMS Conversation"
+#: src/frontend.js:402
+msgid "Active Now"
 msgstr ""
 
-#: src/backend.js:115
-msgid "Check Premium Options"
+#: src/frontend.js:402
+msgid "Inactive Now"
 msgstr ""
 
-#: src/components/Tabs/index.js:23
-#: src/pages/General.js:31
-msgid "General Settings"
+#: src/frontend.js:530
+msgid "Messages"
 msgstr ""
 
-#: src/components/Tabs/index.js:31
-#: src/pages/Firebase-settings.js:24
-msgid "Firebase Settings"
+#: src/frontend.js:540
+msgid "Search"
 msgstr ""
 
-#: src/components/Tabs/index.js:39
-msgid "Info"
+#: src/frontend.js:553
+msgid "All Participants"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:110
-msgid "Storage Bucket"
+#: src/frontend.js:644
+msgid "Today"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:113
-msgid "Firebase Storage Bucket."
+#: src/frontend.js:645
+msgid "Yesterday"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:131
-msgid "Messaging Sender ID"
+#: src/frontend.js:692
+msgid "Attachment"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:134
-msgid "Firebase Messaging Sender ID."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:152
-msgid "App ID"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:155
-msgid "Firebase Application ID."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:171
-#: src/pages/General.js:121
-msgid "Save"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:30
-msgid "API Key"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:50
-msgid "Auth Domain"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:53
-msgid "Firebase API Key."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:70
-msgid "Database URL"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:73
-msgid "Firebase Database Url."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:90
-msgid "Project ID"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:93
-msgid "Firebase Project ID."
-msgstr ""
-
-#: src/pages/General.js:10
-msgid "Juntos"
-msgstr ""
-
-#: src/pages/General.js:103
-msgid "Notification Sound"
-msgstr ""
-
-#: src/pages/General.js:106
-msgid "Set notification sound for while receive message."
-msgstr ""
-
-#: src/pages/General.js:11
-msgid "Me-too"
-msgstr ""
-
-#: src/pages/General.js:12
-msgid "Doorbell Single Press"
-msgstr ""
-
-#: src/pages/General.js:13
-msgid "Dry Pop-up Notification Alert"
-msgstr ""
-
-#: src/pages/General.js:14
-msgid "Elevator Tone"
-msgstr ""
-
-#: src/pages/General.js:15
-msgid "Gaming Lock"
-msgstr ""
-
-#: src/pages/General.js:16
-msgid "Sci Fi Click"
-msgstr ""
-
-#: src/pages/General.js:17
-msgid "Sci Fi Reject Notification"
-msgstr ""
-
-#: src/pages/General.js:18
-msgid "Software Interface Back"
-msgstr ""
-
-#: src/pages/General.js:19
-msgid "Software Interface Remove"
-msgstr ""
-
-#: src/pages/General.js:20
-msgid "Store Door Bell Ring"
-msgstr ""
-
-#: src/pages/General.js:21
-msgid "Percussion Sound"
-msgstr ""
-
-#: src/pages/General.js:36
-msgid "Enable LMS Conversation"
-msgstr ""
-
-#: src/pages/General.js:39
-msgid "Enable / Disable LMS Conversation for Fornt-end."
-msgstr ""
-
-#: src/pages/General.js:58
-msgid "Conversation Controller on Course"
-msgstr ""
-
-#: src/pages/General.js:61
-msgid "Allow Teacher / Author to set Enable / Disable conversation for each course."
-msgstr ""
-
-#: src/pages/General.js:80
-msgid "Allow user to remove own message"
-msgstr ""
-
-#: src/pages/General.js:83
-msgid "Allow chat user to remove their own message."
-msgstr ""
-
-#: src/pages/General.js:9
-msgid "No Sound"
-msgstr ""
-
-#: src/pages/Info.js:24
-msgid "Information"
-msgstr ""
-
-#: src/pages/Info.js:30
-msgid "For setup your firebase database, follow the below steps."
-msgstr ""
-
-#: src/pages/Info.js:33
-msgid "Firebase Settings Information"
-msgstr ""
-
-#: src/pages/Info.js:39
-msgid "For setup firebase settings you should go to "
-msgstr ""
-
-#: src/pages/Info.js:39
-msgid " and login with your gmail account."
-msgstr ""
-
-#: src/pages/Info.js:40
-msgid "Press \"Add project\" if you want to start with a new project."
-msgstr ""
-
-#: src/pages/Info.js:41
-msgid ""
-"Press \"Authentication\" from left menu and Enable \"Email/Password\" if "
-"Disabled."
-msgstr ""
-
-#: src/pages/Info.js:42
-msgid ""
-"Press \"Realtime Database\" from left menu and then press \"Rules\" from "
-"top menu. Add rules:{\".read\": true, \".write\": true} in \"Edit Rules\" "
-"window."
-msgstr ""
-
-#: src/pages/Info.js:43
-msgid ""
-"At last step, you should press settings icon from the right side of "
-"\"Project Overview\" in top left corner."
-msgstr ""
-
-#: src/pages/Info.js:44
-msgid ""
-"Scroll down and you can see necessary settings information for use your "
-"\"Firebase Settings\" tab"
+#: src/frontend.js:695
+msgid "Download Attachment"
 msgstr ""

@@ -18,10 +18,13 @@ const IDontCareAboutFirebaseAuth = () => {
 
 const coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id);
 
+
 const storageRef = storage.ref();
 const imageRef = storageRef.child('images')
 
 const imgsType = ['png', 'svg', 'jpg', 'jpeg'];
+
+
 
 
 class FrontEnd extends Component {
@@ -77,8 +80,11 @@ class FrontEnd extends Component {
         this.fetchData()
         this.userPresentStatus()
         this.alertHandler()
+     
     }
 
+
+    
 
     /**
      * 
@@ -214,7 +220,6 @@ class FrontEnd extends Component {
         });
         let current_user_id = window.lms_conversition_object.user_id
 
-
         coursePublicDB
         .child('msg')
         .orderByChild('room')
@@ -288,10 +293,17 @@ class FrontEnd extends Component {
      */
     onFormSubmit = (e) => {
         e.preventDefault()
+        let submit = true
+        
         let {room, schema, send_to} = this.state
         schema.createDate = Date.now()
         schema.room = room
 
+        if(schema.text_msg == ''){
+            schema.text_msg = document.getElementById('text_msg').value
+        }
+
+        
 
         if(typeof send_to != 'undefined')
             schema.send_to = send_to
@@ -299,8 +311,14 @@ class FrontEnd extends Component {
         if(schema.text_msg != ''){
             coursePublicDB.child('msg').push(schema)
         }
-        schema.text_msg = ''
-        this.setState({schema: schema})
+        console.log('on form submit')
+
+        if(submit == true){
+            schema.text_msg = ''
+            this.setState({schema: schema})
+            submit = false
+        }
+        
     }
 
     /**
@@ -312,6 +330,7 @@ class FrontEnd extends Component {
         let {schema, room} = this.state
         e.preventDefault()
 
+        console.log('this ischange handler')
         switch(e.target.name){
             case 'attachment': 
                 const filename = Math.floor(Math.random() * 90000000000) + e.target.files[0].name
@@ -340,41 +359,45 @@ class FrontEnd extends Component {
      * @param {user id} user_id 
      * @desc  Change room
      */
-    roomHandler = (e, user_id) => {
+    roomHandler = (e, user_id, room) => {
         e.preventDefault()
+        
 
         let {users, duesee, collospe} = this.state
 
+        let click = true
         let width = window.innerWidth
         if(width < 412)
             collospe = true
         
-        let room = 'public'
-        if(user_id != 'public'){
-            let current_user_id = window.lms_conversition_object.user_id
-            room = [users[user_id].user_id, current_user_id]
-            room = room.sort((a, b) => a - b)
-            room = room.join('')
-        }
-        
 
         coursePublicDB
         .child('msg')
-        .orderByChild('room')
-        .equalTo(room)
+        // .orderByChild('room')
+        // .equalTo(click == true ? room : this.state.room)
         .on('value', snapshot => {
+            let tempRoom = click == true ? room : this.state.room
+            console.log('fire room handler from state: ', this.state.room)
 
+            let filter = {}
             if(snapshot.val()){
-                localStorage.setItem(`lmsc_${room}`, Object.keys(snapshot.val()).length)
+                Object.keys(snapshot.val()).map( (k, v) => {
+                    if(snapshot.val()[k].room == tempRoom){
+                        filter[k] = snapshot.val()[k]
+                    }
+                    
+                })
+
+                localStorage.setItem(`lmsc_${room}`, filter.length)
                 duesee[room] = 0;
             }
+            click = false
 
             this.setState({ 
-                chats: snapshot.val() ? snapshot.val(): {}, 
-                room: room, 
+                chats: filter, 
                 duesee: duesee,
                 collospe: collospe,
-                send_to: user_id != 'public' ? users[user_id].user_id : user_id,
+                send_to: room != 'public' ? users[user_id].user_id : user_id,
                 room_name: typeof users[user_id] != 'undefined' && room != 'public' ? users[user_id].name : window.lms_conversition_object.post_title, 
                 room_status: (typeof users[user_id] != 'undefined' && users[user_id].status == 'online' && room != 'public') || room == 'public' ? __('Active Now', 'lms-conversation') : __('Inactive Now', 'lms-conversation'),
                 user_img: typeof users[user_id] != 'undefined' && users[user_id].user_img != '' && room != 'public' ? users[user_id].user_img : window.lms_conversition_object.assets_url + 'images/' + group_img
@@ -382,12 +405,15 @@ class FrontEnd extends Component {
         });
 
         
+        this.setState({room: room})
+        
     }
 
 
     searchUserHandler = (e) => {
         let svalue = e.target.value
 
+        
         // Users 
         this.setState({users: []})
         let {users} = this.state
@@ -396,6 +422,7 @@ class FrontEnd extends Component {
             coursePublicDB
             .child('users')
             .on('value', snapshot => {
+                console.log('search: ', this.state.schema)
                 if(snapshot.val()){
                     users = snapshot.val();
                     Object.keys(snapshot.val()).map( (k, v) => {
@@ -405,7 +432,6 @@ class FrontEnd extends Component {
                             let key = Object.keys(lstmsg.val());
                             users[k]['text_msg'] = lstmsg.val()[key].text_msg
                             users[k]['createDate'] = lstmsg.val()[key].createDate     
-                            
                             
                             this.setState({
                                 users: users
@@ -424,6 +450,7 @@ class FrontEnd extends Component {
             .startAt(svalue)
             .endAt(svalue+"\uf8ff")
             .on('value', snapshot => {
+                console.log('search: ', this.state.schema)
                 if(snapshot.val()){
                     users = snapshot.val();
 
@@ -454,6 +481,7 @@ class FrontEnd extends Component {
      */
     keyPressEvent = (e) => {
         if(e.key == 'Enter'){
+            console.log('key press')
             e.preventDefault()
             this.onFormSubmit(e)
         }
@@ -470,6 +498,8 @@ class FrontEnd extends Component {
         let {config, chats, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room, svalue} = this.state
         if(!chats) chats = []
         let dates = []
+
+        console.log('room: ', room)
 
         const activeClass = this.state.chat_window_active ? 'active' : 'close';
         return (
@@ -523,7 +553,7 @@ class FrontEnd extends Component {
                                                 <h5>{__('All Participants', 'lms-conversation')}</h5>
                                                 {typeof public_last_msg != 'undefined' &&  (<p>{public_last_msg}</p>) }
                                             </div>
-                                            <div className={style.clickable} onClick={(e) => this.roomHandler(e, 'public', '', 'online') }>
+                                            <div className={style.clickable} onClick={(e) => this.roomHandler(e, '', 'public', '', 'online') }>
                                                 <span></span>
                                             </div>
                                         </div>
@@ -561,7 +591,7 @@ class FrontEnd extends Component {
                                                                     <h5>{users[k].user_type}</h5>
                                                                     <p>{typeof users[k].text_msg != 'undefined' ? users[k].text_msg : ''}</p>
                                                                 </div>
-                                                                <div className={style.clickable} onClick={(e) => this.roomHandler(e, k) }>
+                                                                <div className={`${style.clickable} room_${room_inst}`} onClick={(e) => this.roomHandler(e, k, room_inst) }>
                                                                     {/* <span>
                                                                         {dateis}
                                                                     </span> */}
