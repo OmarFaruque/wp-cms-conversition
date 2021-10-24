@@ -80,7 +80,6 @@ class FrontEnd extends Component {
         this.fetchData()
         this.userPresentStatus()
         this.alertHandler()
-     
     }
 
 
@@ -309,9 +308,9 @@ class FrontEnd extends Component {
             schema.send_to = send_to
 
         if(schema.text_msg != ''){
-            coursePublicDB.child('msg').push(schema)
+            coursePublicDB.child('msg').push(schema, () => {
+            })
         }
-        console.log('on form submit')
 
         if(submit == true){
             schema.text_msg = ''
@@ -330,7 +329,6 @@ class FrontEnd extends Component {
         let {schema, room} = this.state
         e.preventDefault()
 
-        console.log('this ischange handler')
         switch(e.target.name){
             case 'attachment': 
                 const filename = Math.floor(Math.random() * 90000000000) + e.target.files[0].name
@@ -373,11 +371,8 @@ class FrontEnd extends Component {
 
         coursePublicDB
         .child('msg')
-        // .orderByChild('room')
-        // .equalTo(click == true ? room : this.state.room)
         .on('value', snapshot => {
             let tempRoom = click == true ? room : this.state.room
-            console.log('fire room handler from state: ', this.state.room)
 
             let filter = {}
             if(snapshot.val()){
@@ -385,7 +380,6 @@ class FrontEnd extends Component {
                     if(snapshot.val()[k].room == tempRoom){
                         filter[k] = snapshot.val()[k]
                     }
-                    
                 })
 
                 localStorage.setItem(`lmsc_${room}`, filter.length)
@@ -422,7 +416,6 @@ class FrontEnd extends Component {
             coursePublicDB
             .child('users')
             .on('value', snapshot => {
-                console.log('search: ', this.state.schema)
                 if(snapshot.val()){
                     users = snapshot.val();
                     Object.keys(snapshot.val()).map( (k, v) => {
@@ -450,7 +443,7 @@ class FrontEnd extends Component {
             .startAt(svalue)
             .endAt(svalue+"\uf8ff")
             .on('value', snapshot => {
-                console.log('search: ', this.state.schema)
+
                 if(snapshot.val()){
                     users = snapshot.val();
 
@@ -480,11 +473,17 @@ class FrontEnd extends Component {
      * @desc If sender press Enter kay then submit message
      */
     keyPressEvent = (e) => {
+        let {schema} = this.state
         if(e.key == 'Enter'){
-            console.log('key press')
             e.preventDefault()
             this.onFormSubmit(e)
+        }else{
+            schema.text_msg = e.target.value
+            this.setState({
+                schema:schema
+            })
         }
+        
     }
 
     deleteThis = (key) => {
@@ -498,8 +497,6 @@ class FrontEnd extends Component {
         let {config, chats, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room, svalue} = this.state
         if(!chats) chats = []
         let dates = []
-
-        console.log('room: ', room)
 
         const activeClass = this.state.chat_window_active ? 'active' : 'close';
         return (
@@ -738,7 +735,7 @@ class FrontEnd extends Component {
                                                 <input onChange={this.changeHandler} 
                                                     type="text" 
                                                     name="text_msg" 
-                                                    onKeyPress={this.keyPressEvent}
+                                                    onKeyUp={this.keyPressEvent}
                                                     value={schema.text_msg}
                                                     id="text_msg" />
                                             </div>
