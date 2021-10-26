@@ -165,9 +165,13 @@ class FrontEnd extends Component {
 
         database.ref('.info/connected').on('value', function(snapshot) {
         if (snapshot.val() == false) {
+            console.log('inside retun false')
             return;
         };  
 
+        if(!auth.currentUser){
+            location.reload();
+        }
         let uid = auth.currentUser.uid;
         let userStatusDatabaseRef = database.ref('/messages/' + lms_conversition_object.post_id +'/users/' + uid)
         // var uid = firebase.auth().currentUser.uid;
@@ -178,6 +182,7 @@ class FrontEnd extends Component {
         // losing internet, or any other means.
         userStatusDatabaseRef.onDisconnect()
             .set(isOfflineForDatabase).then(function() {
+                console.log('set offline')
                 // The promise returned from .onDisconnect().set() will
                 // resolve as soon as the server acknowledges the onDisconnect() 
                 // request, NOT once we've actually disconnected:
@@ -185,7 +190,9 @@ class FrontEnd extends Component {
 
                 // We can now safely set ourselves as 'online' knowing that the
                 // server will mark us as offline once we lose connection.
-                userStatusDatabaseRef.set(isOnlineForDatabase);
+                userStatusDatabaseRef.set(isOnlineForDatabase).then(function(){
+                    console.log('set online')
+                });
             });
         });
     }
