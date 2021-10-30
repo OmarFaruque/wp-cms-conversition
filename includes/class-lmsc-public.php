@@ -122,9 +122,17 @@ class LMSC_Public
     public function lmsc_foother_callback(){
         global $post, $current_user;
         $config = get_option( 'lmsc_config', array() );
+
+        if ( is_plugin_active( 'masterstudy-lms-learning-management-system/masterstudy-lms-learning-management-system.php' ) ) {
+            // If masterstudy LMS are activated
+            global $lms_page_path;
+            $post = get_page_by_path( $lms_page_path, OBJECT, 'stm-courses' );
+        }
+
         $course_id = $post->ID; 
         $user_type = $post->post_author == get_current_user_id(  ) ? 'teacher' : 'student';
         
+
         switch($post->post_type){
             case 'sfwd-lessons':
             case 'sfwd-topic':
@@ -144,11 +152,10 @@ class LMSC_Public
                     $course_id = get_post_meta( $post->ID, '_llms_parent_course', true );
                 
                 if(class_exists('Sensei_Course'))
-                    $course_id = get_post_meta( $post->ID, '_lesson_course', true );
-                    
+                    $course_id = get_post_meta( $post->ID, '_lesson_course', true ); 
             break;
         }
-
+        
 
         if(!$config['enable_lms_conversation'])
             return false;
@@ -158,6 +165,7 @@ class LMSC_Public
                 return false;
         }
             
+        
         $append = false;
         if(in_array($post->post_type, array('sfwd-courses', 'sfwd-lessons', 'sfwd-topic', 'sfwd-quiz'))){ // Learndash LMS post type
             $enrolledCorses = learndash_user_get_enrolled_courses(get_current_user_id(  ));
@@ -184,7 +192,7 @@ class LMSC_Public
             }
         }
 
-
+        
         
         if(in_array($post->post_type, array('course', 'lesson', 'tutor_quiz'))){
             if(class_exists('LLMS_Student')){ // LifterLMS
@@ -209,7 +217,7 @@ class LMSC_Public
             }
         }
                 
-        if(is_singular( 'stm-courses' )){ // Masterstudy
+        if(is_singular( 'stm-courses' ) || $post->post_type === 'stm-courses'){ // Masterstudy
             $courses = stm_lms_get_user_courses(get_current_user_id(  ), '', '', array('course_id'));
             $key = array_search($course_id, array_column($courses, 'course_id'));
             
@@ -234,7 +242,7 @@ class LMSC_Public
                 $append = true;
         }
 
-
+        
         if($append === false)
             return false;
 
