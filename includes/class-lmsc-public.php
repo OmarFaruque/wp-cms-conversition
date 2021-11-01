@@ -273,9 +273,8 @@ class LMSC_Public
 
         echo sprintf(
             '<div id="' . $this->token . '_chat_ui">
-              <div class="' . $this->token . '_loader"><p>%s</p></div>
-            </div>', __('Loading User Interface...', 'lms-conversation')
-        );
+              <div class="' . $this->token . '_loader"><p></p></div>
+            </div>');
     }
 
 
