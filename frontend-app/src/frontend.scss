@@ -670,6 +670,9 @@
                                             background-color:transparent;
                                             box-shadow: none;
                                             width: 100%;
+                                            &[type="text"]{
+                                                color: #555;
+                                            }
                                             &:focus{
                                                 outline: none;
                                             }

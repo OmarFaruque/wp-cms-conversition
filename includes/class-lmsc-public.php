@@ -123,10 +123,14 @@ class LMSC_Public
         global $post, $current_user;
         $config = get_option( 'lmsc_config', array() );
 
+
         if ( is_plugin_active( 'masterstudy-lms-learning-management-system/masterstudy-lms-learning-management-system.php' ) ) {
             // If masterstudy LMS are activated
-            global $lms_page_path;
-            $post = get_page_by_path( $lms_page_path, OBJECT, 'stm-courses' );
+            if($post->post_type != 'stm-courses'){
+                global $lms_page_path;
+                $post = get_page_by_path( $lms_page_path, OBJECT, 'stm-courses' );
+            }
+            
         }
 
         $course_id = $post->ID; 
