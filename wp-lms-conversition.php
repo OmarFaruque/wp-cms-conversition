@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Plugin Name: Mstudy Chat
+ * Plugin Name: LMS Chat
  * Version: 1.0.0
- * Description: LMS Conversation allow user to communicate with each other and with course teacher. Admin / teacher can capable to active chat application for each course or can enable globally for each courch. We use modern tachnology like scss & reactjs for UI for batter user experience. 
+ * Description: LMS Chat allow user to communicate with each other and with course teacher. Admin / teacher can capable to active chat application for each course or can enable globally for each courch. We use modern tachnology like scss & reactjs for UI for batter user experience. 
  * Author: Omar Faruque
  * Author URI: https://www.linkedin.com/in/omarfaruque2020/
  * Requires at least: 4.4.0
@@ -15,7 +15,7 @@
 define('LMSC_TOKEN', 'lms_conversition');
 define('LMSC_VERSION', '1.0.0');
 define('LMSC_FILE', __FILE__);
-define('LMSC_PLUGIN_NAME', 'Mstudy Chat');
+define('LMSC_PLUGIN_NAME', 'LMS Chat');
 
 // Init.
 add_action('plugins_loaded', 'lmsc_init');

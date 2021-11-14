@@ -1,29 +1,44 @@
-﻿=== Acowebs Plugin Boiler Plate ===
-Author: Acowebs
-Author URI: https://acowebs.com
-Contributors:
-Donate link:
-Tags:
+﻿=== WP Learning Management System (LMS) Chat Application ===
+Author: Omar Faruque
+Author URI: https://omer-faruque.me
+Contributors: Omar Faruque (ronymaha)
+Donate link: 
+Tags: Chats, LMS Chat, Learnpress, MasterStudy LMS, LearnDash, LifterLMS, Tutor LMS, Sensei LMS, MemberPress, Firebase
 License: GPLv2 or later
 Requires at least: 4.4.0
-Tested up to: 5.5.3
+Tested up to: 5.8.2
 Stable tag: 1.0.0
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+WP LMS Conversation allow to conversation with LMS teacher or other student. 
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+WP LMS Conversation is a LMS plugins like LearnPress, MasterStudy LMS, LearnDash, LifterLMS, Tutor LMS, Sensei LMS addons and it's easy to use. There are many conversation plugins out here but none of theme are easy like this pluign. We don't like to user with tons of settings and options. We implemented very clean and easy understable setting panel where user can easily set their option. We use Firebase Realtime Database for store chat data. WP LMS Conversation allow to conversation with LMS teacher or other student. It creact individual chat in each course, lesson, quiz etc where student and teacher can join. Enrollment are required for student.  
+
 
 == HOW TO MANAGE SETTINGS? ==
+For control options and settings admin should go Dashboard > LMS Chat > Firebase Settings. In this perticular tab, admin can set firebase settings. Admin can get firebase credientials from [Firebase Console https://firebase.google.com/] and more information about [Firebase Console https://firebase.google.com/] available in info tab.  Admin can set individual chat availability form each course edit page or can set availability as globaly from LMS Chat > General tab.
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
 
-== <Plugin Name> FEATURES ==
-🔹 Feature 1
-🔹 Feature 2
-🔹 RTL Support
-🔹 Compatible with WPML
+== "LMS CHAT" FEATURES ==
+👉 Realtime Chat Application
+👉 Realtime Firebase Database
+👉 Control teacher authorization of chat
+👉 Firebase Settings option
+👉 Text Chat and Image sharing option
+👉 File Sharing Option
+👉 Contributor online / offline status
+👉 Incomming message date and time
+👉 Datewise bundle of incomming message
+👉 Control position of chat widget
+👉 Visiable chat widget after course Enroll and auto login to firebase
+👉 Chat window size toggle with contributor list
+👉 Group chat option
+👉 Individual / one to one Chat option
+👉 And many more...
+
+
+
 
 == DEMO - CHECK THIS OUT IN REAL ==
 
@@ -35,7 +50,7 @@ This is the long description.  No limit, and you can use Markdown (as well as in
 
 == INSTALLATION ==
 
-Installation of "<PLugin Name>" can be done either by searching for "<plugin Name>" via the "Plugins > Add New" screen in your WordPress dashboard, or by using the following steps:
+Installation of "LMS Chat" can be done either by searching for "LMS Chat" via the "Plugins > Add New" screen in your WordPress dashboard, or by using the following steps:
 
 1. Download the plugin via WordPress.org
 1. Upload the ZIP file through the 'Plugins > Add New > Upload' screen in your WordPress dashboard
