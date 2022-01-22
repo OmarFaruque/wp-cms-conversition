@@ -280,23 +280,19 @@ class LMSC_Backend
      */
     public function notice_need_a_cms_plugin()
     {
-
-        $error = sprintf(
         /* translators: %s: Plugin Name. */
-            __(
-                '%s requires any LMS plugin like 
-                <a target="_blank" href="https://wordpress.org/plugins/learnpress/">Learnpress</a>, 
-                <a href="https://www.learndash.com/ target="_blank"">Learndash</a>, 
-                <a href="https://wordpress.org/plugins/sensei-lms/" target="_blank">Sensei</a>, 
-                <a href="https://wordpress.org/plugins/lifterlms/" target="_blank">LifterLms</a>, 
-                <a href="https://wordpress.org/plugins/masterstudy-lms-learning-management-system/" target="_blank">Masterstudy</a> & 
-                <a href="https://wordpress.org/plugins/tutor/" target="_blank">Tutor LMS</a> to be installed & activated!',
-                'cms-conversation'
-            ),
-            LMSC_PLUGIN_NAME
-        );
-
-        echo ('<div class="error"><p>' . $error . '</p></div>');
+        ?>
+            <div class="error">
+                <p> <?php esc_attr_e( LMSC_PLUGIN_NAME, 'cms-conversation'); ?> <?php esc_attr_e( 'requires any LMS plugin like', 'cms-conversation' ); ?> 
+                    <a target="_blank" href="https://wordpress.org/plugins/learnpress/"><?php esc_attr_e( 'Learnpress' ); ?></a>, 
+                    <a href="https://www.learndash.com/" target="_blank"><?php esc_attr_e( 'Learndash' ); ?></a>, 
+                    <a href="https://wordpress.org/plugins/sensei-lms/" target="_blank"><?php esc_attr_e( 'Sensei' ); ?></a>, 
+                    <a href="https://wordpress.org/plugins/lifterlms/" target="_blank"><?php esc_attr_e( 'LifterLms' ); ?></a>, 
+                    <a href="https://wordpress.org/plugins/masterstudy-lms-learning-management-system/" target="_blank"><?php esc_attr_e( 'Masterstudy' ); ?></a> & 
+                    <a href="https://wordpress.org/plugins/tutor/" target="_blank"><?php esc_attr_e( 'Tutor LMS' ); ?></a> <?php esc_attr_e( 'to be installed & activated!', 'cms-conversation' ); ?>
+                </p>
+            </div>
+        <?php
     }
 
     /**

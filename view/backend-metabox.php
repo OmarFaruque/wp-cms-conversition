@@ -7,7 +7,7 @@
         <input type="checkbox" 
             name="allow_conversation"
             value='1'
-            <?php echo get_post_meta( $post->ID, 'allow_conversation', true ) ? 'checked':''; ?>
+            <?php esc_attr_e( get_post_meta( $post->ID, 'allow_conversation', true ) ? 'checked':'' ); ?>
         />
         <span class="slider"></span>
     </label> 
