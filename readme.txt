@@ -1,7 +1,7 @@
 ﻿=== WP Learning Management System (LMS) Chat Application ===
 Author: Omar Faruque
 Author URI: https://omer-faruque.me
-Contributors: Omar Faruque (ronymaha)
+Contributors: WebAid
 Donate link: 
 Tags: Chats, LMS Chat, Learnpress, MasterStudy LMS, LearnDash, LifterLMS, Tutor LMS, Sensei LMS, MemberPress, Firebase
 License: GPLv2 or later
@@ -23,7 +23,7 @@ For control options and settings admin should go Dashboard > LMS Chat > Firebase
 == "LMS CHAT" FEATURES ==
 👉 Realtime Chat Application
 👉 Realtime Firebase Database
-👉 Control teacher authorization of chat
+👉 Control teacher authorization of chat in front-end
 👉 Firebase Settings option
 👉 Text Chat and Image sharing option
 👉 File Sharing Option
@@ -34,6 +34,7 @@ For control options and settings admin should go Dashboard > LMS Chat > Firebase
 👉 Visiable chat widget after course Enroll and auto login to firebase
 👉 Chat window size toggle with contributor list
 👉 Group chat option
+👉 unread message notification
 👉 Individual / one to one Chat option
 👉 And many more...
 
@@ -58,19 +59,15 @@ Installation of "LMS Chat" can be done either by searching for "LMS Chat" via th
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif).
-2. This is the second screen shot
-
-
-== Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
+1. Install "lms-chat" plugin and activate it. 
+2. Go to lms-chat landing page by clicking 'LMS Chat' from left menu and set necessary option from general tab.
+3. Set sound notification if you needed. 
+4. Set google firebase settings for store chat history and for realtime conversation.
+5. You can got firebase related information from info tab.
+6. A teacher / course author can set conversation as allowed or disallowed.  
+7. In front-end chat icon will show left or right positon. 
+8. When a user will extend chat, it will look like this.
+9. User can extend window if he want. 
 
 
 == Changelog ==
