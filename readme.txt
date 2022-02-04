@@ -6,7 +6,7 @@ Donate link:
 Tags: chats, chat, lms chat, learnpress, masterstudy lms, learndash, lifterlms, tutor, sensei lms, memberpress, firebase
 License: GPLv2 or later
 Requires at least: 4.4.0
-Tested up to: 5.8.2
+Tested up to: 5.9.0
 Stable tag: 1.0.1
 
 WP LMS Conversation allow to conversation with LMS teacher or other student. 
