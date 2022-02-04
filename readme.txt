@@ -1,13 +1,13 @@
-﻿=== WP Learning Management System (LMS) Chat Application ===
+﻿=== Learning Management System (LMS) Chat Application ===
 Author: Omar Faruque
 Author URI: https://omer-faruque.me
 Contributors: WebAid
 Donate link: 
-Tags: Chats, LMS Chat, Learnpress, MasterStudy LMS, LearnDash, LifterLMS, Tutor LMS, Sensei LMS, MemberPress, Firebase
+Tags: chats, chat, lms chat, learnpress, masterstudy lms, learndash, lifterlms, tutor, sensei lms, memberpress, firebase
 License: GPLv2 or later
 Requires at least: 4.4.0
 Tested up to: 5.8.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
 WP LMS Conversation allow to conversation with LMS teacher or other student. 
 
@@ -71,6 +71,9 @@ Installation of "LMS Chat" can be done either by searching for "LMS Chat" via th
 
 
 == Changelog ==
+
+= 1.0.1 =
+* Fix fatal error on front-end
 
 = 1.0.0 =
 * Initial release

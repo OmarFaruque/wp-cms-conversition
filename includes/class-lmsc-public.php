@@ -81,18 +81,16 @@ class LMSC_Public
 
 
 
-
-    
-
-
-
     /** Handle Post Typ registration all here
      */
     public function init()
     {
         if(is_user_logged_in(  ) && !is_admin()){
+            if (!function_exists('is_plugin_active')) {
+                include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+            }
             add_action('wp_enqueue_scripts', array($this, 'frontend_enqueue_styles'), 10);
-            add_action('wp_footer', array($this, 'lmsc_foother_callback') );
+            add_action('wp_footer', array($this, 'lmsc_footer_callback') );
         }
     }
 
@@ -119,7 +117,7 @@ class LMSC_Public
      * @access  public
      * @return  footer html for chat application
      */
-    public function lmsc_foother_callback(){
+    public function lmsc_footer_callback(){
         global $post, $current_user;
         $config = get_option( 'lmsc_config', array() );
 
