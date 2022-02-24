@@ -7,7 +7,7 @@
  * Author: Omar Faruque
  * Author URI: https://www.linkedin.com/in/omarfaruque2020/
  * Requires at least: 4.4.0
- * Tested up to: 5.9.0
+ * Tested up to: 5.9.1
  * Text Domain: lms-conversation
  * Learndash LMS tested up to: 3.6.0
  */

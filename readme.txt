@@ -1,23 +1,23 @@
 ﻿=== Learning Management System (LMS) Chat Application ===
 Author: Omar Faruque
-Author URI: https://omer-faruque.me
-Contributors: WebAid
+Author URI: https://www.linkedin.com/in/omarfaruque2020/
+Contributors: wppluginia
 Donate link: 
-Tags: chats, chat, lms chat, learnpress, masterstudy lms, learndash, lifterlms, tutor, sensei lms, memberpress, firebase
+Tags: firebase, Learning Management System, chat, lms, Education, elerning, learnpress, learndash, Sensei LMS, lifterlms, text message, message, messaging, Tutor LMS, memberpress, course, quiz, lesson, conversation, masterstudy, lms-chat
 License: GPLv2 or later
 Requires at least: 4.4.0
-Tested up to: 5.9.0
+Tested up to: 5.9.1
 Stable tag: 1.0.1
 
 WP LMS Conversation allow to conversation with LMS teacher or other student. 
 
 == Description ==
 
-WP LMS Conversation is a LMS plugins like LearnPress, MasterStudy LMS, LearnDash, LifterLMS, Tutor LMS, Sensei LMS addons and it's easy to use. There are many conversation plugins out here but none of theme are easy like this pluign. We don't like to user with tons of settings and options. We implemented very clean and easy understable setting panel where user can easily set their option. We use Firebase Realtime Database for store chat data. WP LMS Conversation allow to conversation with LMS teacher or other student. It creact individual chat in each course, lesson, quiz etc where student and teacher can join. Enrollment are required for student.  
+WP LMS Conversation is a LMS plugins like LearnPress, MasterStudy LMS, LearnDash, LifterLMS, Tutor LMS, Sensei LMS addons and it's easy to use. There are many conversation plugins out here but none of theme are easy like this plugin. We don't like to user with tons of settings and options. We implemented very clean and easy understable setting panel where user can easily set their option. We use Firebase Realtime Database for store chat data. WP LMS Conversation allow to conversation with LMS teacher or other student. It creact individual chat in each course, lesson, quiz etc where student and teacher can join. Enrollment are required for student.  
 
 
 == HOW TO MANAGE SETTINGS? ==
-For control options and settings admin should go Dashboard > LMS Chat > Firebase Settings. In this perticular tab, admin can set firebase settings. Admin can get firebase credientials from [Firebase Console https://firebase.google.com/] and more information about [Firebase Console https://firebase.google.com/] available in info tab.  Admin can set individual chat availability form each course edit page or can set availability as globaly from LMS Chat > General tab.
+For control options and settings admin should go Dashboard > LMS Chat > Firebase Settings. In this perticular tab, admin can set firebase settings. Admin can get firebase credientials from [Firebase Console] (https://firebase.google.com/) and more information about [Firebase Console] (https://firebase.google.com/) available in info tab.  Admin can set individual chat availability form each course edit page or can set availability as globaly from LMS Chat > General tab.
 
 
 == "LMS CHAT" FEATURES ==
@@ -28,10 +28,10 @@ For control options and settings admin should go Dashboard > LMS Chat > Firebase
 👉 Text Chat and Image sharing option
 👉 File Sharing Option
 👉 Contributor online / offline status
-👉 Incomming message date and time
-👉 Datewise bundle of incomming message
+👉 Incoming message date and time
+👉 Incoming message bundle by Date
 👉 Control position of chat widget
-👉 Visiable chat widget after course Enroll and auto login to firebase
+👉 Visible chat widget after course Enroll and auto login to firebase
 👉 Chat window size toggle with contributor list
 👉 Group chat option
 👉 unread message notification
@@ -47,7 +47,7 @@ For control options and settings admin should go Dashboard > LMS Chat > Firebase
 
 == CHECK OUT OUR VIDEO DEMO ON HOW THIS WORKS: ==
 
-[youtube video_link]
+[youtube https://youtu.be/BAJ64Ej-uQM]
 
 == INSTALLATION ==
 
