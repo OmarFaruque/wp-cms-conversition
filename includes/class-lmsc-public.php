@@ -22,7 +22,7 @@ class LMSC_Public
      * @access  public
      * @since   1.0.0
      */
-    public string $version;
+    public $version;
 
     /**
      * The main plugin file.
@@ -31,7 +31,7 @@ class LMSC_Public
      * @access  public
      * @since   1.0.0
      */
-    public string $file;
+    public $file;
 
     /**
      * The token.
@@ -40,7 +40,7 @@ class LMSC_Public
      * @access  public
      * @since   1.0.0
      */
-    public string $token;
+    public $token;
 
     /**
      * The plugin assets URL.

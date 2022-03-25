@@ -3,11 +3,11 @@ Author: Omar Faruque
 Author URI: https://www.linkedin.com/in/omarfaruque2020/
 Contributors: wppluginia
 Donate link: 
-Tags: firebase, Learning Management System, chat, lms, Education, elerning, learnpress, learndash, Sensei LMS, lifterlms, text message, message, messaging, Tutor LMS, memberpress, course, quiz, lesson, conversation, masterstudy, lms-chat
+Tags: learnpress, learndash, masterstudy, firebase, Learning Management System, chat, Education, elerning, Sensei LMS, lms, lifterlms, text message, message, messaging, Tutor LMS, memberpress, course, quiz, lesson, conversation, lms-chat
 License: GPLv2 or later
 Requires at least: 4.4.0
-Tested up to: 5.9.1
-Stable tag: 1.0.1
+Tested up to: 5.9.2
+Stable tag: 1.0.2
 
 WP LMS Conversation allow to conversation with LMS teacher or other student. 
 
@@ -71,6 +71,9 @@ Installation of "LMS Chat" can be done either by searching for "LMS Chat" via th
 
 
 == Changelog ==
+
+= 1.0.2 =
+* Fix Parse error
 
 = 1.0.1 =
 * Fix fatal error on front-end
