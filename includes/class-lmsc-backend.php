@@ -36,7 +36,7 @@ class LMSC_Backend
      * @access  public
      * @since   1.0.0
      */
-    public string $version;
+    public $version;
 
     /**
      * The token.
@@ -45,7 +45,7 @@ class LMSC_Backend
      * @access  public
      * @since   1.0.0
      */
-    public string $token;
+    public $token;
 
     /**
      * The main plugin file.
@@ -54,7 +54,7 @@ class LMSC_Backend
      * @access  public
      * @since   1.0.0
      */
-    public string $file;
+    public $file;
 
     /**
      * The main plugin directory.
@@ -63,7 +63,7 @@ class LMSC_Backend
      * @access  public
      * @since   1.0.0
      */
-    public string $dir;
+    public $dir;
 
     /**
      * The plugin assets directory.
@@ -72,7 +72,7 @@ class LMSC_Backend
      * @access  public
      * @since   1.0.0
      */
-    public string $assets_dir;
+    public $assets_dir;
 
     /**
      * Suffix for Javascripts.
@@ -81,7 +81,7 @@ class LMSC_Backend
      * @access  public
      * @since   1.0.0
      */
-    public string $script_suffix;
+    public $script_suffix;
 
     /**
      * The plugin assets URL.
@@ -90,7 +90,7 @@ class LMSC_Backend
      * @access  public
      * @since   1.0.0
      */
-    public string $assets_url;
+    public $assets_url;
     /**
      * The plugin hook suffix.
      *
