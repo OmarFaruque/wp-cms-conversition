@@ -3,7 +3,7 @@ Author: Omar Faruque
 Author URI: https://www.linkedin.com/in/omarfaruque2020/
 Contributors: wppluginia
 Donate link: 
-Tags: learnpress, learndash, masterstudy, firebase, Learning Management System, chat, Education, elerning, Sensei LMS, lms, lifterlms, text message, message, messaging, Tutor LMS, memberpress, course, quiz, lesson, conversation, lms-chat
+Tags: learnpress, learndash, masterstudy, lifterlms, Sensei LMS, firebase, Learning Management System, chat, Education, elerning, lms, text message, message, messaging, Tutor LMS, memberpress, course, quiz, lesson, conversation, lms-chat
 License: GPLv2 or later
 Requires at least: 4.4.0
 Tested up to: 5.9.2
