@@ -30,7 +30,7 @@ class LMSC_Api
      * @access  public
      * @since   1.0.0
      */
-    public string $token;
+    public $token;
 
     public function __construct()
     {
