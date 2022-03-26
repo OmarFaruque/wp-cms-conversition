@@ -98,7 +98,7 @@ class LMSC_Backend
      * @access  public
      * @since   1.0.0
      */
-    public array $hook_suffix = array();
+    public $hook_suffix = array();
 
 
     /**
