@@ -12,10 +12,6 @@ import firebase, { auth, database, storage } from "./component/config";
 
 
 
-const IDontCareAboutFirebaseAuth = () => {
-    return <div>This part won't react to firebase auth changes</div>;
-};
-
 const coursePublicDB = database.ref('/messages/' + lms_conversition_object.post_id);
 
 
@@ -510,7 +506,7 @@ class FrontEnd extends Component {
                 <div className={style.chatWrap}>
                     
                     <div className={style.chatIcon}>
-                        <span onClick={(e) => this.toggleChatWindow(e)}></span>
+                        <span style={{backgroundImage: `url(${window.lms_conversition_object.assets_url}images/chat.svg)`}} onClick={(e) => this.toggleChatWindow(e)}></span>
                     </div>
                     <div className={`${style.chatWindow} ${activeClass}`}>
                         <div className={`${style.chatBody} ${collospe ? style.collospe : ''}`}>
@@ -535,6 +531,7 @@ class FrontEnd extends Component {
                                         <div className={style.searchbar}>
                                             <div>
                                                 <input 
+                                                    style={{backgroundImage: `url(${window.lms_conversition_object.assets_url}images/search-interface-symbol.svg)`}}
                                                     type="search" 
                                                     onKeyPress={(e) => this.searchUserHandler(e)} 
                                                     onChange={(e) => {e.preventDefault()}} 
@@ -550,7 +547,7 @@ class FrontEnd extends Component {
 
                                         <div className={`${'public' === room ? `${style.active} ${style.singlelist}` : `${style.singlelist}`}`} >
                                             <div>
-                                                <div className={style.userImg}></div>
+                                                <div style={{backgroundImage: `url(${window.lms_conversition_object.assets_url}images/user-group-img.svg)`}} className={style.userImg}></div>
                                             </div>
                                             <div>
                                                 <h4>{window.lms_conversition_object.post_title}</h4>
@@ -612,7 +609,7 @@ class FrontEnd extends Component {
                             <div className={style.bodyWrap}>
                                 <div className={style.topHeader}>
                                     <div className={style.clospe}>
-                                        <span onClick={(e) => this.toggleCollepseLeftWindow(e)} className={style.collspeBtn}></span>
+                                        <span style={{backgroundImage: `url(${window.lms_conversition_object.assets_url}images/left-arrow.svg)`}} onClick={(e) => this.toggleCollepseLeftWindow(e)} className={style.collspeBtn}></span>
                                     </div>
                                     <div className={style.profiInfo}>
                                         <div style={{
@@ -626,7 +623,7 @@ class FrontEnd extends Component {
                                         </div>
                                     </div>
                                     <div>
-                                        <span onClick={(e) => this.toggleChatWindow(e)} className={style.closeBtn}></span>
+                                        <span style={{backgroundImage: `url(${window.lms_conversition_object.assets_url}images/cancel.svg)`}} onClick={(e) => this.toggleChatWindow(e)} className={style.closeBtn}></span>
                                     </div>
                                 </div>
 
@@ -734,7 +731,7 @@ class FrontEnd extends Component {
                                         <form>
                                             <div>
                                                 {/* <span className={style.imoji}></span> */}
-                                                <label htmlFor="attachment"><span className={style.imgUpload}></span></label>
+                                                <label htmlFor="attachment"><span style={{backgroundImage: `url(${lms_conversition_object.assets_url}images/insert-picture-icon.svg)`}} className={style.imgUpload}></span></label>
                                                 <input className={style.fileUPloadInput} type="file" onChange={this.changeHandler} name="attachment" id="attachment" />
                                             </div>
                                             
@@ -748,7 +745,7 @@ class FrontEnd extends Component {
                                             </div>
                                             <div>
                                                 <button onClick={(e) => this.onFormSubmit(e)} id="submitBtn" ref={button => this.buttonElement = button} type="submit">
-                                                    <span className={style.sendBtn}></span>
+                                                    <span style={{backgroundImage: `url(${window.lms_conversition_object.assets_url}images/send-button.svg)`}} className={style.sendBtn}></span>
                                                 </button>
                                             </div>
                                         </form>

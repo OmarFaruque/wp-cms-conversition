@@ -30,7 +30,6 @@
         height: 60px;
         cursor: pointer;
         span{
-            background-image: url(./icons/chat.svg);
             background-repeat: no-repeat;
             height: 100%;
             width: 100%;
@@ -141,26 +140,26 @@
                                 background-color: #6c89f4;
                                 
                             }
-                            &.friends{
-                                >span{
-                                    background-image: url(icons/friends.svg);
-                                }
-                            }
-                            &.friends:hover{
-                                >span{
-                                    background-image: url(icons/friends-white.svg);
-                                }
-                            }
-                            &.inbox{
-                                >span{
-                                    background-image: url(icons/inbox-gray.svg);
-                                }
-                            }
-                            &.inbox:hover{
-                                >span{
-                                    background-image: url(icons/inbox-white.svg);    
-                                }
-                            }
+                            // &.friends{
+                            //     >span{
+                            //         background-image: url(icons/friends.svg);
+                            //     }
+                            // }
+                            // &.friends:hover{
+                            //     >span{
+                            //         background-image: url(icons/friends-white.svg);
+                            //     }
+                            // }
+                            // &.inbox{
+                            //     >span{
+                            //         background-image: url(icons/inbox-gray.svg);
+                            //     }
+                            // }
+                            // &.inbox:hover{
+                            //     >span{
+                            //         background-image: url(icons/inbox-white.svg);    
+                            //     }
+                            // }
 
                         }
                     }
@@ -185,19 +184,16 @@
                                         outline: none;
                                         box-shadow: 0 0 0.5em #ddd;
                                         border-radius: 10px;
+                                        background-size: auto 60%;
+                                        background-repeat: no-repeat;
+                                        background-position: 10px center;
+                                        padding-left: 45px;
                                         &:focus{
                                             &::placeholder{
                                                 background-image: unset;
                                                 padding-left: 5px;
                                             }
                                         }
-                                    }
-                                    input::placeholder{
-                                        color:#ccc;
-                                        padding-left: 30px;
-                                        background-image: url(./icons/search-interface-symbol.svg);
-                                        background-repeat: no-repeat;
-                                        background-size: contain;
                                     }
                                     
                                 }
@@ -270,7 +266,6 @@
                                                 width: 70px;
                                                 margin: 0 auto;
                                                 margin-right: 7px;
-                                                background-image: url(./icons/user-group-img.svg);
                                                 background-position: center;
                                             }
                                         }
@@ -384,7 +379,6 @@
                                         display: block;
                                         width: 30px;
                                         height: 100%;
-                                        background-image: url(./icons/left-arrow.svg);
                                         background-repeat: no-repeat;
                                         background-position: center;
                                         background-size: contain;
@@ -433,7 +427,6 @@
                                     height: 30px;
                                     display: block;
                                     margin-left: auto;
-                                    background-image: url(./icons/cancel.svg);
                                     background-position: center;
                                     background-repeat: no-repeat;
                                     opacity: 0.3;
@@ -658,7 +651,7 @@
                                                 margin: 5px;
                                                 cursor: pointer;
                                                 &.imgUpload{
-                                                    background-image: url(./icons/insert-picture-icon.svg);
+                                                    
                                                 }
                                             }
                                         }
@@ -684,7 +677,6 @@
                                             border-width: 0;
                                             >span{
                                                 &.sendBtn{
-                                                    background-image: url(./icons/send-button.svg);
                                                     width: 30px;
                                                     height: 30px;
                                                     display: block;

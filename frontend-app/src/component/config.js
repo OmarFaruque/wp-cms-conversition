@@ -1,12 +1,12 @@
 import firebase from "firebase";
 const config = {
-    apiKey: "AIzaSyD3xcZDHm-TI6Qio3BZzLLlsV9q2sb-gfc",
-    authDomain: "chat-7caa4.firebaseapp.com",
-    databaseURL: "https://chat-7caa4.firebaseio.com",
-    projectId: "chat-7caa4",
-    storageBucket: "chat-7caa4.appspot.com",
-    messagingSenderId: "58421091753",
-    appId: "1:58421091753:web:502de188e4c3363c44b8b8"
+    apiKey: window.lms_conversition_object.settings.api_key,
+    authDomain: window.lms_conversition_object.settings.auth_domain,
+    databaseURL: window.lms_conversition_object.settings.database_url,
+    projectId: window.lms_conversition_object.settings.projectid,
+    storageBucket: lms_conversition_object.settings.storage_bucket,
+    messagingSenderId: lms_conversition_object.settings.messaging_sender_id,
+    appId: lms_conversition_object.settings.app_id
 };
 
 firebase.initializeApp(config);
