@@ -2,12 +2,12 @@
 
 /**
  * Plugin Name: LMS Chat
- * Version: 1.0.2
+ * Version: 1.1.1
  * Description: LMS Chat allow user to communicate with each other and with course teacher. Admin / teacher can capable to active chat application for each course or can enable globally for each courch. We use modern tachnology like scss & reactjs for UI for batter user experience. 
  * Author: Omar Faruque
  * Author URI: https://www.linkedin.com/in/omarfaruque2020/
  * Requires at least: 4.4.0
- * Tested up to: 5.9.2
+ * Tested up to: 5.9.3
  * Text Domain: lms-conversation
  * Learndash LMS tested up to: 3.6.0
  */

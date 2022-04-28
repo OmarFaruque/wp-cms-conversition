@@ -1,13 +1,13 @@
 ﻿=== Learning Management System (LMS) Chat Application ===
 Author: Omar Faruque
 Author URI: https://www.linkedin.com/in/omarfaruque2020/
-Contributors: wppluginia
+Contributors: ronymaha
 Donate link: 
 Tags: learnpress, learndash, masterstudy, lifterlms, Sensei LMS, firebase, Learning Management System, chat, Education, elerning, lms, text message, message, messaging, Tutor LMS, memberpress, course, quiz, lesson, conversation, lms-chat
 License: GPLv2 or later
 Requires at least: 4.4.0
-Tested up to: 5.9.2
-Stable tag: 1.0.2
+Tested up to: 5.9.3
+Stable tag: 1.1.1
 
 WP LMS Conversation allow to conversation with LMS teacher or other student. 
 
@@ -17,7 +17,7 @@ WP LMS Conversation is a LMS plugins like LearnPress, MasterStudy LMS, LearnDash
 
 
 == HOW TO MANAGE SETTINGS? ==
-For control options and settings admin should go Dashboard > LMS Chat > Firebase Settings. In this perticular tab, admin can set firebase settings. Admin can get firebase credientials from [Firebase Console] (https://firebase.google.com/) and more information about [Firebase Console] (https://firebase.google.com/) available in info tab.  Admin can set individual chat availability form each course edit page or can set availability as globaly from LMS Chat > General tab.
+For control options and settings admin should go Dashboard > LMS Chat > Firebase Settings. In this perticular tab, admin can set firebase settings. Admin can get firebase credientials from [Firebase Console](https://firebase.google.com/) and more information about [Firebase Console](https://firebase.google.com/) available in info tab.  Admin can set individual chat availability form each course edit page or can set availability as globaly from LMS Chat > General tab.
 
 
 == "LMS CHAT" FEATURES ==
@@ -71,6 +71,9 @@ Installation of "LMS Chat" can be done either by searching for "LMS Chat" via th
 
 
 == Changelog ==
+
+= 1.1.1 =
+* Solved firebase database store issues. Saved data to site owner own firebase realtime database.
 
 = 1.0.2 =
 * Fix Parse error
