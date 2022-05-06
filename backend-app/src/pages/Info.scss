@@ -18,6 +18,7 @@
         margin: 16px 0;
         >div{
           &:first-child{
+            
             .tooltip{
               cursor: pointer;
               color: #999;
@@ -25,6 +26,16 @@
             }
           }
           &:last-child{
+            ol{
+              li{
+                font-weight: bold;
+                margin-bottom: 80px;
+                img{
+                  max-width: 100%;
+                  margin-top: 5px;
+                }
+              }
+            }
           }
         }
       }

@@ -1,13 +1,13 @@
 ﻿=== Learning Management System (LMS) Chat Application ===
-Author: Omar Faruque
+Author: ronymaha
 Author URI: https://www.linkedin.com/in/omarfaruque2020/
 Contributors: ronymaha
 Donate link: 
 Tags: learnpress, learndash, masterstudy, lifterlms, Sensei LMS, firebase, Learning Management System, chat, Education, elerning, lms, text message, message, messaging, Tutor LMS, memberpress, course, quiz, lesson, conversation, lms-chat
 License: GPLv2 or later
 Requires at least: 4.4.0
-Tested up to: 5.9.3
-Stable tag: 1.1.1
+Tested up to: 6.0
+Stable tag: 1.1.2
 
 WP LMS Conversation allow to conversation with LMS teacher or other student. 
 
@@ -36,6 +36,9 @@ For control options and settings admin should go Dashboard > LMS Chat > Firebase
 👉 Group chat option
 👉 unread message notification
 👉 Individual / one to one Chat option
+👉 Admin can capable to erash entire message from firebase database
+👉 There have a option to allow user to erash message for her own course
+👉 Firebase setting guide in info tab
 👉 And many more...
 
 
@@ -71,6 +74,12 @@ Installation of "LMS Chat" can be done either by searching for "LMS Chat" via th
 
 
 == Changelog ==
+
+= 1.1.2 =
+* Added firebase connection status in Firebase settings tab.
+* Added more information with screenshot about firebase settings in Firebase Guide tab.
+* Change info tab to Firebase Guide
+* Tested plugin upto WP version 6.0
 
 = 1.1.1 =
 * Solved firebase database store issues. Saved data to site owner own firebase realtime database.

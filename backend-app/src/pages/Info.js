@@ -36,12 +36,33 @@ class Info extends React.Component {
                                 </div>
                                 <div>
                                     <ol>
-                                        <li>{__('For setup firebase settings you should go to ', 'lms-conversation')} <a href="https://firebase.google.com/" target="_blank">Firebase</a> {__(' and login with your gmail account.')}</li>
-                                        <li>{__('Press "Add project" if you want to start with a new project.', 'lms-conversation')}</li>
-                                        <li>{__('Press "Authentication" from left menu and Enable "Email/Password" if Disabled.', 'lms-conversation')}</li>
-                                        <li>{__('Press "Realtime Database" from left menu and then press "Rules" from top menu. Add rules:{".read": true, ".write": true} in "Edit Rules" window.', 'lms-conversation')}</li>
-                                        <li>{__('At last step, you should press settings icon from the right side of "Project Overview" in top left corner.', 'lms-conversation')}</li>
-                                        <li>{__('Scroll down and you can see necessary settings information for use your "Firebase Settings" tab', 'lms-conversation')}</li>
+                                        <li>{__('For setup firebase settings you should go to ', 'lms-conversation')} <a href="https://firebase.google.com/" target="_blank">Firebase</a> {__(' and login with your gmail account.')}
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-1.jpg`} alt={__('firebase started')} />
+                                        </li>
+                                        <li>{__('Press "Add project" if you want to start with a new database.', 'lms-conversation')}
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-2.jpg`} alt={__('firebase started')} />
+                                        </li>
+                                        <li>{__('Press "Authentication" from left menu and Enable "Email/Password" if it Disabled.', 'lms-conversation')}
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-3.jpg`} alt={__('firebase started')} />
+                                        </li>
+                                        <li>{__('Click on "Realtime Database" from left menu and then create a database by press create database button', 'lms-conversation')}
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-4.jpg`} alt={__('firebase started')} />
+                                        </li>
+
+                                        <li>{__('In Realtime Database add following rules in "Rules" tab: ', 'lms-conversation')}<code>&#123;".read": true, ".write": true&#125;</code>
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-5.jpg`} alt={__('firebase started')} />
+                                        </li>
+                                        <li>{__('Now press settings icon from the right side of "Project Overview" in top left corner and create a new app by click web app icon from bottom of the page', 'lms-conversation')}
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-6.jpg`} alt={__('firebase started')} />
+                                        </li>
+
+                                        <li>{__('Write anything as your app name and press "Register now" button for process', 'lms-conversation')}
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-7.jpg`} alt={__('firebase started')} />
+                                        </li>
+                                        <li>{__('Our journey are near end and end of the session now you can see all of your necessary information like API Key, Auth Domain etc. You should be use this information in firebase settings tab for run your "LMS Chat" application successfully.', 'lms-conversation')}
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-8.jpg`} alt={__('firebase started')} />
+                                        </li>
+                                        <li>{__('If you fill up all information perfectly you will be see "Connected" as connection status', 'lms-conversation')}</li>
                                     </ol>
                                 </div>
                             </div>

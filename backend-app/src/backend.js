@@ -1,5 +1,5 @@
 import React from "react";
-import {HashRouter, Route, Switch} from 'react-router-dom'
+import {HashRouter, Route, Routes} from 'react-router-dom'
 import ReactDOM from "react-dom";
 import FetchWP from './utils/fetchWP';
 import Loader from './utils/loader';
@@ -98,9 +98,7 @@ class App extends React.Component {
     }
 
     render() {
-        
         const {config, loader} = this.state;
-        if(loader) return <Loader />
         return (
             <div className={style.lmsWrap}>
                 <div className={style.header}>
@@ -116,45 +114,55 @@ class App extends React.Component {
                     </div>
                 </div>
                 <div className={style.lmsBody}>
-                    <HashRouter>
-                        <Tabs/>
-                        <Switch>
-                            <Route
-                                path="/"
-                                exact
-                                render={props =>
-                                    <General 
-                                        config={config} 
-                                        handleUpdate={this.handleUpdate}
-                                        SaveChanges={this.SaveChanges}
-                                        />
-                                }
-                            />
-                            <Route
-                                exact
-                                path="/firebase-settings"
-                                render={props =>
-                                    <FirebaseSettings
-                                        handleUpdate={this.handleUpdate}
-                                        config={config}
-                                        SaveChanges={this.SaveChanges}
-                                    />
-                                }
-                            />
+                {
+                        (() => {
+                            if(loader){ return <Loader />}
+                            else{
+                                return(
+                                    <>
+                                     <HashRouter>
+                                        <Tabs/>
+                                        <Routes>
+                                            <Route
+                                                path="/"
+                                                element={
+                                                    <General 
+                                                        remove_all_message={this.remove_all_message}
+                                                        config={config} 
+                                                        handleUpdate={this.handleUpdate}
+                                                        SaveChanges={this.SaveChanges}
+                                                        />
+                                                }
+                                            />
+                                            <Route
+                                                path="/firebase-settings"
+                                                element={
+                                                    <FirebaseSettings
+                                                        handleUpdate={this.handleUpdate}
+                                                        config={config}
+                                                        SaveChanges={this.SaveChanges}
+                                                    />
+                                                }
+                                            />
 
-                            <Route
-                                exact
-                                path="/info"
-                                render={props =>
-                                    <Info
-                                        handleUpdate={this.handleUpdate}
-                                        config={config}
-                                        SaveChanges={this.SaveChanges}
-                                    />
-                                }
-                            />
-                        </Switch>
-                    </HashRouter>
+
+                                            <Route
+                                                path="/info"
+                                                element={
+                                                    <Info
+                                                        handleUpdate={this.handleUpdate}
+                                                        config={config}
+                                                        SaveChanges={this.SaveChanges}
+                                                    />
+                                                }
+                                            />
+                                        </Routes>
+                                    </HashRouter>
+                                    </>
+                                )
+                            }
+                        })()
+                    }
                 </div>
             </div>
         )

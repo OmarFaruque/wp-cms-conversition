@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink, withRouter} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import style from './style.scss'
 import { Icon, InlineIcon } from "@iconify/react";
 import cogOutline from "@iconify/icons-mdi/cog-outline";
@@ -10,13 +10,13 @@ import info from "@iconify/icons-mdi/information";
 const { __ } = window.wp.i18n;
 
 const Tabs = (props) => {
-
+    const location = useLocation()
     return (
         <div className={style.wrap}>
             <ul>
                 <li>
                 
-                    <NavLink exact activeClassName={style.active} to="/">
+                    <NavLink className={({ isActive }) => location.pathname == '/' ? style.active : ''} to="/">
                         <span className={style.icon}>
                             <InlineIcon icon={cogOutline} />
                         </span>
@@ -24,7 +24,7 @@ const Tabs = (props) => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink exact activeClassName={style.active} to="/firebase-settings">
+                    <NavLink className={({ isActive }) => location.pathname == '/firebase-settings' ? style.active : ''} to="/firebase-settings">
                         <span className={style.icon}>
                             <InlineIcon icon={firebase} />
                         </span>
@@ -32,11 +32,11 @@ const Tabs = (props) => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink exact activeClassName={style.active} to="/info">
+                    <NavLink className={({ isActive }) => location.pathname == '/info' ? style.active : ''} to="/info">
                         <span className={style.icon}>
                             <InlineIcon icon={info} />
                         </span>
-                        {__('Info', 'lms-conversation')}
+                        {__('Firebase Guideline', 'lms-conversation')}
                     </NavLink>
                 </li>
             </ul>
@@ -44,4 +44,4 @@ const Tabs = (props) => {
     )
 }
 
-export default withRouter(Tabs);
+export default Tabs;

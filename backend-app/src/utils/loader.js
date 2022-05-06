@@ -7,7 +7,7 @@ export default class Loader extends Component {
     render(){
         return (
             <div className={style.loader}>
-                <span className={style.icon}></span>
+                <span style={{backgroundImage: `url(${window.lms_conversition_object.assets_url}images/loading.svg)`}} className={style.icon}></span>
             </div>
         )
     }

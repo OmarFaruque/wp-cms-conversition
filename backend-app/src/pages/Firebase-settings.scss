@@ -18,6 +18,30 @@
         align-items: center;
         margin: 16px 0;
         >div{
+          >div{
+            &.connectedStatus{
+              display: flex;
+              align-items: center;
+              span{
+                display: block;
+                padding: 5px 26px;
+                overflow: hidden;
+                background-repeat: no-repeat;
+                background-position: left center;
+                background-size: auto 20px;
+                font-weight: bold;
+                &.methodMsg{
+                  font-weight: normal;
+                }
+                &:not(.connected){
+                  color: #d63638;
+                }
+                &.connected{
+                  color: #17a8e3;
+                }
+              }
+            }
+          }
           &:first-child{
             flex: 1;
             .tooltip{

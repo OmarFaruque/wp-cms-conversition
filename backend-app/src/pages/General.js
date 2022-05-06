@@ -1,7 +1,10 @@
-import React from "react"
+import React, {useState} from "react"
 import style from './General.scss'
 import ReactTooltip from "react-tooltip"
 import TextInput from "../components/TextInput"
+import { Icon, InlineIcon } from "@iconify/react"
+import trash from "@iconify/icons-mdi/trash-can-outline"
+import lock from "@iconify/icons-mdi/lock"
 
 const { __ } = window.wp.i18n;
 
@@ -22,6 +25,7 @@ const soundsFiles = {
 }
 
 export default function General(props) {
+    const [delete_status, setDelete_status] = useState(false)
     const {config} = props;
     
     return (
@@ -117,6 +121,73 @@ export default function General(props) {
                     /> 
                 </div>
 
+
+
+
+                <div className={style.erashedWrap}>
+                    <div className={style.blockedForFreeVersion}>
+                        <span data-tip data-for="proFeatures">
+                            <InlineIcon icon={lock} />
+                            <ReactTooltip id="proFeatures" place="top" effect="solid">
+                                {__('This is a pro feature, please use our pro version for use this feature.', 'lms-conversation')}
+                            </ReactTooltip>
+                        </span>
+                    </div>
+                    <hr/>
+                    <h2>
+                        {__('Erased', 'lms-conversation')}
+                        <span>({__('Danger Zone', 'lms-conversation')})</span>
+                    </h2>
+                    <div>
+                        <article>
+                            {__('Allow author to remove course chat message', 'lms-conversation')}
+                            <span data-tip data-for="removecourseMssage" className={style.tooltip + ' dashicons dashicons-editor-help'}>
+                                <ReactTooltip id="removecourseMssage" place="right" effect="solid">
+                                    {__('If selected, course author well be capable to remove all message from their own course.', 'lms-conversation')}
+                                </ReactTooltip>
+                            </span>
+                        </article>
+
+                        <label className={style.switch}>
+                            <input type="checkbox" 
+                                onChange={props.handleUpdate}
+                                name="author_can_remove"
+                                value={1}
+                                checked={typeof config.author_can_remove != 'undefined' && config.author_can_remove ? true : false}
+                            />
+                            <span className={style.slider}></span>
+                        </label> 
+                    </div>
+
+                    <div>
+                        <article>
+                            {__('Remove entire message', 'lms-conversation')}
+                            <span data-tip data-for="removeEntireMessage" className={style.tooltip + ' dashicons dashicons-editor-help'}>
+                                <ReactTooltip id="removeEntireMessage" place="right" effect="solid">
+                                    {__('Remove entire message by pressing remove button', 'lms-conversation')}
+                                </ReactTooltip>
+                            </span>
+                        </article>
+
+                        <div className={style.removeAllMessage}>
+                            <span data-tip data-for="removeWarning" onClick={(e) => remove_all_message(e)} className={style.removButton}>
+                                <InlineIcon icon={trash} />
+                                <ReactTooltip id="removeWarning" place="left" effect="solid">
+                                    {__('WARNING: Remove entire message', 'lms-conversation')}
+                                </ReactTooltip>
+                            </span>
+                            {
+                                delete_status && (
+                                    <>
+                                        <span className={style.statusMessage}>
+                                            {__('Entire message remove successfully.', 'lms-conversation')}
+                                        </span>        
+                                    </>
+                                )
+                            }
+                        </div> 
+                    </div>
+                </div>
                 <button className={style.saveBtn} onClick={props.SaveChanges}>
                     <span>{__('Save', 'lms-conversation')}</span>
                 </button>

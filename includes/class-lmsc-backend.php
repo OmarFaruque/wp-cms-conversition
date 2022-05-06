@@ -346,6 +346,7 @@ class LMSC_Backend
      */
     public function adminEnqueueScripts()
     {
+        global $current_user;
         if (!isset($this->hook_suffix) || empty($this->hook_suffix)) {
             return;
         }
@@ -371,6 +372,7 @@ class LMSC_Backend
                     'api_nonce' => wp_create_nonce('wp_rest'),
                     'root' => rest_url($this->token . '/v1/'),
                     'assets_url' => $this->assets_url,
+                    'email' => $current_user->user_email 
                 )
             );
         }
