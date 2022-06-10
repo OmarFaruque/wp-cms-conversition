@@ -52,6 +52,9 @@ class Info extends React.Component {
                                         <li>{__('In Realtime Database add following rules in "Rules" tab: ', 'lms-conversation')}<code>&#123;".read": true, ".write": true&#125;</code>
                                             <img src={`${window.lms_conversition_object.assets_url}images/firebase-5.jpg`} alt={__('firebase started')} />
                                         </li>
+                                        <li>{__('Then go to "Storage" menu from left and write following code for save attachment and images.', 'lms-conversation')}<br/>{__('Code', 'lms-conversation')}: <code>rules_version = '2'; service firebase.storage &#123;match /b/&#123;bucket&#125;/o &#123;match /&#123;allPaths=**&#125; &#123;allow read, write: if request.auth != null;&#125;&#125;&#125;</code>
+                                            <img src={`${window.lms_conversition_object.assets_url}images/firebase-9.jpg`} alt={__('firebase started')} />
+                                        </li>
                                         <li>{__('Now press settings icon from the right side of "Project Overview" in top left corner and create a new app by click web app icon from bottom of the page', 'lms-conversation')}
                                             <img src={`${window.lms_conversition_object.assets_url}images/firebase-6.jpg`} alt={__('firebase started')} />
                                         </li>
