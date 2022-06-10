@@ -106,7 +106,8 @@ Installation of "LMS Chat" can be done either by searching for "LMS Chat" via th
 == Changelog ==
 
 = 1.1.3 =
-* Added missing feature "message delete option" in chat window.
+* Added missing feature "message delete option" in chat window
+* Added information about firebase storage setting
 
 = 1.1.2 =
 * Added firebase connection status in Firebase settings tab.
