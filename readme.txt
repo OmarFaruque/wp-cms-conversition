@@ -7,7 +7,7 @@ Tags: learnpress, learndash, masterstudy, lifterlms, Sensei LMS, firebase, Learn
 License: GPLv2 or later
 Requires at least: 4.4.0
 Tested up to: 6.0
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 
 WP LMS Conversation allow to conversation with LMS teacher or other student. 
 
@@ -15,17 +15,22 @@ WP LMS Conversation allow to conversation with LMS teacher or other student.
 
 WP LMS Conversation is a LMS plugins like LearnPress, MasterStudy LMS, LearnDash, LifterLMS, Tutor LMS, Sensei LMS addons and it's easy to use. There are many conversation plugins out here but none of theme are easy like this plugin. We don't like to user with tons of settings and options. We implemented very clean and easy understable setting panel where user can easily set their option. We use Firebase Realtime Database for store chat data. WP LMS Conversation allow to conversation with LMS teacher or other student. It creact individual chat in each course, lesson, quiz etc where student and teacher can join. Enrollment are required for student.  
 
+== CHECK OUT OUR VIDEO DEMO ON HOW THIS WORKS: ==
+
+[youtube https://youtu.be/BAJ64Ej-uQM]
+
 
 == HOW TO MANAGE SETTINGS? ==
 For control options and settings admin should go Dashboard > LMS Chat > Firebase Settings. In this perticular tab, admin can set firebase settings. Admin can get firebase credientials from [Firebase Console](https://firebase.google.com/) and more information about [Firebase Console](https://firebase.google.com/) available in info tab.  Admin can set individual chat availability form each course edit page or can set availability as globaly from LMS Chat > General tab.
 
 
-== "LMS CHAT" FEATURES ==
+== "LMS CHAT" FEATURES - FREE VERSION ==
 👉 Realtime Chat Application
 👉 Realtime Firebase Database
 👉 Control teacher authorization of chat in front-end
 👉 Firebase Settings option
 👉 Text Chat and Image sharing option
+👉 Delete already sent message from window.
 👉 File Sharing Option
 👉 Contributor online / offline status
 👉 Incoming message date and time
@@ -43,14 +48,21 @@ For control options and settings admin should go Dashboard > LMS Chat > Firebase
 
 
 
+== "LMS CHAT" FEATURES - [PRO VERSION](https://wppluginia.com/product/learning-management-system-lms-chat-application-pro/) ==
+👉 All featue for free version
+👉 Option to delete entire message
+👉 Option to allow course author to delete entire message of a course
+👉 Option to send email notification to teacher on personal message on chat
+👉 Allow teacher to send email notification to all participant using pre built content
+👉 Allow teacher to set a chat start and duration time, then a countdown will appear in chat window before start.
+👉 Option to set message before start and after end if teacher set start time. 
+👉 Purchase Link: [LMS CHAT PRO](https://wppluginia.com/product/learning-management-system-lms-chat-application-pro/) 
+
 
 == DEMO - CHECK THIS OUT IN REAL ==
 
 🔗 [Backend Demo](demo url)
 
-== CHECK OUT OUR VIDEO DEMO ON HOW THIS WORKS: ==
-
-[youtube https://youtu.be/BAJ64Ej-uQM]
 
 == INSTALLATION ==
 
@@ -59,6 +71,24 @@ Installation of "LMS Chat" can be done either by searching for "LMS Chat" via th
 1. Download the plugin via WordPress.org
 1. Upload the ZIP file through the 'Plugins > Add New > Upload' screen in your WordPress dashboard
 1. Activate the plugin through the 'Plugins' menu in WordPress
+
+
+== What our customer says: ==
+
+“Appreciable user interface! Customer service and support are beyond words. Thank you for this wonderful plugin "
+
+“It is fantastic! Thanks for this! As I was doing some tries the upload files and delete message by user is not working. Other then those two things the chat looks great and simple to use!”
+
+== OTHER USEFUL LINKS ==
+
+[Find all PRO features](https://wppluginia.com/product/learning-management-system-lms-chat-application-pro/)
+[Documentation](https://wppluginia.com/product/learning-management-system-lms-chat-application-pro/)
+[Facebook](https://www.facebook.com/OmarFaruqueFarazi/)
+[LinkedIn](https://www.linkedin.com/in/omarfaruque2020/)
+[GitHub](https://github.com/OmarFaruque/)
+[Stackoverflow](https://stackoverflow.com/users/3374352/omar)
+
+
 
 == Screenshots ==
 
@@ -74,6 +104,9 @@ Installation of "LMS Chat" can be done either by searching for "LMS Chat" via th
 
 
 == Changelog ==
+
+= 1.1.3 =
+* Added missing feature "message delete option" in chat window.
 
 = 1.1.2 =
 * Added firebase connection status in Firebase settings tab.

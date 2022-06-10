@@ -672,7 +672,7 @@ class FrontEnd extends Component {
                                                             {
                                                                 (typeof window.lms_conversition_object.settings.remove_access != 'undefined' && window.lms_conversition_object.settings.remove_access === true && chats[k].sender_id == window.lms_conversition_object.user_id) && (
                                                                     <span className={style.deleteOption}>
-                                                                        <span onClick={(e) => this.deleteThis(k)} className={style.deleteThis}></span>
+                                                                        <span style={{backgroundImage: `url(${lms_conversition_object.assets_url}images/delete.svg)`}} onClick={(e) => this.deleteThis(k)} className={style.deleteThis}></span>
                                                                     </span>
                                                                 )
                                                             }
