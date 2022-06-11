@@ -5,8 +5,9 @@ import FetchWP from './utils/fetchWP';
 import Loader from './utils/loader';
 import General from "./pages/General";
 import FirebaseSettings from "./pages/Firebase-settings";
-import Tabs from "./components/Tabs";
+import Tabs from "./components/Tabs/Index.jsx";
 import Info from "./pages/Info";
+import Proadvertisement from "./components/Proadvertisement/Proadvertisement"
 
 //CSS 
 import style from './backend.scss';
@@ -113,56 +114,59 @@ class App extends React.Component {
                         <a href="#">{__('Check Premium Options', 'lms-conversation')}</a>
                     </div>
                 </div>
-                <div className={style.lmsBody}>
-                {
-                        (() => {
-                            if(loader){ return <Loader />}
-                            else{
-                                return(
-                                    <>
-                                     <HashRouter>
-                                        <Tabs/>
-                                        <Routes>
-                                            <Route
-                                                path="/"
-                                                element={
-                                                    <General 
-                                                        remove_all_message={this.remove_all_message}
-                                                        config={config} 
-                                                        handleUpdate={this.handleUpdate}
-                                                        SaveChanges={this.SaveChanges}
+                <div className={style.bodyWrap}>
+                    <div className={style.lmsBody}>
+                    {
+                            (() => {
+                                if(loader){ return <Loader />}
+                                else{
+                                    return(
+                                        <>
+                                        <HashRouter>
+                                            <Tabs/>
+                                            <Routes>
+                                                <Route
+                                                    path="/"
+                                                    element={
+                                                        <General 
+                                                            remove_all_message={this.remove_all_message}
+                                                            config={config} 
+                                                            handleUpdate={this.handleUpdate}
+                                                            SaveChanges={this.SaveChanges}
+                                                            />
+                                                    }
+                                                />
+                                                <Route
+                                                    path="/firebase-settings"
+                                                    element={
+                                                        <FirebaseSettings
+                                                            handleUpdate={this.handleUpdate}
+                                                            config={config}
+                                                            SaveChanges={this.SaveChanges}
                                                         />
-                                                }
-                                            />
-                                            <Route
-                                                path="/firebase-settings"
-                                                element={
-                                                    <FirebaseSettings
-                                                        handleUpdate={this.handleUpdate}
-                                                        config={config}
-                                                        SaveChanges={this.SaveChanges}
-                                                    />
-                                                }
-                                            />
+                                                    }
+                                                />
 
 
-                                            <Route
-                                                path="/info"
-                                                element={
-                                                    <Info
-                                                        handleUpdate={this.handleUpdate}
-                                                        config={config}
-                                                        SaveChanges={this.SaveChanges}
-                                                    />
-                                                }
-                                            />
-                                        </Routes>
-                                    </HashRouter>
-                                    </>
-                                )
-                            }
-                        })()
-                    }
+                                                <Route
+                                                    path="/info"
+                                                    element={
+                                                        <Info
+                                                            handleUpdate={this.handleUpdate}
+                                                            config={config}
+                                                            SaveChanges={this.SaveChanges}
+                                                        />
+                                                    }
+                                                />
+                                            </Routes>
+                                        </HashRouter>
+                                        </>
+                                    )
+                                }
+                            })()
+                        }
+                    </div>
+                    <Proadvertisement />
                 </div>
             </div>
         )
