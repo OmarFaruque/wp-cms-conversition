@@ -1,0 +1,159 @@
+@import '../common.scss';
+.emailSettingsWrap{
+  display: flex;
+  .bodyWrap{
+    flex: 5;
+    width: 100%;
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 20px;
+    margin-right: 15px;
+    position: relative;
+      a{
+        &.block{
+          position: absolute; 
+          opacity: 0.6;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgba(0,0,0,0.5);
+          color: white;
+          font-size: 35px;
+          border-radius: 10px;
+          left: 0;
+          z-index: 1;
+          top: 0;
+          &:hover{
+            opacity: 1;
+          }
+        }
+      }
+    
+    h2{
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+    .tooltip{
+      cursor: pointer;
+    }
+    >div{
+      &.erashedWrap{
+        margin-top: 50px;
+        h2{
+          span{
+            color: #d63638;
+            margin-left: 10px;
+            font-size: 12px;
+            text-shadow: 0 0 0.5em #666;
+          }
+        }
+        .statusMessage{
+          display: block;
+          margin-top: 12px;
+          color: #006FFF;
+          text-shadow: 0 0 0.5em;
+          -o-text-shadow: 0 0 0.5em;
+          -webkit-text-shadow: 0 0 0.5em;
+          -moz-text-shadow: 0 0 0.5em;
+          position: absolute;
+          right: 0;
+          text-align: right;
+        }
+        .removeAllMessage{
+          position: relative;
+          min-width: 50%;
+          >span{
+            &.removButton{
+              cursor: pointer;
+              display: table;
+              margin-left: auto;
+              border: 1px solid #d63638;
+              padding: 5px;
+              border-radius: 5px;
+              &:hover{
+                background-color: #d63638;
+                svg{
+                  color: white;
+                }
+              }
+              svg{
+                width: 50px;
+                height: 50px;
+                color: #d63638;
+              }
+            }
+          }
+        }
+      }
+    }
+    >div:not(.erashedWrap){
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+     &.row{
+        display: flex;
+        align-items: center;
+        margin: 16px 0;
+        >div{
+          >div{
+            &.connectedStatus{
+              display: flex;
+              align-items: center;
+              span{
+                display: block;
+                padding: 5px 26px;
+                overflow: hidden;
+                background-repeat: no-repeat;
+                background-position: left center;
+                background-size: auto 20px;
+                font-weight: bold;
+                &.methodMsg{
+                  font-weight: normal;
+                }
+                &:not(.connected){
+                  color: #d63638;
+                }
+                &.connected{
+                  color: #17a8e3;
+                }
+              }
+            }
+          }
+          &:first-child{
+            flex: 1;
+            .tooltip{
+              cursor: pointer;
+              color: #999;
+              margin-left: 5px;
+            }
+          }
+          &:last-child{
+            flex: 3;
+          }
+        }
+      }
+      article{
+        font-size: 14px;
+        color: #555;
+        span:global(.dashicons){
+          color: #999;
+          margin-left: 5px;
+        }
+      }
+      
+      &:not(.row){
+        >div{
+            margin-left: auto;
+            select{
+              border-color: #eee;
+            }
+          }
+      }
+      label{
+        margin-left: auto;
+      }
+    }
+  }
+}

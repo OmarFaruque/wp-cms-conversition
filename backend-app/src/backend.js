@@ -8,6 +8,7 @@ import FirebaseSettings from "./pages/Firebase-settings";
 import Tabs from "./components/Tabs/Index.jsx";
 import Info from "./pages/Info";
 import Proadvertisement from "./components/Proadvertisement/Proadvertisement"
+import EmailSettings from "./pages/Email-settings"
 
 //CSS 
 import style from './backend.scss';
@@ -43,16 +44,20 @@ class App extends React.Component {
 
     }
 
-    handleUpdate(e) {
+    handleUpdate(e, name = false) {
 
         const {config} = this.state
 
-        switch(e.target.type){
-            case 'checkbox':
-                config[e.target.name] = !config[e.target.name] ? true : false
-            break;
-            default:
-                config[e.target.name] = e.target.value
+        if(!name){
+            switch(e.target.type){
+                case 'checkbox':
+                    config[e.target.name] = !config[e.target.name] ? true : false
+                break;
+                default:
+                    config[e.target.name] = e.target.value
+            }
+        }else{
+            config[name] = e
         }
 
         
@@ -158,6 +163,17 @@ class App extends React.Component {
                                                         />
                                                     }
                                                 />
+
+                                                <Route
+                                                    path="/email-settings"
+                                                    element={
+                                                        <EmailSettings
+                                                            handleUpdate={this.handleUpdate}
+                                                            config={config}
+                                                            SaveChanges={this.SaveChanges}
+                                                        />
+                                                    }
+                                                />
                                             </Routes>
                                         </HashRouter>
                                         </>
@@ -165,9 +181,11 @@ class App extends React.Component {
                                 }
                             })()
                         }
+
                     </div>
                     <Proadvertisement />
                 </div>
+                
             </div>
         )
     }

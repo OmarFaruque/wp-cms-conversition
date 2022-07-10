@@ -265,6 +265,7 @@ class LMSC_Public
                 'post_id' => $course_id,
                 'post_title' => get_the_title( $course_id ),
                 'user_id' => get_current_user_id(  ),
+                'user_limit' => LMSC_USER_LIMIT,
                 'avatar_url' => get_avatar_url( get_current_user_id(  ) ), 
                 'email' => $current_user->user_email, 
                 'display_name' => strtolower($current_user->data->display_name), 

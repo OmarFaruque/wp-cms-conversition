@@ -3,307 +3,54 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/backend.js:108
-msgid "LMS Conversation"
+#: src/frontend.js:402
+msgid "Active Now"
 msgstr ""
 
-#: src/backend.js:113
-msgid "Check Premium Options"
+#: src/frontend.js:402
+msgid "Inactive Now"
 msgstr ""
 
-#: src/components/Tabs/index.js:23
-#: src/pages/General.js:35
-msgid "General Settings"
+#: src/frontend.js:515
+msgid "Lms Loader"
 msgstr ""
 
-#: src/components/Tabs/index.js:31
-#: src/pages/Firebase-settings.js:79
-msgid "Firebase Settings"
+#: src/frontend.js:555
+msgid "User limit is over for this course, please use"
 msgstr ""
 
-#: src/components/Tabs/index.js:39
-msgid "Firebase Guideline"
+#: src/frontend.js:555
+msgid " pro version "
 msgstr ""
 
-#: src/pages/Firebase-settings.js:105
-msgid "Auth Domain"
+#: src/frontend.js:555
+msgid "for unlimited user."
 msgstr ""
 
-#: src/pages/Firebase-settings.js:108
-msgid "Firebase API Key."
+#: src/frontend.js:566
+msgid "Messages"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:125
-msgid "Database URL"
+#: src/frontend.js:577
+msgid "Search"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:128
-msgid "Firebase Database Url."
+#: src/frontend.js:590
+msgid "All Participants"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:145
-msgid "Project ID"
+#: src/frontend.js:681
+msgid "Today"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:148
-msgid "Firebase Project ID."
+#: src/frontend.js:682
+msgid "Yesterday"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:165
-msgid "Storage Bucket"
+#: src/frontend.js:729
+msgid "Attachment"
 msgstr ""
 
-#: src/pages/Firebase-settings.js:168
-msgid "Firebase Storage Bucket."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:186
-msgid "Messaging Sender ID"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:189
-msgid "Firebase Messaging Sender ID."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:207
-msgid "App ID"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:210
-msgid "Firebase Application ID."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:227
-msgid "Connection Status"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:230
-msgid "Firebase connection status."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:242
-msgid "Disconnected"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:250
-msgid "Connected"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:255
-msgid ""
-"Firebase authentication sign-in method aren't set properly, please set "
-"Email/Password as sign-in method. Read info. (information) tab for more "
-"instruction."
-msgstr ""
-
-#: src/pages/Firebase-settings.js:270
-#: src/pages/General.js:192
-msgid "Save"
-msgstr ""
-
-#: src/pages/Firebase-settings.js:85
-msgid "API Key"
-msgstr ""
-
-#: src/pages/General.js:107
-msgid "Notification Sound"
-msgstr ""
-
-#: src/pages/General.js:110
-msgid "Set notification sound for while receive message."
-msgstr ""
-
-#: src/pages/General.js:12
-msgid "No Sound"
-msgstr ""
-
-#: src/pages/General.js:13
-msgid "Juntos"
-msgstr ""
-
-#: src/pages/General.js:132
-msgid "This is a pro feature, please use our pro version for use this feature."
-msgstr ""
-
-#: src/pages/General.js:138
-msgid "Erased"
-msgstr ""
-
-#: src/pages/General.js:139
-msgid "Danger Zone"
-msgstr ""
-
-#: src/pages/General.js:14
-msgid "Me-too"
-msgstr ""
-
-#: src/pages/General.js:143
-msgid "Allow author to remove course chat message"
-msgstr ""
-
-#: src/pages/General.js:146
-msgid ""
-"If selected, course author well be capable to remove all message from their "
-"own course."
-msgstr ""
-
-#: src/pages/General.js:15
-msgid "Doorbell Single Press"
-msgstr ""
-
-#: src/pages/General.js:16
-msgid "Dry Pop-up Notification Alert"
-msgstr ""
-
-#: src/pages/General.js:164
-msgid "Remove entire message"
-msgstr ""
-
-#: src/pages/General.js:167
-msgid "Remove entire message by pressing remove button"
-msgstr ""
-
-#: src/pages/General.js:17
-msgid "Elevator Tone"
-msgstr ""
-
-#: src/pages/General.js:176
-msgid "WARNING: Remove entire message"
-msgstr ""
-
-#: src/pages/General.js:18
-msgid "Gaming Lock"
-msgstr ""
-
-#: src/pages/General.js:183
-msgid "Entire message remove successfully."
-msgstr ""
-
-#: src/pages/General.js:19
-msgid "Sci Fi Click"
-msgstr ""
-
-#: src/pages/General.js:20
-msgid "Sci Fi Reject Notification"
-msgstr ""
-
-#: src/pages/General.js:21
-msgid "Software Interface Back"
-msgstr ""
-
-#: src/pages/General.js:22
-msgid "Software Interface Remove"
-msgstr ""
-
-#: src/pages/General.js:23
-msgid "Store Door Bell Ring"
-msgstr ""
-
-#: src/pages/General.js:24
-msgid "Percussion Sound"
-msgstr ""
-
-#: src/pages/General.js:40
-msgid "Enable LMS Conversation"
-msgstr ""
-
-#: src/pages/General.js:43
-msgid "Enable / Disable LMS Conversation for Fornt-end."
-msgstr ""
-
-#: src/pages/General.js:62
-msgid "Conversation Controller on Course"
-msgstr ""
-
-#: src/pages/General.js:65
-msgid "Allow Teacher / Author to set Enable / Disable conversation for each course."
-msgstr ""
-
-#: src/pages/General.js:84
-msgid "Allow user to remove own message"
-msgstr ""
-
-#: src/pages/General.js:87
-msgid "Allow chat user to remove their own message."
-msgstr ""
-
-#: src/pages/Info.js:24
-msgid "Information"
-msgstr ""
-
-#: src/pages/Info.js:30
-msgid "For setup your firebase database, follow the below steps."
-msgstr ""
-
-#: src/pages/Info.js:33
-msgid "Firebase Settings Information"
-msgstr ""
-
-#: src/pages/Info.js:39
-msgid "For setup firebase settings you should go to "
-msgstr ""
-
-#: src/pages/Info.js:39
-msgid " and login with your gmail account."
-msgstr ""
-
-#: src/pages/Info.js:42
-msgid "Press \"Add project\" if you want to start with a new database."
-msgstr ""
-
-#: src/pages/Info.js:45
-msgid ""
-"Press \"Authentication\" from left menu and Enable \"Email/Password\" if it "
-"Disabled."
-msgstr ""
-
-#: src/pages/Info.js:48
-msgid ""
-"Click on \"Realtime Database\" from left menu and then create a database by "
-"press create database button"
-msgstr ""
-
-#: src/pages/Info.js:52
-msgid "In Realtime Database add following rules in \"Rules\" tab: "
-msgstr ""
-
-#: src/pages/Info.js:55
-msgid ""
-"Then go to \"Storage\" menu from left and write following code for save "
-"attachment and images."
-msgstr ""
-
-#: src/pages/Info.js:55
-msgid "Code"
-msgstr ""
-
-#: src/pages/Info.js:58
-msgid ""
-"Now press settings icon from the right side of \"Project Overview\" in top "
-"left corner and create a new app by click web app icon from bottom of the "
-"page"
-msgstr ""
-
-#: src/pages/Info.js:62
-msgid ""
-"Write anything as your app name and press \"Register now\" button for "
-"process"
-msgstr ""
-
-#: src/pages/Info.js:65
-msgid ""
-"Our journey are near end and end of the session now you can see all of your "
-"necessary information like API Key, Auth Domain etc. You should be use this "
-"information in firebase settings tab for run your \"LMS Chat\" application "
-"successfully."
-msgstr ""
-
-#: src/pages/Info.js:66
-msgid "firebase started"
-msgstr ""
-
-#: src/pages/Info.js:68
-msgid ""
-"If you fill up all information perfectly you will be see \"Connected\" as "
-"connection status"
+#: src/frontend.js:732
+msgid "Download Attachment"
 msgstr ""

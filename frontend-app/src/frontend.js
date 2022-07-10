@@ -4,7 +4,7 @@ import attachment from './icons/attachment.svg';
 
 //CSS 
 import style from './frontend.scss';
-import {_n, __ } from '@wordpress/i18n';
+import {sprintf, _n, __ } from '@wordpress/i18n';
 import group_img from './icons/user-group-img.svg';
 
 import firebase, { auth, database, storage } from "./component/config";
@@ -27,7 +27,7 @@ class FrontEnd extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loader: false,
+            loader: true,
             saving: false,
             collospe: false,
             config: {
@@ -227,7 +227,10 @@ class FrontEnd extends Component {
         .orderByChild('room')
         .equalTo('public')
         .on('value', snapshot => {
-            this.setState({ chats: snapshot.val() });
+            this.setState({ 
+                chats: snapshot.val(), 
+                loader: false 
+            });
         });
 
 
@@ -497,11 +500,29 @@ class FrontEnd extends Component {
 
 
     render() {
-        let {config, chats, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room, svalue} = this.state
+        let {config, chats, loader, public_last_msg, download, users, schema, room_name, room_status, user_img, duesee, collospe, room, svalue} = this.state
         if(!chats) chats = []
         let dates = []
 
         const activeClass = this.state.chat_window_active ? 'active' : 'close';
+        let findThisUser = Object.keys(users).find( (v) => {
+            return users[v].user_id == window.lms_conversition_object.user_id
+        })
+
+        if(loader){
+            return(
+                <div className={style.loader}>
+                    <img src={`${window.lms_conversition_object.assets_url}images/loading.svg)`} alt={__('Lms Loader', 'lms-conversation')} />
+                </div>
+            )
+        }
+
+        /**
+         * Check user limit for free version 
+         * Free version are allow 10 user for chat
+         */
+        if(Object.keys(users).length >= window.lms_conversition_object.user_limit  && typeof findThisUser == 'undefined') return;
+
         return (
                 <div className={style.chatWrap}>
                     
@@ -511,6 +532,8 @@ class FrontEnd extends Component {
                     <div className={`${style.chatWindow} ${activeClass}`}>
                         <div className={`${style.chatBody} ${collospe ? style.collospe : ''}`}>
                             <div className={style.profileInfoWrap}>
+                                
+                                {/* Profile Information */}
                                 <div className={style.profileInfo}>
                                     <div className={style.profileImg}
                                         style={{
@@ -522,6 +545,19 @@ class FrontEnd extends Component {
                                     <h4>{window.lms_conversition_object.display_name}</h4>
                                     <p>{window.lms_conversition_object.user_type}</p>
                                 </div>
+
+
+                                {
+                                    (window.lms_conversition_object.user_type == 'teacher' && Object.keys(users).length >= window.lms_conversition_object.user_limit) && (
+                                        <div className={style.limitInformation}>
+                                            {/* User Limitation Information to teacher and site admin */}
+                                            <div>
+                                                <span>{__('User limit is over for this course, please use', 'lms-conversation')}<a target={`_blank`} href="https://wppluginia.com/product/learning-management-system-lms-chat-application-pro/">{__(' pro version ', 'lms-conversation')}</a>{__('for unlimited user.', 'lms-conversation')}</span>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                
                                
                             </div>
                             <div className={style.listWrap}>
